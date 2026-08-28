@@ -2,3 +2,4 @@ User-agent: *
 Disallow: /panel.html
 Disallow: /ddhh.html
 Disallow: /radar.html
+Disallow: /organizaciones.html
