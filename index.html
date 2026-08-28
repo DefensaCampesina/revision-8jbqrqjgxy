@@ -722,9 +722,6 @@ textarea{resize:vertical;min-height:130px}
    quedaron minúsculas y oscuras sobre una foto oscura, o sea invisibles. */
 .redes-fijas{position:fixed;right:0;top:50%;transform:translateY(-50%);z-index:35;
   display:flex;flex-direction:column;gap:6px}
-/* Color fijo, no del tema: esta barrita flota sobre fotos y sobre fondos que
-   cambian, y en tema oscuro --papel y --olivo-hondo quedaban casi del mismo
-   color. Con los tokens del tema se volvía dos recuadros ilegibles. */
 /* Cada red con su color de marca: se reconocen antes de leer el nombre.
    Van en color fijo y no del tema, porque flotan sobre fotos y sobre fondos
    que cambian; con los tokens del tema quedaban ilegibles en modo oscuro. */
@@ -737,19 +734,18 @@ textarea{resize:vertical;min-height:130px}
 .redes-fijas a.ig{background:linear-gradient(45deg,#F58529,#DD2A7B 52%,#8134AF)}
 .redes-fijas a.x{background:#000}
 .redes-fijas svg{width:24px;height:24px;fill:currentColor;flex:none}
-.redes-fijas b{font:700 13.5px/1 "RedTexto",sans-serif;white-space:nowrap}
-@media (max-width:1080px){
-  .redes-fijas b{max-width:0;overflow:hidden;transition:max-width .18s}
-  .redes-fijas a{gap:0}
-  .redes-fijas a:hover{gap:10px}
-  .redes-fijas a:hover b{max-width:90px}
-}
+/* Solo el icono. El nombre sale al pasar el cursor: con el nombre siempre
+   puesto, las pestañas se comían medio borde de la pantalla. */
+.redes-fijas b{font:700 13.5px/1 "RedTexto",sans-serif;white-space:nowrap;
+  max-width:0;overflow:hidden;transition:max-width .18s}
+.redes-fijas a{gap:0}
+.redes-fijas a:hover{gap:10px}
+.redes-fijas a:hover b{max-width:96px}
 @media (max-width:640px){
   .redes-fijas{top:auto;bottom:0;right:50%;transform:translateX(50%);flex-direction:row;gap:0}
   .redes-fijas a{border-radius:12px 12px 0 0;border-right:1px solid var(--linea);
     border-bottom:0;gap:9px;padding:12px 18px}
   .redes-fijas b{max-width:90px}
-}
 }
 
 /* los puntos del boletín de la portada */
@@ -801,17 +797,6 @@ textarea{resize:vertical;min-height:130px}
         <button class="btn btn-1" data-ir="ddhh" data-ancla="ficha">Reportar una situación de riesgo</button>
         <button class="btn btn-2" data-ir="red">Conocer la Red</button>
       </div>
-    </div>
-  </div>
-
-  <!-- contador de uso: visitas y denuncias recibidas -->
-  <div class="reloj" id="reloj">
-    <div class="caja reloj-in">
-      <div class="reloj-n"><b id="numVisitas">—</b><span>visitas a la página</span></div>
-      <div class="reloj-n"><b id="numDenuncias">—</b><span>denuncias recibidas</span></div>
-      <p class="reloj-t" id="relojNota">La Red lleva la cuenta de quién consulta esta información
-        y de cuántos casos llegan al Mecanismo de Respuesta Rápida.</p>
-      <button class="btn btn-1" data-ir="ddhh" data-ancla="ficha">Reportar un hecho</button>
     </div>
   </div>
 
@@ -888,6 +873,17 @@ textarea{resize:vertical;min-height:130px}
         <ul class="alertas" id="listaAlertas"></ul>
       </div>
       <button class="btn btn-1" data-ir="ddhh" data-ancla="ficha" style="margin-top:8px">Ver la ruta de atención</button>
+    </div>
+  </div>
+
+  <!-- contador de uso: visitas y denuncias recibidas -->
+  <div class="reloj" id="reloj">
+    <div class="caja reloj-in">
+      <div class="reloj-n"><b id="numVisitas">—</b><span>visitas a la página</span></div>
+      <div class="reloj-n"><b id="numDenuncias">—</b><span>denuncias recibidas</span></div>
+      <p class="reloj-t" id="relojNota">La Red lleva la cuenta de quién consulta esta información
+        y de cuántos casos llegan al Mecanismo de Respuesta Rápida.</p>
+      <button class="btn btn-1" data-ir="ddhh" data-ancla="ficha">Reportar un hecho</button>
     </div>
   </div>
 
