@@ -96,11 +96,15 @@ p{margin:0 0 1.05em;max-width:var(--medida)}
 /* ═══════════════ navegación ═══════════════ */
 .nav{position:sticky;top:0;z-index:40;background:color-mix(in srgb,var(--crema) 93%,transparent);
   backdrop-filter:blur(12px);border-bottom:1px solid var(--linea)}
-.nav-in{max-width:1240px;margin:0 auto;padding:10px 22px;display:flex;align-items:center;gap:20px}
+.nav-in{max-width:1240px;margin:0 auto;padding:10px 22px;display:flex;
+  align-items:center;gap:14px 20px;flex-wrap:wrap}
 .marca{display:flex;align-items:center;gap:11px;flex:none;background:none;border:0;padding:0;cursor:pointer}
 .marca img{height:42px;width:auto}
-.menu{display:flex;gap:3px;overflow-x:auto;scrollbar-width:none;flex:1}
-.menu::-webkit-scrollbar{display:none}
+/* Antes: overflow-x:auto con la barra oculta. Se podía correr pero nada lo
+   decía, así que las últimas pestañas quedaban invisibles. Ahora envuelve:
+   más alto, pero se ven todas, que era lo que hacía falta. */
+.menu{display:flex;gap:3px;flex-wrap:wrap;flex:1 1 420px;row-gap:2px}
+
 .menu button{font:600 13.5px/1 "RedTexto",sans-serif;color:var(--tinta);background:none;border:0;
   padding:9px 12px;border-radius:7px;cursor:pointer;white-space:nowrap;transition:background .15s,color .15s}
 .menu button:hover{background:color-mix(in srgb,var(--olivo) 12%,transparent)}
@@ -651,6 +655,27 @@ textarea{resize:vertical;min-height:130px}
   .bloque{padding:44px 0}
   .hero-in{padding:52px 16px 46px}
 }
+
+/* ═════ visor del documento original ═════
+   Se muestra el PDF tal cual, dentro del visor del navegador: ya trae zoom,
+   búsqueda e impresión, y conserva el texto seleccionable. */
+#visorPdf{position:fixed;inset:0;background:rgba(28,33,19,.72);z-index:60;
+  display:grid;place-items:center;padding:18px}
+#visorPdf[hidden]{display:none}
+.vp-caja{background:var(--papel);border-radius:14px;width:min(1080px,100%);
+  height:min(92vh,100%);display:flex;flex-direction:column;overflow:hidden}
+.vp-barra{display:flex;align-items:center;gap:9px;padding:12px 16px;
+  border-bottom:1px solid var(--linea);flex-wrap:wrap}
+.vp-barra b{font:800 14px/1.2 "RedTitular",sans-serif;text-transform:uppercase;
+  margin-right:auto;color:var(--tinta)}
+.vp-b{font:600 13px/1 "RedTexto",sans-serif;text-decoration:none;cursor:pointer;
+  background:var(--papel);color:var(--olivo);border:1.5px solid var(--linea);
+  border-radius:8px;padding:9px 13px}
+.vp-b:hover{background:var(--suave)}
+.vp-x{background:var(--olivo);color:#fff;border-color:var(--olivo)}
+.vp-x:hover{background:var(--olivo-hondo);color:#fff}
+#vpMarco{flex:1;width:100%;border:0;background:#525659}
+@media (max-width:640px){.vp-caja{height:100%;border-radius:0}}
 </style>
 
 <!-- ══════════════════════ LEMA ══════════════════════ -->
@@ -778,7 +803,7 @@ textarea{resize:vertical;min-height:130px}
         </div>
         <ul class="alertas" id="listaAlertas"></ul>
       </div>
-      <button class="btn btn-1" data-ir="alertas" style="margin-top:8px">Ver la ruta de atención</button>
+      <button class="btn btn-1" data-ir="ddhh" data-ancla="ficha" style="margin-top:8px">Ver la ruta de atención</button>
     </div>
   </div>
 
@@ -796,6 +821,9 @@ textarea{resize:vertical;min-height:130px}
         <p class="plomo" style="margin-top:12px">Convocamos a organizaciones sociales, comunidades campesinas
           y étnicas, asociaciones productivas, universidades, centros de investigación y profesionales
           comprometidos con la justicia agraria.</p>
+        <div class="hero-btns" style="margin:18px 0 16px">
+          <button class="btn btn-1" data-ir="colabora">Registrar mi organización →</button>
+        </div>
         <p style="font-size:15px"><b>Correo</b><br>
           <a href="mailto:rednal.reformaagraria@gmail.com">rednal.reformaagraria@gmail.com</a></p>
       </div>
@@ -2469,6 +2497,20 @@ function fichaInstrumento(it){
 
 </main>
 
+<!-- visor del documento original -->
+<div id="visorPdf" hidden>
+  <div class="vp-caja">
+    <div class="vp-barra">
+      <b id="vpTitulo"></b>
+      <a id="vpDescargar" class="vp-b" download>Descargar</a>
+      <a id="vpAbrir" class="vp-b" target="_blank" rel="noopener">Abrir aparte</a>
+      <button class="vp-b vp-x" id="vpCerrar" aria-label="Cerrar el documento">Cerrar</button>
+    </div>
+    <iframe id="vpMarco" title="Documento original"></iframe>
+  </div>
+</div>
+
+
 <!-- ══════════════════════════════════════════════════════════════ -->
 <footer class="pie">
   <div class="caja">
@@ -2485,8 +2527,14 @@ function fichaInstrumento(it){
       <div>
         <h5>Actuar</h5>
         <button data-ir="ddhh" data-ancla="ficha">Reportar un hecho</button>
-        <button data-ir="alertas">Ruta de atención</button>
+        <button data-ir="colabora">Registrar mi organización</button>
+        <button data-ir="ddhh" data-ancla="ficha">Ruta de atención</button>
         <a href="https://defensacampesina.github.io/herramienta/tablero2/" target="_blank" rel="noopener">Matriz de derechos</a>
+      </div>
+      <div>
+        <h5>Redes</h5>
+        <a href="https://www.instagram.com/redagrariacol/" target="_blank" rel="noopener">Instagram · @redagrariacol</a>
+        <a href="https://x.com/RedAgrariaCol" target="_blank" rel="noopener">X · @RedAgrariaCol</a>
       </div>
       <div>
         <h5>Contacto</h5>
@@ -2543,6 +2591,7 @@ function fichaInstrumento(it){
     <button class="cerrar" id="cerrarModal" aria-label="Cerrar">✕</button>
     <p class="meta" id="modalMeta"></p>
     <h2 id="modalTit"></h2>
+    <div id="modalPdf" style="margin-bottom:18px"></div>
     <div class="cuerpo" id="modalCuerpo"></div>
   </div>
 </div>
@@ -2579,7 +2628,7 @@ const SECCIONES = [
 ];
 
 const COMUNICADOS = [
-  { n:'Comunicado 001', fecha:'Julio de 2026', img:'lamTierra',
+  { n:'Comunicado 001', fecha:'Julio de 2026', img:'lamTierra', pdf:'docs/comunicado001.pdf',
     tit:'El crimen organizado vuelve por las tierras de la Reforma Agraria',
     resumen:'La Red alerta sobre una operación de alcance nacional mediante la cual estructuras del '+
       'narcotráfico buscan reapropiarse, con maniobras judiciales, presiones institucionales y violencia '+
@@ -2608,7 +2657,7 @@ const COMUNICADOS = [
         'de la Nación y a la comunidad internacional mantener especial vigilancia sobre la vida, la integridad '+
         'y la permanencia en el territorio de las 2.481 familias beneficiarias de estos procesos.'],
     ]},
-  { n:'Comunicado 002', fecha:'Julio de 2026', img:'lamJusticia',
+  { n:'Comunicado 002', fecha:'Julio de 2026', img:'lamJusticia', pdf:'docs/comunicado002.pdf',
     tit:'La Red celebra la radicación del proyecto de ley de la Jurisdicción Agraria y Rural',
     resumen:'La radicación coincide con los tres años del Acto Legislativo 03 de 2023, que creó la '+
       'Jurisdicción Agraria y Rural. La Red llama a un debate con rigor jurídico y sin pánicos infundados.',
@@ -3055,6 +3104,14 @@ function abrirComunicado(i, desdeUrl) {
   if (!desdeUrl) history.replaceState(null, '', '#' + (location.hash.replace('#','').split('/')[0] || 'inicio') + '/com' + i);
   $('#modalMeta').textContent = c.n + ' · ' + c.fecha;
   $('#modalTit').textContent  = c.tit;
+  /* El botón al documento original. Lo que se lee abajo es una versión
+     rediagramada para pantalla; el PDF es el que sirve para citar o reenviar,
+     con su membrete y sus firmas. */
+  const zonaPdf = $('#modalPdf');
+  if (zonaPdf) zonaPdf.innerHTML = c.pdf
+    ? '<button class="btn btn-1" data-pdf="' + esc(c.pdf) + '" data-pdf-tit="' +
+      esc(c.n + ' · ' + c.tit) + '">Ver el documento original →</button>'
+    : '';
   /* lo que sube el equipo llega ya armado; lo de fábrica viene por bloques */
   $('#modalCuerpo').innerHTML = c.cuerpoHTML ? c.cuerpoHTML : (() => {
     if (!Array.isArray(c.cuerpo)) return '';
@@ -3538,5 +3595,33 @@ $('#botLlamar').addEventListener('click', abrirBot);
 $('#botCerrar').addEventListener('click', cerrarBot);
 document.addEventListener('keydown', e => {
   if (e.key === 'Escape' && !panelBot.hidden && !velo.classList.contains('viva')) cerrarBot();
+});
+
+/* ═════ visor del documento original ═════
+   Quien lea el comunicado en la página está viendo una versión rediagramada
+   para leer en pantalla. El documento con membrete y firmas es otro archivo,
+   y es el que sirve para citar o reenviar. */
+function abrirPdf(ruta, titulo) {
+  if (!ruta) return;
+  $('#vpTitulo').textContent = titulo || 'Documento';
+  $('#vpMarco').src = ruta;
+  $('#vpDescargar').href = ruta;
+  $('#vpAbrir').href = ruta;
+  $('#visorPdf').hidden = false;
+  document.body.style.overflow = 'hidden';
+}
+function cerrarPdf() {
+  $('#visorPdf').hidden = true;
+  $('#vpMarco').src = 'about:blank';   /* que no siga cargado por detrás */
+  document.body.style.overflow = '';
+}
+$('#vpCerrar').addEventListener('click', cerrarPdf);
+$('#visorPdf').addEventListener('click', e => { if (e.target.id === 'visorPdf') cerrarPdf(); });
+document.addEventListener('keydown', e => {
+  if (e.key === 'Escape' && !$('#visorPdf').hidden) cerrarPdf();
+});
+document.addEventListener('click', e => {
+  const b = e.target.closest('[data-pdf]');
+  if (b) { e.preventDefault(); abrirPdf(b.dataset.pdf, b.dataset.pdfTit || ''); }
 });
 </script>
