@@ -12,10 +12,10 @@
   Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=(), interest-cohort=()
 
 /
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-OYSknpDYXOiUUwhjYwHCv59XEYucYyz0utcUYKcR0Nw=' 'sha256-Ek7v3F13D5npyPR5LETGDjLGoWoEVy09BwPpdCrTZK0='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-OYSknpDYXOiUUwhjYwHCv59XEYucYyz0utcUYKcR0Nw=' 'sha256-G4GW2ExYZv/oCRndUGDM74Kkh8Tse89Ww0/l0ThmnXo='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
 
 /index.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-OYSknpDYXOiUUwhjYwHCv59XEYucYyz0utcUYKcR0Nw=' 'sha256-Ek7v3F13D5npyPR5LETGDjLGoWoEVy09BwPpdCrTZK0='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-OYSknpDYXOiUUwhjYwHCv59XEYucYyz0utcUYKcR0Nw=' 'sha256-G4GW2ExYZv/oCRndUGDM74Kkh8Tse89Ww0/l0ThmnXo='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
 
 /panel
   Content-Security-Policy: default-src 'none'; script-src 'sha256-O93wPjpMfbTOL5eUyNVeTYw2hkdxVi0DXgaJsfv5SOU='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
