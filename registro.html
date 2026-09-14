@@ -1,4 +1,5 @@
 <meta charset="utf-8">
+<meta http-equiv="Content-Security-Policy" content="default-src 'none'; script-src 'sha256-kT8gltUMwhrWbvVOAMYwsL4gOiR09MIyXSIpwmyj8n0='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; object-src 'none'; upgrade-insecure-requests">
 <meta name="viewport" content="width=device-width,initial-scale=1">
 <title>Registro de organizaciones — Red Nacional por la Defensa de la Reforma Agraria</title>
 
@@ -127,7 +128,7 @@ main{padding:26px 0 70px}
 
 const API = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)
   ? '/api'
-  : 'https://script.google.com/macros/s/AKfycbwiMAuwROnjeYmzGMEVbS_1FNk5C6o39bccX7K9Y1-zORcLdBWiiog1274JSz1oub6T/exec';
+  : 'https://script.google.com/macros/s/AKfycbzhYzR5BNKpYP4lmwJouZDiS0-s1muUkdBdfm6FQ4r_QxCUcLIy1OXysAEgfCjYtOEZ/exec';
 
 const CAMPOS_ORG    = [{"n":1,"titulo":"La organización","campos":[{"id":"nombre","r":"Nombre de la organización","tipo":"texto","visible":true,"obligatorio":true,"ayuda":"Como aparece en sus documentos o como se le conoce en el territorio.","pista":"Ej: Asociación de Campesinos del Sur"},{"id":"tipo","r":"Tipo de organización","tipo":"sel","visible":true,"obligatorio":true,"ops":["Organización campesina","Organización de derechos humanos","Asociación productiva","Fundación","Otra"]},{"id":"tipo_otro","r":"¿Cuál?","tipo":"texto","visible":true,"depende":{"campo":"tipo","valor":"Otra"},"pista":"Ej: Colectivo académico"},{"id":"nivel","r":"Nivel de operación","tipo":"sel","visible":true,"obligatorio":true,"ops":["Nacional","Regional"]}]},{"n":2,"titulo":"En qué quiere trabajar","nota":"Marque todas las que correspondan. Sirve para saber a quién convocar cuando se abra un frente de trabajo.","campos":[{"id":"acciones","r":"¿En cuáles acciones estaría interesada su organización?","tipo":"multi","visible":true,"ops":["Espacios de coordinación","Investigación","Formación","Incidencia institucional","Acompañamiento a comunidades","Alertas tempranas","Defensa jurídica","Elaboración de propuestas","Observatorio territorial","Análisis de políticas públicas","Comunicaciones"]}]},{"n":3,"titulo":"Dónde trabaja","nota":"Escoja el departamento y marque los municipios donde la organización tiene presencia. Puede agregar varios departamentos, uno tras otro.","campos":[{"id":"territorios","r":"Departamentos y municipios","tipo":"territorios","visible":true,"obligatorio":true}]},{"n":4,"titulo":"Contacto","campos":[{"id":"correo","r":"Correo electrónico de contacto","tipo":"correo","visible":true,"obligatorio":true,"reservado":true,"ayuda":"Por aquí la Red se comunica. No se publica en ningún documento.","pista":"contacto@organizacion.org"},{"id":"telefono","r":"Teléfono o celular (opcional)","tipo":"texto","visible":true,"reservado":true},{"id":"persona","r":"Persona de contacto (opcional)","tipo":"texto","visible":true,"reservado":true,"ayuda":"Nombre de quien atiende la relación con la Red."}]},{"n":5,"titulo":"Autorización","campos":[{"id":"habeas","r":"¿Autoriza el tratamiento de los datos de contacto de la organización, conforme a la Ley 1581 de 2012, para efectos de la articulación con la Red?","tipo":"sel","visible":true,"obligatorio":true,"ops":["Sí","No"]},{"id":"publicar","r":"¿Autoriza que el nombre de la organización aparezca en el mapa público de organizaciones aliadas?","tipo":"sel","visible":true,"obligatorio":true,"ayuda":"El correo y el teléfono nunca se publican, autorice o no esta pregunta.","ops":["Sí, puede aparecer","No, prefiero que no aparezca","Prefiero definirlo después"]}]},{"n":6,"titulo":"Revisión de la Red","soloAmpliado":true,"nota":"Lo diligencia quien revisa el registro. No lo ve la organización.","campos":[{"id":"estado_rev","r":"Estado de la revisión","tipo":"sel","visible":false,"ops":["Recibido","En verificación","Verificado","Vinculado","No procede","Archivado"]},{"id":"verificado_por","r":"Quién verificó","tipo":"texto","visible":false},{"id":"vinculo","r":"Vínculo con la Red","tipo":"sel","visible":false,"ops":["Sin contacto todavía","Contactada","Participa en un frente de trabajo","Organización miembro"]},{"id":"observaciones","r":"Observaciones","tipo":"larga","visible":false}]}];
 const DEPARTAMENTOS = ["Amazonas","Antioquia","Arauca","Atlántico","Bogotá D.C.","Bolívar","Boyacá","Caldas","Caquetá","Casanare","Cauca","Cesar","Chocó","Córdoba","Cundinamarca","Guainía","Guaviare","Huila","La Guajira","Magdalena","Meta","Nariño","Norte de Santander","Putumayo","Quindío","Risaralda","San Andrés y Providencia","Santander","Sucre","Tolima","Valle del Cauca","Vaupés","Vichada"];
@@ -310,7 +311,39 @@ $('#formulario').addEventListener('submit', async e => {
   b.disabled = false; b.textContent = 'Enviar el registro';
 
   if (!r.ok) {
-    $('#errorGeneral').innerHTML = `<div class="error">${esc(r.error || 'No se pudo guardar.')}</div>`;
+    /* Quien llena este formulario no tiene ninguna cuenta ni ninguna sesión:
+       viene a registrar su organización. Si el receptor contesta que falta la
+       sesión —pasa cuando está publicada una versión anterior, que no conoce
+       todavía el registro de organizaciones— mostrarle eso sería mandarlo a
+       iniciar una sesión que no existe. Se le dice lo que pasa y se le deja
+       una salida con lo que ya escribió. */
+    const esDelServidor = /sesion|sesión/i.test(String(r.error || ''));
+    if (esDelServidor) {
+      $('#errorGeneral').innerHTML = `<div class="error">
+        <b>El registro no se pudo guardar en este momento.</b>
+        El sistema de la Red está en mantenimiento. No pierda lo que escribió:
+        con el botón de abajo se abre su correo con todos los datos listos para enviarlos.
+        <div style="margin-top:12px"><button type="button" class="btn" id="porCorreo">
+          Enviarlo por correo</button></div></div>`;
+      $('#porCorreo').addEventListener('click', () => {
+        const lineas = ['Quiero registrar mi organización en la Red.', ''];
+        for (const b of BLOQUES_ORG) for (const c of b.campos) {
+          if (c.reservado && c.id !== 'correo' && c.id !== 'telefono') continue;
+          const v = datos[c.id];
+          if (v === undefined || v === '' || (Array.isArray(v) && !v.length)) continue;
+          lineas.push(c.r + ': ' + (Array.isArray(v)
+            ? v.map(x => typeof x === 'object'
+                ? x.dpto + (x.municipios && x.municipios.length ? ' (' + x.municipios.join(', ') + ')' : '')
+                : x).join(' | ')
+            : v));
+        }
+        window.location.href = 'mailto:rednal.reformaagraria@gmail.com?subject=' +
+          encodeURIComponent('Registro de organización') +
+          '&body=' + encodeURIComponent(lineas.join(String.fromCharCode(10)));
+      });
+    } else {
+      $('#errorGeneral').innerHTML = `<div class="error">${esc(r.error || 'No se pudo guardar.')}</div>`;
+    }
     window.scrollTo({ top: 0, behavior: 'smooth' });
     return;
   }
