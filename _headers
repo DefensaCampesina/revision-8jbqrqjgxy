@@ -47,11 +47,11 @@
   X-Frame-Options: DENY
 
 /radar
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-Zq9VLHSPNIFuSC901mx4tlP/PQvfg6eZyZvuvHcwlhk='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-OqQ1jVEW3W93ppc34ORETqLZXS6yKaLalCcM8c4NCcc='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /radar.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-Zq9VLHSPNIFuSC901mx4tlP/PQvfg6eZyZvuvHcwlhk='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-OqQ1jVEW3W93ppc34ORETqLZXS6yKaLalCcM8c4NCcc='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /registro
