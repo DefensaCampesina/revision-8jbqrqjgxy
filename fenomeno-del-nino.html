@@ -240,9 +240,49 @@ ul.equipo li{white-space:nowrap;line-height:1.55}
   table{font-size:13.5px}
 }
 @media print{
-  .cab-acc,nav.tabs,.saltar{display:none}
-  .hero,footer,.pie-sitio,.box.dark{background:#fff;color:#000}
+  :root,:root:not([data-theme="light"]),:root[data-theme="dark"]{
+    --olivo-hondo:#2F3A1A; --olivo:#46551F; --olivo-vivo:#7A9A2E;
+    --tierra:#8C4415; --ocre:#B87A20; --ocre-texto:#925E15; --arena:#E8C48F;
+    --crema:#FFFFFF; --papel:#FFFFFF; --suave:#ECF0E4;
+    --tinta:#1C2113; --gris:#5F6752; --linea:#DBE1CE; --alerta:#B3231F;
+    --cabeza-tabla:#2F3A1A; --texto-boton:#fff; --ocre-banda:#E0A244; --verde-banda:#B4D169;
+    color-scheme:light;
+  }
+  @page{size:A4;margin:13mm 12mm 16mm}
+  html,body{background:#fff;font-size:10.5pt}
+  .saltar,.cab-acc,nav.tabs,.pie-sitio,.volver,.nv-mando,.bot-llamar{display:none !important}
+  .cab{position:static;break-after:avoid}
+  .cab-in{padding:0 0 6mm}
+  .hero{break-after:page;padding:10mm 9mm 12mm;margin:0 0 0}
+  .heroin{grid-template-columns:1fr;gap:7mm}
+  .hero h1{font-size:30pt;line-height:1.02}
+  .hero .lead{font-size:12pt;max-width:none}
+  .heromap img{max-height:105mm;width:auto;margin:0 auto}
+  .figs{gap:9mm}
+  .figs b{font-size:20pt}
+  main{padding:0;max-width:none}
+  section{break-before:page;padding:0 0 4mm;border-top:0;scroll-margin:0}
+  section:first-of-type{break-before:avoid}
+  h2{font-size:19pt;max-width:none;break-after:avoid}
+  h3{font-size:13pt;break-after:avoid}
+  h4{font-size:11pt;break-after:avoid}
+  p,li,dd,td,th{orphans:3;widows:3}
+  figure,table,.tw,.box,.cadena,.stats,.chart,.lim>div,ol.dem li,.ev{break-inside:avoid}
+  figure img{max-height:95mm;width:auto}
+  .cols{grid-template-columns:1.05fr .95fr;gap:8mm}
+  .dos{columns:2;column-gap:9mm}
+  .chart{height:34mm}
+  .imp-cierre{display:block;break-before:page}
+  .imp-cierre .imp-codigos{display:grid;grid-template-columns:1fr 1fr;gap:8mm;margin:8mm 0 0}
+  .imp-cierre .imp-codigo{border:1px solid var(--linea);border-radius:4mm;padding:6mm;text-align:center}
+  .imp-cierre .imp-codigo img{width:38mm;height:38mm;margin:0 auto 4mm}
+  .imp-cierre .imp-codigo b{display:block;font-family:"RedTitular",sans-serif;font-size:12pt;color:var(--olivo);margin-bottom:2mm}
+  .imp-cierre .imp-codigo span{display:block;font-size:9pt;color:var(--gris);line-height:1.45}
+  .imp-cierre .imp-codigo u{display:block;text-decoration:none;font-size:8.5pt;color:var(--ocre-texto);margin-top:3mm;word-break:break-all}
+  .imp-cierre .imp-lema{margin:10mm 0 0;padding-top:5mm;border-top:1px solid var(--linea);
+    font-family:"RedTitular",sans-serif;font-size:13pt;color:var(--olivo);text-align:center}
 }
+@media screen{.imp-cierre{display:none}}
 </style>
 </head>
 <body>
@@ -254,7 +294,7 @@ ul.equipo li{white-space:nowrap;line-height:1.55}
     <nav class="cab-acc" aria-label="Acciones">
       <a class="volver" href="./">← Volver al sitio</a>
       <a class="cab-btn cab-btn-1" href="fenomeno-del-nino-mapa" target="_blank" rel="noopener">Abrir el mapa interactivo <span aria-hidden="true">↗</span></a>
-      <a class="cab-btn" href="docs/analisis-el-nino-2026-2027.pdf" download="analisis-el-nino-2026-2027.pdf">Descargar el análisis (PDF, 2,5 MB) <span aria-hidden="true">↓</span></a>
+      <a class="cab-btn" href="docs/analisis-el-nino-2026-2027.pdf" download="analisis-el-nino-2026-2027.pdf">Descargar el análisis (PDF, 1007 KB) <span aria-hidden="true">↓</span></a>
     </nav>
   </div>
 </header>
@@ -556,6 +596,25 @@ ul.equipo li{white-space:nowrap;line-height:1.55}
 
 </div>
 
+<div class="imp-cierre">
+  <h2>Consulte y verifique</h2>
+  <p>Toda la metodología, el código y los datos son públicos. Cualquiera puede reproducir el ejercicio, cuestionarlo o mejorarlo.</p>
+  <div class="imp-codigos">
+    <div class="imp-codigo">
+      <img src="activos/nino/qr-mapa.png?v=993bf14b90" width="900" height="900" alt="">
+      <b>Abra el mapa interactivo</b>
+      <span>Consulte su municipio, filtre por cultivo y descargue los datos. Es libre y gratuito.</span>
+      <u>redagraria.pages.dev/fenomeno-del-nino-mapa</u>
+    </div>
+    <div class="imp-codigo">
+      <img src="activos/nino/qr-analisis.png?v=53268d6959" width="900" height="900" alt="">
+      <b>Lea el análisis completo</b>
+      <span>Metodología, límites del análisis y las 16 cadenas con todo el detalle municipal.</span>
+      <u>redagraria.pages.dev/fenomeno-del-nino</u>
+    </div>
+  </div>
+  <p class="imp-lema">¡Ni una hectárea atrás, ni un derecho atrás!</p>
+</div>
 <div class="pie-sitio"><div>
   <p><b>Red Nacional por la Defensa de la Reforma Agraria</b> ·
     <a href="./">Sitio de la Red</a> ·
