@@ -38,11 +38,11 @@
   X-Frame-Options: DENY
 
 /
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-4oRQGccmltfbx+XTpr1twHQcagTp4zInIaXeDes9Cew=' 'sha256-QkCohgpmMd/a8olqmfUXhYAotYUUuGblSlS8mQMmIRc='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-4oRQGccmltfbx+XTpr1twHQcagTp4zInIaXeDes9Cew=' 'sha256-c1ayFuGjyS1IiN5IbbPzikd/cUASF4jyZ8ow3pONvW0='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /index.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-4oRQGccmltfbx+XTpr1twHQcagTp4zInIaXeDes9Cew=' 'sha256-QkCohgpmMd/a8olqmfUXhYAotYUUuGblSlS8mQMmIRc='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-4oRQGccmltfbx+XTpr1twHQcagTp4zInIaXeDes9Cew=' 'sha256-c1ayFuGjyS1IiN5IbbPzikd/cUASF4jyZ8ow3pONvW0='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /panel

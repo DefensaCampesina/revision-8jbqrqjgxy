@@ -114,22 +114,32 @@ p{margin:0 0 1.05em;max-width:var(--medida)}
 /* Las pestañas, en el mismo renglón del logo y alineadas a la derecha.
    Si no caben se corren en horizontal, que estorba menos que partir la
    barra en dos: en pantallas angostas la barra dejaría de ser una barra. */
-.menu{display:flex;gap:5px;flex:1;justify-content:flex-end;
+.menu{display:flex;gap:4px;flex:1;justify-content:flex-end;
   overflow-x:auto;scrollbar-width:thin;padding-bottom:2px}
 @media (max-width:980px){.menu{justify-content:flex-start}}
 
 /* Cada pestaña es una casilla con contorno. Sin borde, al envolverse en dos
    líneas las palabras parecían regadas y no se leía dónde empezaba una y
    terminaba otra. */
-.menu button{font:600 13px/1 "RedTexto",sans-serif;color:var(--tinta);
+/* Con diez pestañas (nueve secciones más la página del análisis) el renglón
+   no alcanzaba en 1330 px y la primera quedaba cortada: se ajustó el aire. */
+.menu button{font:600 12.5px/1 "RedTexto",sans-serif;color:var(--tinta);
   background:var(--papel);border:1px solid var(--linea);
-  padding:9px 11px;border-radius:8px;cursor:pointer;white-space:nowrap;
+  padding:9px 9px;border-radius:8px;cursor:pointer;white-space:nowrap;
   transition:background .15s,color .15s,border-color .15s}
 .menu button:hover{background:var(--suave);border-color:var(--olivo-vivo)}
 .menu button[aria-current="true"]{color:#fff;background:var(--olivo);border-color:var(--olivo)}
 @media (prefers-color-scheme:dark){.menu button[aria-current="true"]{color:var(--olivo-hondo)}}
 :root[data-theme="dark"] .menu button[aria-current="true"]{color:var(--olivo-hondo)}
 :root[data-theme="light"] .menu button[aria-current="true"]{color:var(--papel)}
+/* La pestaña que lleva a una página aparte va en ocre: no es una sección de
+   esta página y no debe confundirse con las otras. */
+.menu .menu-aparte{font:700 12.5px/1 "RedTexto",sans-serif;color:#1B1408;background:var(--ocre);
+  border:1px solid var(--ocre);padding:9px 10px;border-radius:8px;white-space:nowrap;text-decoration:none;
+  display:inline-flex;align-items:center;gap:7px;transition:filter .15s,transform .15s}
+.menu .menu-aparte::before{content:"";width:7px;height:7px;border-radius:50%;background:#1B1408;opacity:.55}
+.menu .menu-aparte:hover{filter:brightness(1.07);transform:translateY(-1px)}
+.pie-rej a.menu-aparte,#pieMenu a{display:block}
 .btn-denuncia{flex:none;font:800 13px/1 "RedTitular",sans-serif;letter-spacing:.09em;text-transform:uppercase;
   background:var(--alerta);color:#fff;border:0;padding:12px 17px;border-radius:8px;cursor:pointer;
   display:flex;align-items:center;gap:8px;transition:transform .14s,box-shadow .14s}
@@ -1154,29 +1164,25 @@ textarea{resize:vertical;min-height:130px}
    reinicia los botones (.dsp-ambito button{border:0;background:none}) y
    con una sola clase las cajas salían sin borde ni fondo solo ahí. El
    prefijo nv- no lo usa nadie más. */
-.nv-tira{background:var(--suave);border-bottom:1px solid var(--linea);padding-block:24px 26px}
-.nv-tira .ante{margin-bottom:12px}
-.nv-tira .nv-cajas{list-style:none;margin:0;padding:0;display:grid;gap:12px;
-  grid-template-columns:repeat(var(--nv-n,4),minmax(0,1fr))}
+.nv-tira{background:var(--suave);border-bottom:1px solid var(--linea);padding-block:18px 18px}
+.nv-tira .ante{margin-bottom:10px}
+/* Un índice corrido, como el sumario de un impreso: número, título y flecha.
+   Antes eran tarjetas con un resumen debajo; la Red las vio genéricas. */
+.nv-tira .nv-cajas{list-style:none;margin:0;padding:0;display:flex;flex-wrap:wrap;gap:8px 10px}
 .nv-tira .nv-cajas > li{display:flex;min-width:0}
-.nv-tira .nv-caja{display:flex;flex-direction:column;gap:5px;width:100%;margin:0;text-align:left;
-  font:inherit;color:var(--tinta);background:var(--papel);cursor:pointer;
-  border:1px solid var(--linea);border-left:4px solid var(--ocre);border-radius:12px;
-  padding:12px 14px 13px;box-shadow:var(--sombra);transition:transform .15s,box-shadow .15s,border-color .15s}
-.nv-tira .nv-caja:hover{transform:translateY(-2px);box-shadow:var(--sombra-alta)}
-.nv-tira .nv-caja[aria-current="location"]{border-left-color:var(--olivo)}
-.nv-tira .nv-tit{display:flex;justify-content:space-between;align-items:baseline;gap:8px;
-  font:800 15px/1.15 "RedTitular",Arial Narrow,sans-serif;text-transform:uppercase;letter-spacing:.01em;color:var(--olivo)}
-.nv-tira .nv-tit i{flex:none;font-style:normal;font-family:"RedTexto",sans-serif;font-weight:600;color:var(--ocre-texto)}
-.nv-tira .nv-txt{font-size:13.5px;line-height:1.45;color:var(--gris)}
-/* con cinco o seis partes las cajas no caben en una fila angosta: tres por fila */
-@media (max-width:1100px){.nv-tira .nv-cajas{grid-template-columns:repeat(var(--nv-m,3),minmax(0,1fr))}}
-/* en el celular, una fila que se corre con el dedo: apiladas empujaban el
-   contenido una pantalla entera hacia abajo */
+.nv-tira .nv-caja{display:inline-flex;align-items:baseline;gap:8px;margin:0;text-align:left;
+  font:inherit;color:var(--tinta);background:none;cursor:pointer;border:0;border-bottom:2px solid var(--linea);
+  padding:5px 2px 6px;transition:border-color .15s,color .15s}
+.nv-tira .nv-caja:hover{border-bottom-color:var(--ocre);color:var(--olivo)}
+.nv-tira .nv-caja[aria-current="location"]{border-bottom-color:var(--olivo);color:var(--olivo)}
+.nv-tira .nv-num{font:700 11.5px/1 "RedTexto",sans-serif;color:var(--tierra);letter-spacing:.06em;flex:none}
+.nv-tira .nv-tit{font:800 14.5px/1.2 "RedTitular",Arial Narrow,sans-serif;text-transform:uppercase;
+  letter-spacing:.01em;color:inherit}
+.nv-tira .nv-baja{font-style:normal;font-size:12px;color:var(--ocre-texto);flex:none}
 @media (max-width:640px){
-  .nv-tira{padding-block:18px 18px}
-  .nv-tira .nv-cajas{display:flex;overflow-x:auto;scroll-snap-type:x mandatory;gap:10px;padding:2px 2px 8px}
-  .nv-tira .nv-cajas > li{flex:0 0 min(78%,260px);scroll-snap-align:start}
+  .nv-tira{padding-block:14px 14px}
+  .nv-tira .nv-cajas{gap:6px 8px}
+  .nv-tira .nv-tit{font-size:13.5px}
 }
 
 /* El control va suelto en <body>, junto a Denuncia/Súmate y nunca dentro de
@@ -7592,10 +7598,19 @@ const LEMA = ['¡Ni una hectárea atrás, ni un derecho atrás!','Red Nacional p
 $('#lema').innerHTML = [...LEMA, ...LEMA, ...LEMA, ...LEMA].map(t => `<span>${esc(t)}</span>`).join('');
 
 /* navegación */
+/* El análisis de El Niño no es una sección de esta página sino una página
+   aparte, así que va como enlace y con su propio color: la Red quiso que se
+   distinguiera de las pestañas del sitio. */
+/* El rótulo corto es a propósito: con el nombre completo las diez pestañas
+   no caben en un renglón de 1330 px y la primera quedaba cortada. El nombre
+   entero va en el título y en el pie. */
+const PAGINAS_APARTE = [{ href: 'fenomeno-del-nino', rot: 'El Niño', largo: 'Fenómeno del Niño' }];
 $('#menu').innerHTML = SECCIONES.filter(s => s.menu !== false).map(s =>
-  `<button role="tab" data-ir="${s.id}" aria-current="false">${esc(s.rot)}</button>`).join('');
+  `<button role="tab" data-ir="${s.id}" aria-current="false">${esc(s.rot)}</button>`).join('') +
+  PAGINAS_APARTE.map(p => `<a class="menu-aparte" href="${esc(p.href)}" title="${esc(p.largo)}" aria-label="${esc(p.largo)}">${esc(p.rot)}</a>`).join('');
 $('#pieMenu').innerHTML = SECCIONES.map(s =>
-  `<button data-ir="${s.id}">${esc(s.rot)}</button>`).join('');
+  `<button data-ir="${s.id}">${esc(s.rot)}</button>`).join('') +
+  PAGINAS_APARTE.map(p => `<a href="${esc(p.href)}">${esc(p.largo)}</a>`).join('');
 
 function ir(id, ancla, desdeUrl) {
   id = ALIAS_SECCION[id] || id;
@@ -7829,19 +7844,23 @@ function nvSaltar(dest, conFoco = true) {
    demás, debajo de la cabecera de la sección. */
 function nvPintarTiras() {
   for (const [id, partes] of Object.entries(INDICE)) {
+    /* En el inicio no va: la portada ya dice de qué se trata el sitio y la
+       tira le robaba la primera pantalla. El control fijo sí la conserva. */
+    if (id === 'red') continue;
     const sec = document.getElementById('s-' + id);
     if (!sec || partes.length < 2) continue;
-    const tras = sec.querySelector(id === 'red' ? ':scope > .hero' : ':scope > .cabsec');
+    const tras = sec.querySelector(':scope > .cabsec');
     if (!tras || sec.querySelector(':scope > .nv-tira')) continue;
     const n = partes.length;
     tras.insertAdjacentHTML('afterend', `
   <nav class="nv-tira" aria-labelledby="nvTira-${id}">
     <div class="caja">
       <p class="ante" id="nvTira-${id}">Qué encontrará aquí</p>
-      <ol class="nv-cajas" style="--nv-n:${n};--nv-m:${Math.min(n, 3)}">${partes.map((p, i) => `
+      <ol class="nv-cajas">${partes.map((p, i) => `
         <li><button type="button" class="nv-caja" data-nv-i="${i}">
-          <span class="nv-tit">${esc(p.t)}<i aria-hidden="true">↓</i></span>
-          <span class="nv-txt">${esc(p.d)}</span>
+          <b class="nv-num">${String(i + 1).padStart(2, '0')}</b>
+          <span class="nv-tit">${esc(p.t)}</span>
+          <i class="nv-baja" aria-hidden="true">↓</i>
         </button></li>`).join('')}
       </ol>
     </div>
