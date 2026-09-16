@@ -1,0 +1,16 @@
+# Redirecciones de Cloudflare Pages. Se edita a mano: son pocas y cada una
+# es una dirección que ya circuló y no puede quedar rota.
+#
+# La columna de Héctor Mondragón vivía en la raíz del sitio y su enlace ya se
+# compartió. Desde que cada publicación tiene su página en /publicaciones/,
+# la dirección vieja manda allá para siempre (301).
+/columna-contrarreformas-agrarias-made-in-miami       /publicaciones/columna-contrarreformas-agrarias-made-in-miami  301
+/columna-contrarreformas-agrarias-made-in-miami.html  /publicaciones/columna-contrarreformas-agrarias-made-in-miami  301
+
+# El paquete de la alerta alimentaria (la cartilla de 18 MB, su página y su
+# mapa) se reemplazó por el análisis de El Niño y su mapa interactivo. Las
+# direcciones viejas ya circularon con la cartilla: mandan a las nuevas.
+/alerta-alimentaria                                   /fenomeno-del-nino                                             301
+/alerta-alimentaria.html                              /fenomeno-del-nino                                             301
+/alerta-alimentaria-mapa                              /fenomeno-del-nino-mapa                                        301
+/alerta-alimentaria-mapa.html                         /fenomeno-del-nino-mapa                                        301

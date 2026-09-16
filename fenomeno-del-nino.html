@@ -1,0 +1,606 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<meta name="color-scheme" content="light dark">
+<title>Lo que “El Niño” le va a costar a la comida de Colombia · RADAR agrario</title>
+<meta name="description" content="Análisis municipio por municipio y cultivo por cultivo del impacto del fenómeno de El Niño 2026–2027 sobre la producción de alimentos en Colombia. Red por la Defensa de la Reforma Agraria.">
+<link rel="canonical" href="https://redagraria.pages.dev/fenomeno-del-nino">
+<meta property="og:site_name" content="Red Nacional por la Defensa de la Reforma Agraria">
+<meta property="og:locale" content="es_CO">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Lo que “El Niño” le va a costar a la comida de Colombia">
+<meta property="og:description" content="8,46 millones de toneladas de alimentos en riesgo en 1.094 municipios entre septiembre de 2026 y julio de 2027.">
+<meta property="og:url" content="https://redagraria.pages.dev/fenomeno-del-nino">
+<meta property="og:image" content="https://redagraria.pages.dev/activos/nino/deficit-de-precipitacion-en-diciembre-de-2026.jpg?v=d2620ef5aa">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="773">
+<meta property="og:image:height" content="900">
+<meta property="og:image:alt" content="Déficit de precipitación en diciembre de 2026">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@font-face{font-family:"RedTitular";src:url("activos/fuentes/OpenSans_Condensed-ExtraBold.ttf?v=fd0c313e2a") format("truetype");font-weight:800;font-display:swap}
+@font-face{font-family:"RedTexto";src:url("activos/fuentes/OpenSans-Regular.ttf?v=33e93bec67") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:"RedTexto";src:url("activos/fuentes/OpenSans-SemiBold.ttf?v=126a7c4db9") format("truetype");font-weight:600;font-display:swap}
+:root{
+  --olivo-hondo:#2F3A1A; --olivo:#46551F; --olivo-vivo:#7A9A2E;
+  --tierra:#8C4415; --ocre:#B87A20; --ocre-texto:#925E15; --arena:#E8C48F;
+  --crema:#FFFFFF; --papel:#FFFFFF; --suave:#ECF0E4;
+  --tinta:#1C2113; --gris:#5F6752; --linea:#DBE1CE; --alerta:#B3231F;
+  --cabeza-tabla:#2F3A1A; --texto-boton:#fff;
+  --sombra:0 1px 2px rgba(47,58,26,.06),0 4px 14px rgba(47,58,26,.07);
+  --ocre-banda:#E0A244; --verde-banda:#B4D169;
+  --marca:var(--olivo);
+  color-scheme:light;
+}
+@media (prefers-color-scheme:dark){
+  :root:not([data-theme="light"]){
+    --olivo-hondo:#141A0C; --olivo:#A8C25C; --olivo-vivo:#B9D46A;
+    --tierra:#D98A4A; --ocre:#E0A244; --ocre-texto:#E0A244; --arena:#EBCF9E;
+    --crema:#0F140A; --papel:#19200F; --suave:#232C16;
+    --tinta:#EDF0E2; --gris:#A2AC90; --linea:#2C3620; --alerta:#F0736C;
+    --cabeza-tabla:#2C3620; --texto-boton:#141A0C;
+    --sombra:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3);
+    color-scheme:dark;
+  }
+}
+:root[data-theme="dark"]{
+  --olivo-hondo:#141A0C; --olivo:#A8C25C; --olivo-vivo:#B9D46A;
+  --tierra:#D98A4A; --ocre:#E0A244; --ocre-texto:#E0A244; --arena:#EBCF9E;
+  --crema:#0F140A; --papel:#19200F; --suave:#232C16;
+  --tinta:#EDF0E2; --gris:#A2AC90; --linea:#2C3620; --alerta:#F0736C;
+  --cabeza-tabla:#2C3620; --texto-boton:#141A0C;
+  --sombra:0 1px 2px rgba(0,0,0,.4),0 4px 14px rgba(0,0,0,.3);
+  color-scheme:dark;
+}
+*{box-sizing:border-box}
+@media (prefers-reduced-motion:no-preference){html{scroll-behavior:smooth}}
+html{-webkit-text-size-adjust:100%}
+body{margin:0;background:var(--crema);color:var(--tinta);
+  font:400 17px/1.68 "RedTexto",system-ui,-apple-system,"Segoe UI",sans-serif;
+  -webkit-font-smoothing:antialiased;overflow-x:hidden}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--ocre-texto)}
+strong,b{font-weight:600}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--ocre);outline-offset:2px;border-radius:3px}
+.saltar{position:absolute;left:12px;top:-60px;background:var(--papel);color:var(--tinta);
+  padding:10px 14px;border-radius:8px;z-index:60;font-weight:600}
+.saltar:focus{top:12px}
+.cab{background:var(--olivo-hondo);color:#fff;padding:14px 0;border-bottom:1px solid rgba(255,255,255,.08)}
+.cab-in{max-width:1240px;margin:0 auto;padding:0 22px;display:flex;align-items:center;gap:12px 18px;flex-wrap:wrap}
+.cab-logo{flex:none;border-radius:6px}
+.cab-logo img{height:50px;width:auto}
+.cab-radar{margin:0;font:800 13.5px/1.25 "RedTitular",sans-serif;letter-spacing:.1em;text-transform:uppercase;color:var(--arena)}
+.cab-radar span{display:block;font:400 11.5px/1.35 "RedTexto",sans-serif;letter-spacing:.02em;text-transform:none;color:#D9DCC9}
+.cab-acc{margin-left:auto;display:flex;gap:8px;flex-wrap:wrap;align-items:center}
+.volver,.cab-btn{display:inline-block;font:600 14px/1.2 "RedTexto",sans-serif;text-decoration:none;white-space:nowrap;
+  border-radius:9px;padding:10px 15px;border:1px solid rgba(255,255,255,.28);color:#E9E4D4;transition:background .15s,box-shadow .15s}
+.volver:hover,.cab-btn:hover{background:rgba(255,255,255,.1)}
+.cab-btn-1{background:var(--ocre-banda);border-color:var(--ocre-banda);color:#1B1408}
+.cab-btn-1:hover{background:#EDB45C;box-shadow:0 6px 20px rgba(224,162,68,.35)}
+nav.tabs{position:sticky;top:0;z-index:40;background:var(--crema);
+  background:color-mix(in srgb,var(--crema) 93%,transparent);
+  -webkit-backdrop-filter:blur(12px);backdrop-filter:blur(12px);border-bottom:1px solid var(--linea)}
+.tabsin{position:relative;max-width:1340px;margin:0 auto;padding:8px 14px;display:flex;gap:4px;
+  overflow-x:auto;scrollbar-width:thin;overscroll-behavior-x:contain}
+.tabsin a{flex:none;font:600 12.5px/1 "RedTexto",sans-serif;color:var(--tinta);text-decoration:none;
+  background:var(--papel);border:1px solid var(--linea);padding:9px 9px;border-radius:8px;white-space:nowrap;
+  transition:background .15s,color .15s,border-color .15s}
+.tabsin a:hover{background:var(--suave);border-color:var(--olivo-vivo)}
+.tabsin a.on{color:var(--texto-boton);background:var(--olivo);border-color:var(--olivo)}
+.hero{background:var(--olivo-hondo);color:var(--arena);padding:58px 22px 64px;border-bottom:1px solid var(--linea)}
+.heroin{max-width:1196px;margin:0 auto;display:grid;grid-template-columns:minmax(0,1.15fr) minmax(0,.85fr);gap:48px;align-items:center}
+.kick{font:600 12px/1.3 "RedTexto",sans-serif;letter-spacing:.17em;text-transform:uppercase;color:var(--verde-banda);
+  display:flex;align-items:center;gap:11px;margin:0 0 16px}
+.kick::after{content:"";flex:1;height:2px;background:var(--verde-banda);opacity:.4}
+.hero h1{font:800 clamp(34px,4.7vw,60px)/.98 "RedTitular","Arial Narrow",sans-serif;text-transform:uppercase;
+  letter-spacing:.005em;color:#fff;margin:0 0 20px;text-wrap:balance}
+.hero p.lead{font-size:clamp(17px,1.7vw,19.5px);line-height:1.6;margin:0;max-width:52ch;text-align:left;-webkit-hyphens:manual;hyphens:manual;
+  color:color-mix(in srgb,var(--arena) 90%,#fff)}
+.figs{display:flex;gap:18px 36px;margin-top:32px;flex-wrap:wrap}
+.figs b{font:800 clamp(30px,3.3vw,40px)/1 "RedTitular",sans-serif;color:var(--ocre-banda);display:block;font-variant-numeric:tabular-nums}
+.figs span{font:600 11px/1.4 "RedTexto",sans-serif;letter-spacing:.08em;text-transform:uppercase;display:block;margin-top:7px;
+  color:color-mix(in srgb,var(--arena) 75%,#fff)}
+.heromap{background:#F2F1EA;border-radius:14px;padding:12px;box-shadow:0 12px 40px rgba(0,0,0,.35)}
+.heromap img{border:0;border-radius:8px;width:100%;height:auto;max-height:min(640px,76vh);object-fit:contain;background:#F2F1EA}
+.heromap figcaption{font:600 10.5px/1.45 "RedTexto",sans-serif;letter-spacing:.05em;text-transform:uppercase;color:#5F6752;margin-top:9px}
+main{max-width:1240px;margin:0 auto;padding:0 22px 72px}
+section{padding:58px 0 14px;border-top:1px solid var(--linea);scroll-margin-top:12px}
+section:first-of-type{border-top:0}
+.sk{font:600 12px/1.3 "RedTexto",sans-serif;letter-spacing:.17em;text-transform:uppercase;color:var(--tierra);
+  display:flex;align-items:center;gap:11px;margin:0 0 14px}
+.sk::after{content:"";flex:1;height:2px;background:var(--tierra);opacity:.28}
+h2{font:800 clamp(26px,3.1vw,40px)/1.02 "RedTitular","Arial Narrow",sans-serif;text-transform:uppercase;
+  letter-spacing:.005em;color:var(--olivo);margin:0 0 22px;max-width:28ch;text-wrap:balance}
+h3{font:800 clamp(19px,1.9vw,22px)/1.2 "RedTitular",sans-serif;color:var(--tinta);margin:36px 0 10px}
+h4{font:800 16px/1.25 "RedTitular",sans-serif;letter-spacing:.015em;color:var(--tierra);margin:24px 0 6px}
+p{margin:0 0 1em;text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+.dos{columns:2;column-gap:46px;margin-bottom:6px}
+.dos p{margin:0 0 .95em;break-inside:avoid}
+.dos h3,.dos h4{break-after:avoid;margin-top:0}
+.cols{display:grid;grid-template-columns:minmax(0,1.1fr) minmax(0,.9fr);gap:44px;align-items:start}
+.cols>div>figure:first-child{margin-top:0}
+.cols figure img{width:100%;height:auto;max-height:560px;object-fit:contain}
+.stats{display:grid;grid-template-columns:repeat(auto-fit,minmax(170px,1fr));gap:1px;background:var(--linea);
+  border:1px solid var(--linea);border-radius:14px;overflow:hidden;margin:26px 0}
+.stats div{background:var(--suave);padding:20px 20px 18px}
+.stats b{font:800 clamp(26px,2.6vw,34px)/1 "RedTitular",sans-serif;color:var(--olivo);display:block;font-variant-numeric:tabular-nums}
+.stats span{font-size:13.5px;line-height:1.45;color:var(--gris);display:block;margin-top:8px}
+.box{background:var(--suave);border-left:4px solid var(--ocre);border-radius:0 14px 14px 0;padding:18px 24px;margin:26px 0}
+.box h4{margin:0 0 8px}
+.box p{margin:0 0 .7em}
+.box p:last-child{margin:0}
+.box.dark{background:var(--olivo-hondo);color:color-mix(in srgb,var(--arena) 88%,#fff);border-left-color:var(--ocre-banda);
+  box-shadow:inset 0 0 0 1px var(--linea)}
+.box.dark h4{color:var(--ocre-banda)}
+.box.warn{background:color-mix(in srgb,var(--alerta) 9%,var(--papel));border-left-color:var(--alerta)}
+.box.warn h4{color:var(--alerta)}
+.big{font:800 clamp(28px,3vw,36px)/1.05 "RedTitular",sans-serif;color:var(--ocre-banda);display:block;margin-bottom:8px}
+.tw{overflow-x:auto;-webkit-overflow-scrolling:touch;margin:24px 0;border:1px solid var(--linea);border-radius:12px;background:var(--papel)}
+table{border-collapse:collapse;width:100%;font-size:14.5px;line-height:1.42;min-width:520px}
+th{text-align:left;background:var(--cabeza-tabla);color:#fff;font-weight:600;font-size:12.5px;letter-spacing:.03em;
+  padding:10px 12px;vertical-align:bottom}
+td{padding:9px 12px;border-bottom:1px solid var(--linea);vertical-align:top}
+tbody tr:last-child td{border-bottom:0}
+td.n,th.n{text-align:right;font-variant-numeric:tabular-nums;white-space:nowrap}
+tbody tr:hover{background:var(--suave)}
+.chart{display:flex;align-items:flex-end;gap:5px;height:calc(var(--alto) + 40px);margin:24px 0 34px;padding-top:40px}
+.bar{flex:1;min-width:0;display:flex;flex-direction:column;justify-content:flex-end;align-items:center;height:100%;position:relative}
+.bar i{display:block;flex:none;width:100%;height:var(--h);background:var(--olivo);border-radius:4px 4px 0 0;transition:background .15s}
+.bar.on i{background:var(--tierra)}
+.bar:hover i{background:var(--ocre)}
+.bl{position:absolute;top:100%;left:-2px;right:-2px;text-align:center;font-size:11px;line-height:1.2;color:var(--gris);margin-top:6px;letter-spacing:.02em}
+.bv{position:absolute;top:-20px;font-size:11px;font-weight:600;line-height:1.2;color:var(--tinta);opacity:0;
+  transition:opacity .15s;white-space:nowrap;font-variant-numeric:tabular-nums}
+.bar.on+.bar.on .bv{top:-36px}
+.bar:hover .bv,.bar.on .bv{opacity:1}
+.chart:hover .bar.on:not(:hover) .bv{opacity:0}
+.leyenda{font-size:13px;line-height:1.5;color:var(--gris);margin:0 0 26px;text-align:left}
+figure{margin:26px 0}
+figure img{border:1px solid var(--linea);border-radius:10px;background:#F2F1EA}
+figcaption{font-size:13px;line-height:1.5;color:var(--gris);margin-top:9px}
+figcaption b{display:block;font:800 12.5px/1.3 "RedTitular",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--tierra);margin-bottom:3px}
+.cols figure figcaption{text-align:left}
+.mapgrid{display:grid;grid-template-columns:repeat(auto-fit,minmax(230px,1fr));gap:22px;margin:26px 0}
+.mapgrid figure{margin:0}
+.cadena{border-top:2px solid var(--olivo);padding:16px 0 4px;margin-top:24px;break-inside:avoid}
+.cadena h3{margin:0 0 4px;font-size:22px}
+.cadena .meta{font-size:13.5px;line-height:1.45;color:var(--gris);margin:0 0 12px;text-align:left}
+.cadena dl{display:grid;grid-template-columns:auto 1fr;gap:7px 18px;margin:0;font-size:16px}
+.cadena dt{font:800 12.5px/1.3 "RedTitular",sans-serif;letter-spacing:.08em;text-transform:uppercase;color:var(--tierra);padding-top:4px}
+.cadena dd{margin:0;text-align:justify;-webkit-hyphens:auto;hyphens:auto}
+@media (min-width:1000px){
+  section:has(>.cadena){display:grid;grid-template-columns:repeat(2,minmax(0,1fr));column-gap:48px;align-content:start}
+  section:has(>.cadena)>:not(.cadena){grid-column:1/-1}
+}
+ol.dem{list-style:none;counter-reset:d;padding:0;margin:26px 0}
+ol.dem li{counter-increment:d;display:grid;grid-template-columns:44px 1fr;gap:14px;padding:15px 0;border-bottom:1px solid var(--linea)}
+ol.dem li::before{content:counter(d);font:800 28px/1.05 "RedTitular",sans-serif;color:var(--ocre-texto)}
+ol.dem p{margin:0}
+.lim{display:grid;grid-template-columns:repeat(auto-fit,minmax(255px,1fr));gap:24px;margin:26px 0}
+.lim div{border-top:2px solid var(--linea);padding-top:12px}
+.lim h4{margin:0 0 6px;color:var(--tinta)}
+.lim p{font-size:15.5px;margin:0;color:var(--gris);text-align:left;-webkit-hyphens:manual;hyphens:manual}
+.cta{display:inline-block;font:600 14.5px/1.2 "RedTexto",sans-serif;text-decoration:none;border-radius:9px;padding:14px 22px;
+  background:var(--ocre)!important;color:#1B1408!important;transition:box-shadow .15s}
+.cta:hover{box-shadow:0 8px 24px color-mix(in srgb,var(--ocre) 45%,transparent)}
+footer{background:var(--olivo-hondo);color:color-mix(in srgb,var(--arena) 82%,#fff);padding:50px 22px 36px;margin-top:10px}
+.footin{max-width:1196px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:40px}
+footer h4{font:800 12.5px/1.2 "RedTitular",sans-serif;letter-spacing:.15em;text-transform:uppercase;color:var(--arena);margin:0 0 14px}
+footer p{font-size:14.5px;line-height:1.6;margin:0 0 .8em;text-align:left;-webkit-hyphens:manual;hyphens:manual}
+footer a{color:var(--arena)}
+footer a:hover{color:#fff}
+.fuentes{font-size:13.5px;line-height:1.6}
+.fuentes b{color:#fff}
+ul.equipo{list-style:none;font-size:14px;color:#fff;border-left:3px solid var(--ocre-banda);padding:2px 0 2px 14px;margin:6px 0 16px;
+  display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:3px 18px}
+ul.equipo li{white-space:nowrap;line-height:1.55}
+.lema{font:800 clamp(18px,2.1vw,23px)/1.2 "RedTitular",sans-serif;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--arena);text-align:center;max-width:1196px;margin:34px auto 0;padding-top:26px;
+  border-top:1px solid color-mix(in srgb,var(--arena) 22%,transparent)}
+.pie-sitio{background:var(--olivo-hondo);color:#E9E4D4;padding:0 22px 26px;font-size:13.5px;line-height:1.6}
+.pie-sitio div{max-width:1196px;margin:0 auto;padding-top:18px;border-top:1px solid color-mix(in srgb,var(--arena) 14%,transparent);text-align:center}
+.pie-sitio p{margin:0;text-align:center}
+.pie-sitio a{color:#fff}
+@media (max-width:900px){
+  .heroin,.cols,.footin{grid-template-columns:1fr;gap:28px}
+  .heromap{max-width:520px}
+  body{font-size:16.5px}
+  .cab-radar span{display:none}
+}
+@media (max-width:820px){.dos{columns:1}}
+@media (min-width:901px) and (max-height:720px){
+  .hero{padding:34px 22px 38px}
+  .hero h1{font-size:clamp(32px,3.9vw,50px);margin-bottom:14px}
+  .figs{margin-top:22px}
+  .hero p.lead{font-size:17px}
+  .heromap img{max-height:max(340px,calc(100vh - 260px))}
+}
+@media (max-width:640px){
+  .cab-in{padding:0 16px}
+  .cab-logo img{height:42px}
+  .cab-acc{margin-left:0;width:100%}
+  .volver,.cab-btn{font-size:13px;padding:9px 12px}
+  .tabsin{padding:8px 12px}
+  .hero{padding:36px 16px 42px}
+  main{padding:0 16px 56px}
+  section{padding-top:44px;scroll-margin-top:26px}
+  footer{padding:40px 16px 30px}
+  .pie-sitio{padding:0 16px 22px}
+  .box{padding:16px 18px}
+  .mapgrid[style]{grid-template-columns:1fr!important}
+  .cadena dl{grid-template-columns:1fr;gap:2px}
+  .cadena dd{margin-bottom:8px}
+  .chart{gap:3px}
+  .bl{font-size:10px}
+  .bv{font-size:9.5px;top:-17px}
+  .bar.on+.bar.on .bv{top:-31px}
+  table{font-size:13.5px}
+}
+@media print{
+  .cab-acc,nav.tabs,.saltar{display:none}
+  .hero,footer,.pie-sitio,.box.dark{background:#fff;color:#000}
+}
+</style>
+</head>
+<body>
+<a class="saltar" href="#contenido">Ir al contenido</a>
+<header class="cab">
+  <div class="cab-in">
+    <a class="cab-logo" href="./"><img src="activos/logos/logo-red-blanco.webp?v=8f0298d6a5" width="760" height="387" alt="Red Nacional por la Defensa de la Reforma Agraria"></a>
+    <p class="cab-radar">RADAR agrario<span>Red por la Defensa de la Reforma Agraria</span></p>
+    <nav class="cab-acc" aria-label="Acciones">
+      <a class="volver" href="./">← Volver al sitio</a>
+      <a class="cab-btn cab-btn-1" href="fenomeno-del-nino-mapa" target="_blank" rel="noopener">Abrir el mapa interactivo <span aria-hidden="true">↗</span></a>
+      <a class="cab-btn" href="docs/analisis-el-nino-2026-2027.pdf" download="analisis-el-nino-2026-2027.pdf">Descargar el análisis (PDF, 2,5 MB) <span aria-hidden="true">↓</span></a>
+    </nav>
+  </div>
+</header>
+
+<div id="contenido">
+<nav class="tabs"><div class="tabsin"><a href="#hallazgo" data-s="hallazgo">El hallazgo</a><a href="#contexto" data-s="contexto">Contexto global</a><a href="#pronostico" data-s="pronostico">El pronóstico</a><a href="#calendario" data-s="calendario">La trampa del calendario</a><a href="#cadenas" data-s="cadenas">Cadenas en riesgo</a><a href="#cafe" data-s="cafe">La economía cafetera</a><a href="#alertas" data-s="alertas">Alertas por cadena</a><a href="#presupuesto" data-s="presupuesto">El presupuesto</a><a href="#exigencias" data-s="exigencias">Exigencias</a><a href="#limites" data-s="limites">Límites</a><a href="#herramienta" data-s="herramienta">La herramienta</a></div></nav>
+
+<div class="hero"><div class="heroin">
+  <div>
+    <p class="kick">Alerta alimentaria · El Niño 2026–2027</p>
+    <h1>Lo que “El Niño” le va a costar a la comida de Colombia</h1>
+    <p class="lead">Municipio por municipio, cultivo por cultivo: el cruce entre el pronóstico del IDEAM, la producción agrícola de las Evaluaciones Agropecuarias y los calendarios de siembra y cosecha de la UPRA.</p>
+    <div class="figs">
+      <div><b>8,46 M t</b><span>de alimentos en riesgo<br>sep. 2026 – jul. 2027</span></div>
+      <div><b>1.094</b><span>municipios con<br>al menos una alerta</span></div>
+      <div><b>30,8 %</b><span>de los alimentos del<br>calendario del periodo</span></div>
+    </div>
+  </div>
+  <figure class="heromap" style="margin:0">
+    <img src="activos/nino/deficit-de-precipitacion-en-diciembre-de-2026.jpg?v=d2620ef5aa" alt="Déficit de precipitación en diciembre de 2026" width="773" height="900" decoding="async">
+    <figcaption>Déficit de precipitación pronosticado · diciembre de 2026<br>1.114 municipios con pronóstico IDEAM. Elaboración propia.</figcaption>
+  </figure>
+</div></div>
+
+<main>
+
+<section id="hallazgo">
+  <p class="sk">El hallazgo</p>
+  <h2>Casi un tercio de la comida del país queda en juego</h2>
+  <div class="stats">
+    <div><b>8,46 M t</b><span>de alimentos en riesgo, sep. 2026 – jul. 2027</span></div>
+    <div><b>1.003.424 ha</b><span>de cultivos alimentarios afectadas</span></div>
+    <div><b>1.094</b><span>municipios con al menos una alerta</span></div>
+    <div><b>30,8 %</b><span>de los alimentos que el calendario ubica en el periodo</span></div>
+  </div>
+  <div class="cols">
+    <div>
+      <p>Desde el RADAR de la Red por la Defensa de la Reforma Agraria cruzamos el pronóstico de lluvias del IDEAM con las Evaluaciones Agropecuarias Municipales y los calendarios de la UPRA. Es la primera estimación pública de cuánta comida está en riesgo, dónde y en qué mes exacto.</p>
+      <p>El golpe no llega cuando falta el agua. Llega después. El pronóstico del IDEAM termina en febrero de 2027, pero el pico de pérdida de cosecha está entre febrero y mayo de 2027, cuando se recoge lo que se sembró en la sequía. Sembraremos menos y cosecharemos mucho menos.</p>
+      <div class="box warn">
+        <h4>La decisión y el daño están en años distintos</h4>
+        <p>Hay que decidir en octubre de 2026 sobre un daño que se sentirá en los mercados en marzo de 2027. El proyecto de Presupuesto 2027 —el año en que aterriza el daño— reduce el sector agropecuario. Es una alerta inflacionaria para la comida de todos los colombianos.</p>
+      </div>
+    </div>
+    <div>
+      <h4>Producción en riesgo, mes a mes</h4>
+      <div class="chart" style="--alto:190px"><div class="bar" style="--h:1.5%"><span class="bv">0 mil t</span><i></i><span class="bl">Sep</span></div><div class="bar" style="--h:31.330725766658045%"><span class="bv">459 mil t</span><i></i><span class="bl">Oct</span></div><div class="bar" style="--h:47.54921264544714%"><span class="bv">697 mil t</span><i></i><span class="bl">Nov</span></div><div class="bar" style="--h:68.81416685378267%"><span class="bv">1.008 mil t</span><i></i><span class="bl">Dic</span></div><div class="bar" style="--h:80.32169847183671%"><span class="bv">1.177 mil t</span><i></i><span class="bl">Ene</span></div><div class="bar on" style="--h:100.0%"><span class="bv">1.465 mil t</span><i></i><span class="bl">Feb</span></div><div class="bar on" style="--h:74.73579107071073%"><span class="bv">1.095 mil t</span><i></i><span class="bl">Mar</span></div><div class="bar" style="--h:65.1602520571954%"><span class="bv">955 mil t</span><i></i><span class="bl">Abr</span></div><div class="bar" style="--h:46.341546645118186%"><span class="bv">679 mil t</span><i></i><span class="bl">May</span></div><div class="bar" style="--h:41.13940335361921%"><span class="bv">603 mil t</span><i></i><span class="bl">Jun</span></div><div class="bar" style="--h:21.757302472046916%"><span class="bv">319 mil t</span><i></i><span class="bl">Jul</span></div></div>
+      <p class="leyenda">Toneladas de alimentos en riesgo por mes. El pico está en febrero y marzo de 2027, después de que termina el pronóstico climático.</p>
+    </div>
+  </div>
+</section>
+
+<section id="contexto">
+  <p class="sk">1 · Contexto global</p>
+  <h2>Uno de los episodios de El Niño más intensos jamás medidos</h2>
+  <div class="stats">
+    <div><b>~100 %</b><span>probabilidad de que persista hasta feb. 2027 (OMM)</span></div>
+    <div><b>49 M</b><span>personas adicionales en riesgo de hambre aguda (PMA)</span></div>
+    <div><b>25,8 %</b><span>de la población mundial con inseguridad alimentaria en 2025</span></div>
+    <div><b>2,9 °C</b><span>anomalía proyectada en la región Niño 3.4</span></div>
+  </div>
+  <div class="dos">
+  <p>La Organización Meteorológica Mundial estableció una probabilidad cercana al 100 % de que el episodio de El Niño persista hasta febrero de 2027, con anomalías en la región Niño 3.4 que los modelos proyectan por encima de los 2,9 °C. No se trata de un evento ordinario dentro de la variabilidad climática.</p>
+  <p>El Programa Mundial de Alimentos estima que al menos 49 millones de personas adicionales podrían enfrentar hambre aguda hacia finales de 2027 —al menos 16 millones de ellas en Suramérica—. En 45 países vulnerables, la población en inseguridad alimentaria pasaría de unos 225 a 274 millones, un aumento cercano al 22 %.</p>
+  <p>El informe conjunto de cinco organismos internacionales, publicado en 2026, ya reportaba que el 25,8 % de la población mundial —alrededor de 2.100 millones de personas— padeció inseguridad alimentaria moderada o grave en 2025. El fenómeno llega sobre una base ya deteriorada.</p>
+  <h3>El mundo ya sabía qué hacer</h3>
+  <p>La secretaria general de la OMM, Celeste Saulo, ha sido explícita en que existe conocimiento y recursos suficientes para evitar que el riesgo se convierta en crisis, y ha recomendado a los gobiernos anticiparse en el sector agrícola: seleccionar semillas según el pronóstico de lluvias, prepararse para la escasez de agua y actuar antes del impacto.</p>
+  <p>La Organización Internacional del Trabajo advierte que los trabajadores rurales e informales están entre los más expuestos. Bloomberg Línea y otros analistas han señalado que las cadenas en riesgo en América Latina van del café al arroz, y que el efecto se suma a precios internacionales ya elevados de combustibles, fertilizantes y alimentos.</p>
+  </div>
+  <div class="box">
+    <h4>El punto de partida no es la ignorancia</h4>
+    <p>El sistema internacional lleva más de un año advirtiendo. La información existe, el pronóstico existe y las recomendaciones de política están publicadas. Lo que este análisis demuestra es que en Colombia esa advertencia no se ha traducido en una asignación presupuestal proporcional al tamaño del riesgo.</p>
+  </div>
+</section>
+
+<section id="pronostico">
+  <p class="sk">2 · El pronóstico del IDEAM</p>
+  <h2>Diciembre de 2026: el fondo del pozo</h2>
+  <div class="cols">
+    <div>
+      <p>El pronóstico estacional del IDEAM, procesado municipio por municipio, describe un semestre con dos caras y una trampa en el medio. Diciembre concentra la señal más severa: el promedio nacional de variación es de −60,5 %. De 1.114 municipios con pronóstico, <strong>1.057 registran déficit superior al 20 % y 903 superan el 40 %</strong>.</p>
+      <p>En La Guajira la lluvia de diciembre se reduce en 95,3 %: prácticamente desaparece. En el Caribe entero —Sucre, Magdalena, Atlántico, Bolívar, Cesar y Córdoba— la reducción supera el 85 %. En el eje cafetero y el alto Magdalena el golpe llega antes, en septiembre, con Quindío en −74,6 %, Tolima en −68,2 % y Huila en −67,8 %.</p>
+      <p>Medido por el semestre completo, Quindío es el departamento más castigado con −42,2 % promedio, seguido de Atlántico con −37,9 % y Huila con −35,3 %.</p>
+    </div>
+    <div><figure class=""><img src="activos/nino/deficit-de-precipitacion-en-diciembre-de-2026.jpg?v=d2620ef5aa" alt="Déficit de precipitación · diciembre de 2026" width="773" height="900" loading="lazy" decoding="async"><figcaption><b>Déficit de precipitación · diciembre de 2026</b>Variación frente al promedio 1991–2020. Elaboración propia con datos IDEAM.</figcaption></figure></div>
+  </div>
+  <div class="tw"><table class=""><thead><tr><th class="">Departamento</th><th class="">Peor mes</th><th class="n">Reducción</th><th class="n">Promedio del semestre</th></tr></thead><tbody><tr><td class="">La Guajira</td><td class="">Dic. 2026</td><td class="n">-95,3 %</td><td class="n">-30,4 %</td></tr><tr><td class="">Sucre</td><td class="">Dic. 2026</td><td class="n">-91,0 %</td><td class="n">-29,3 %</td></tr><tr><td class="">Magdalena</td><td class="">Dic. 2026</td><td class="n">-89,2 %</td><td class="n">-26,6 %</td></tr><tr><td class="">Atlántico</td><td class="">Dic. 2026</td><td class="n">-89,0 %</td><td class="n">-37,9 %</td></tr><tr><td class="">Bolívar</td><td class="">Dic. 2026</td><td class="n">-85,9 %</td><td class="n">-23,8 %</td></tr><tr><td class="">Cesar</td><td class="">Dic. 2026</td><td class="n">-85,7 %</td><td class="n">-25,2 %</td></tr><tr><td class="">Córdoba</td><td class="">Dic. 2026</td><td class="n">-85,3 %</td><td class="n">-21,4 %</td></tr><tr><td class="">N. de Santander</td><td class="">Dic. 2026</td><td class="n">-84,7 %</td><td class="n">-24,9 %</td></tr><tr><td class="">Quindío</td><td class="">Sep. 2026</td><td class="n">-74,6 %</td><td class="n">-42,2 %</td></tr><tr><td class="">Tolima</td><td class="">Sep. 2026</td><td class="n">-68,2 %</td><td class="n">-31,7 %</td></tr><tr><td class="">Huila</td><td class="">Sep. 2026</td><td class="n">-67,8 %</td><td class="n">-35,3 %</td></tr><tr><td class="">Santander</td><td class="">Dic. 2026</td><td class="n">-63,5 %</td><td class="n">-21,3 %</td></tr></tbody></table></div>
+  <div class="box warn">
+    <h4>Una advertencia sobre febrero</h4>
+    <p>En febrero de 2027 el pronóstico se invierte: el promedio nacional pasa a +26,3 %. Eso no significa alivio.</p>
+    <p>Primero, porque el exceso de lluvia también arruina cosechas —por encharcamiento, hongos y dificultad para recoger— y ese riesgo no está medido en este análisis. La falta de cuidado de los suelos y el impacto de la sequía en las coberturas reducen la capacidad de filtración, generando mayores riesgos al inicio de la temporada de lluvias.</p>
+    <p>Segundo, y más importante: lo que se cosecha en febrero ya venía dañado desde los meses secos anteriores. La lluvia de febrero no devuelve el rendimiento perdido.</p>
+  </div>
+</section>
+
+<section id="calendario">
+  <p class="sk">3 · La trampa del calendario</p>
+  <h2>Por qué el daño llega después</h2>
+  <div class="dos"><p>Este es el punto que cambia toda la discusión de política pública. Una planta no se daña el día que la cosechan. Se daña antes, mientras llena el grano o el fruto, que es cuando más agua necesita. Un cultivo transitorio que se recoge en marzo definió su rendimiento entre diciembre y febrero. Un cultivo permanente arrastra el estrés hídrico de hasta seis meses atrás.</p></div>
+  <div class="box dark">
+    <h4>La consecuencia, en una frase</h4>
+    <p>El pronóstico del IDEAM termina en febrero de 2027. El daño a la comida apenas empieza ahí. Los meses más duros para el abastecimiento nacional son febrero, marzo, abril y mayo de 2027, porque son los que recogen la sequía de septiembre a enero. Un presupuesto que se programe según el calendario de lluvias va a estar disponible cuando el problema ya ocurrió.</p>
+  </div>
+  <p>Por eso el análisis se extiende hasta agosto de 2027 —un semestre más allá del pronóstico climático— y separa dos daños distintos que exigen instrumentos distintos.</p>
+  <div class="cols">
+    <div class="cadena" style="margin-top:0"><h3>Siembra en riesgo</h3>
+      <dl><dt>Qué ocurre</dt><dd>La semilla no germina o la siembra se aplaza porque el suelo está seco.</dd>
+      <dt>Cuándo</dt><dd>Septiembre de 2026 – febrero de 2027.</dd>
+      <dt>Se necesita</dt><dd>Riego para establecimiento, semilla de ciclo corto, crédito puente, asistencia técnica.</dd></dl></div>
+    <div class="cadena" style="margin-top:0;border-top-color:var(--tierra)"><h3>Cosecha en riesgo</h3>
+      <dl><dt>Qué ocurre</dt><dd>La planta ya está en el campo y rinde menos por el agua que le faltó antes.</dd>
+      <dt>Cuándo</dt><dd>Octubre de 2026 – agosto de 2027, pico entre febrero y mayo de 2027.</dd>
+      <dt>Se necesita</dt><dd>Seguro agrícola, apoyo al ingreso, compras públicas anticipadas, gestión de reservas.</dd></dl></div>
+  </div>
+  <div class="box warn">
+    <h4>Un caso concreto: maíz en Cereté, Córdoba</h4>
+    <p>Quien siembre maíz en Cereté en <strong>octubre de 2026</strong> encontrará un mes benigno: la lluvia cae apenas 11,6 % frente a lo normal y la semilla debería nacer sin problema. Pero ese maíz se cosecha en febrero de 2027, y su ventana de llenado de grano son noviembre, diciembre y enero, con <strong>−32 %, −97 % y −48 %</strong> de lluvia. El riesgo pasa de 15 a 88 sobre 100. Puede nacer bien y rendir poco: el productor pierde la inversión sin haber tenido ninguna señal el día de la siembra.</p>
+  </div>
+  <h3>Septiembre siembra, marzo se siente</h3>
+  <div class="cols">
+    <div>
+      <p>Septiembre es el mes con más siembras del semestre —<strong>241.816 hectáreas</strong>— y con la alerta de siembra más alta de todo el periodo: <strong>228 municipios</strong> superan un índice de 30 sobre 100.</p>
+      <p>Los cultivos transitorios pesan doble: constituyen el mayor peso en la canasta alimentaria —arroz, maíz, papa, fríjol, hortalizas, cebolla, tomate y yuca— y son representativos de la agricultura campesina, por su capacidad de rotación e integración de ciclos cortos. El impacto se traduce en las condiciones e ingresos de cerca de 15 millones de campesinos y campesinas.</p>
+      <p>Mientras se discute el presupuesto de 2027, la ventana de acción sobre las siembras de 2026 se está cerrando. Una siembra que no se hizo no se recupera con una partida aprobada en noviembre.</p>
+      <p><strong>Marzo de 2027</strong> es el único mes cuya ventana hídrica está cubierta al 100 % por el pronóstico: sus cosechas dependen exactamente de la lluvia de diciembre, enero y febrero. Es la proyección más sólida del ejercicio, y es la peor.</p>
+    </div>
+    <div class="mapgrid" style="grid-template-columns:1fr 1fr;margin-top:0">
+      <figure class=""><img src="activos/nino/alerta-de-siembra-septiembre-2026.jpg?v=713c19ffd7" alt="Alerta de siembra · septiembre 2026" width="773" height="900" loading="lazy" decoding="async"><figcaption><b>Alerta de siembra · septiembre 2026</b>El déficit del propio mes sobre las siembras del calendario.</figcaption></figure>
+      <figure class=""><img src="activos/nino/alerta-de-cosecha-marzo-2027.jpg?v=cc0d037cc1" alt="Alerta de cosecha · marzo 2027" width="773" height="900" loading="lazy" decoding="async"><figcaption><b>Alerta de cosecha · marzo 2027</b>Respaldo del pronóstico del 100 %.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="cadenas">
+  <p class="sk">4 · Cadenas alimentarias en riesgo</p>
+  <h2>8,46 millones de toneladas, cultivo por cultivo</h2>
+  <div class="dos"><p>Entre septiembre de 2026 y julio de 2027 la afectación equivale a 1.598.691 hectáreas de cultivos, de las cuales 1.003.424 corresponden a alimentos. Las hectáreas de este análisis son <em>afectadas equivalentes</em>: el área de cada mes multiplicada por la severidad del déficit que le corresponde.</p></div>
+  <div class="tw"><table class=""><thead><tr><th class="">Cadena</th><th class="n">Toneladas</th><th class="n">Ha afectadas equiv.</th><th class="n">% del área</th><th class="n">Municipios</th></tr></thead><tbody><tr><td class="">Plátano</td><td class="n">1.471.628</td><td class="n">135.857</td><td class="n">31 %</td><td class="n">813</td></tr><tr><td class="">Papa</td><td class="n">1.410.746</td><td class="n">118.116</td><td class="n">35 %</td><td class="n">296</td></tr><tr><td class="">Banano</td><td class="n">825.811</td><td class="n">32.683</td><td class="n">34 %</td><td class="n">286</td></tr><tr><td class="">Yuca</td><td class="n">809.022</td><td class="n">88.336</td><td class="n">22 %</td><td class="n">801</td></tr><tr><td class="">Maíz</td><td class="n">462.164</td><td class="n">227.699</td><td class="n">26 %</td><td class="n">919</td></tr><tr><td class="">Aguacate</td><td class="n">400.760</td><td class="n">37.511</td><td class="n">33 %</td><td class="n">604</td></tr><tr><td class="">Arroz</td><td class="n">357.634</td><td class="n">115.823</td><td class="n">10 %</td><td class="n">296</td></tr><tr><td class="">Piña</td><td class="n">337.535</td><td class="n">7.870</td><td class="n">33 %</td><td class="n">215</td></tr><tr><td class="">Tomate</td><td class="n">309.266</td><td class="n">8.814</td><td class="n">27 %</td><td class="n">482</td></tr><tr><td class="">Naranja</td><td class="n">256.908</td><td class="n">15.523</td><td class="n">38 %</td><td class="n">436</td></tr><tr><td class="">Ñame</td><td class="n">194.019</td><td class="n">18.972</td><td class="n">25 %</td><td class="n">123</td></tr><tr><td class="">Limón</td><td class="n">172.175</td><td class="n">12.503</td><td class="n">30 %</td><td class="n">543</td></tr><tr><td class="">Mango</td><td class="n">149.939</td><td class="n">14.131</td><td class="n">39 %</td><td class="n">263</td></tr><tr><td class="">Cebolla de rama</td><td class="n">130.735</td><td class="n">8.275</td><td class="n">29 %</td><td class="n">165</td></tr><tr><td class="">Zanahoria</td><td class="n">82.205</td><td class="n">5.704</td><td class="n">29 %</td><td class="n">109</td></tr><tr><td class="">Cebolla de bulbo</td><td class="n">76.316</td><td class="n">6.783</td><td class="n">24 %</td><td class="n">127</td></tr></tbody></table></div>
+  <div class="cols">
+    <div>
+      <h3>Tres lecturas del cruce</h3>
+      <h4>El maíz, la mayor cobertura territorial</h4>
+      <p>Es el cultivo con más hectáreas comprometidas del país: 227.699, repartidas en 919 municipios. Es la cadena de mayor alcance territorial y la que más productores pequeños involucra.</p>
+      <h4>La papa, el mayor riesgo por tonelada básica</h4>
+      <p>Concentra 1,4 millones de toneladas en riesgo y el porcentaje de área afectada más alto de los cultivos mayores, 35 %.</p>
+      <h4>Frutas: presión de precios a la vista</h4>
+      <p>Mango, naranja y banano superan el 34 % de área comprometida, lo que anticipa presión de precios en frutas durante el primer semestre de 2027.</p>
+      <div class="box dark"><span class="big">2.297.439 toneladas</span>
+        <p>Es el volumen conjunto de plátano y banano en riesgo: la mayor cadena alimentaria afectada del país, concentrada en Arauca, Urabá y el Chocó.</p></div>
+    </div>
+    <div class="mapgrid" style="grid-template-columns:1fr 1fr;margin-top:0">
+      <figure class=""><img src="activos/nino/una-sola-cadena-papa.jpg?v=34165cb960" alt="Una sola cadena: papa" width="773" height="900" loading="lazy" decoding="async"><figcaption><b>Una sola cadena: papa</b>Altiplano cundiboyacense, Nariño y oriente antioqueño.</figcaption></figure>
+      <figure class=""><img src="activos/nino/una-sola-cadena-maiz.jpg?v=693841426a" alt="Una sola cadena: maíz" width="773" height="900" loading="lazy" decoding="async"><figcaption><b>Una sola cadena: maíz</b>919 municipios: la mayor cobertura territorial del país.</figcaption></figure>
+    </div>
+  </div>
+</section>
+
+<section id="cafe">
+  <p class="sk">5 · La economía cafetera</p>
+  <h2>El café: lo que no se come pero sostiene el ingreso rural</h2>
+  <div class="stats">
+    <div><b>209.227 ha</b><span>afectadas equivalentes</span></div>
+    <div><b>261.816 t</b><span>de café en riesgo</span></div>
+    <div><b>637</b><span>municipios cafeteros afectados</span></div>
+    <div><b>32,9 %</b><span>de su área de calendario en el periodo</span></div>
+  </div>
+  <div class="cols">
+    <div>
+      <p>El café no entra en el índice de alerta alimentaria porque las Evaluaciones Agropecuarias no lo clasifican como alimento, sino dentro de los cultivos tropicales tradicionales. Esa decisión metodológica tiene sentido mientras la pregunta sea de seguridad alimentaria. Pero deja fuera del radar de la política pública la cadena que sostiene el ingreso de cientos de miles de familias campesinas.</p>
+      <p>Cuando se aísla el café en la herramienta, el resultado es contundente: <strong>625 municipios registran alerta</strong> y la afectación equivale a <strong>209.227 hectáreas</strong>, casi un tercio de toda el área de calendario de la cadena en el periodo. En superficie comprometida, el café queda solo por debajo del maíz entre todos los cultivos del país.</p>
+      <h4>Y su pico llega todavía más tarde</h4>
+      <p>El café concentra su afectación en <strong>mayo de 2027</strong>, con 120.491 hectáreas, y mantiene presión hasta junio. Es entre dos y tres meses después del pico alimentario de febrero y marzo, y más de un año después de las medidas anticipatorias anunciadas en 2026.</p>
+      <p>Eso convierte a la caficultura en el caso más extremo del desajuste que denuncia este análisis: el daño aterriza en el segundo trimestre de 2027, cuando los recursos de la vigencia 2026 ya se agotaron y el presupuesto de 2027 llega recortado. No hay hoy ningún instrumento anunciado que apunte a esa ventana.</p>
+      <div class="box warn">
+        <h4>Una advertencia metodológica</h4>
+        <p>Al ser un cultivo permanente, la ventana hídrica del café es de seis meses, y de mayo de 2027 en adelante el respaldo del pronóstico cae por debajo del 40 %. Estas cifras son indicativas y deben actualizarse cuando el IDEAM emita su siguiente boletín estacional. La dirección del hallazgo, en cambio, es robusta: el golpe al café llega tarde.</p>
+      </div>
+    </div>
+    <div>
+      <figure class=""><img src="activos/nino/una-sola-cadena-cafe.jpg?v=8558c7633a" alt="Una sola cadena: café" width="773" height="900" loading="lazy" decoding="async"><figcaption><b>Una sola cadena: café</b>Afectación acumulada sep. 2026 – jul. 2027. El cinturón cafetero de Huila, Tolima, Cauca, Antioquia y la Sierra Nevada.</figcaption></figure>
+      <h4>Hectáreas de café afectadas, mes a mes</h4>
+      <div class="chart" style="--alto:165px"><div class="bar" style="--h:1.5%"><span class="bv">0 mil ha</span><i></i><span class="bl">Sep</span></div><div class="bar" style="--h:93.9200801443981%"><span class="bv">109 mil ha</span><i></i><span class="bl">Oct</span></div><div class="bar" style="--h:100.0%"><span class="bv">116 mil ha</span><i></i><span class="bl">Nov</span></div><div class="bar" style="--h:41.2303201457799%"><span class="bv">48 mil ha</span><i></i><span class="bl">Dic</span></div><div class="bar" style="--h:10.56213349914933%"><span class="bv">12 mil ha</span><i></i><span class="bl">Ene</span></div><div class="bar" style="--h:13.59604805209386%"><span class="bv">16 mil ha</span><i></i><span class="bl">Feb</span></div><div class="bar" style="--h:36.45533763418573%"><span class="bv">42 mil ha</span><i></i><span class="bl">Mar</span></div><div class="bar" style="--h:63.71134198685563%"><span class="bv">74 mil ha</span><i></i><span class="bl">Abr</span></div><div class="bar on" style="--h:82.36564154381601%"><span class="bv">95 mil ha</span><i></i><span class="bl">May</span></div><div class="bar" style="--h:49.856206440915095%"><span class="bv">58 mil ha</span><i></i><span class="bl">Jun</span></div><div class="bar" style="--h:14.23426691193616%"><span class="bv">16 mil ha</span><i></i><span class="bl">Jul</span></div></div>
+      <p class="leyenda">El pico de mayo de 2027 concentra 120.491 hectáreas, tres meses después del pico alimentario.</p>
+    </div>
+  </div>
+  <h3>Dónde se concentra</h3>
+  <div class="tw"><table class=""><thead><tr><th class="">Departamento</th><th class="n">Ha afectadas equiv.</th><th class="n">Toneladas</th><th class="n">% de su área</th><th class="n">Municipios</th></tr></thead><tbody><tr><td class="">Huila</td><td class="n">39.857</td><td class="n">55.998</td><td class="n">35,0 %</td><td class="n">35</td></tr><tr><td class="">Tolima</td><td class="n">31.560</td><td class="n">33.645</td><td class="n">38,8 %</td><td class="n">38</td></tr><tr><td class="">Cauca</td><td class="n">31.456</td><td class="n">41.380</td><td class="n">43,4 %</td><td class="n">34</td></tr><tr><td class="">Antioquia</td><td class="n">17.581</td><td class="n">26.914</td><td class="n">21,4 %</td><td class="n">94</td></tr><tr><td class="">Valle del Cauca</td><td class="n">15.660</td><td class="n">17.614</td><td class="n">39,1 %</td><td class="n">39</td></tr><tr><td class="">Caldas</td><td class="n">12.306</td><td class="n">16.885</td><td class="n">28,9 %</td><td class="n">25</td></tr><tr><td class="">Nariño</td><td class="n">12.244</td><td class="n">14.455</td><td class="n">44,1 %</td><td class="n">41</td></tr><tr><td class="">Risaralda</td><td class="n">9.594</td><td class="n">13.066</td><td class="n">34,4 %</td><td class="n">14</td></tr><tr><td class="">Cundinamarca</td><td class="n">8.318</td><td class="n">9.783</td><td class="n">36,8 %</td><td class="n">70</td></tr><tr><td class="">Santander</td><td class="n">7.386</td><td class="n">8.843</td><td class="n">18,5 %</td><td class="n">73</td></tr></tbody></table></div>
+  <p>Huila encabeza en volumen absoluto, pero la lectura por intensidad es otra: <strong>Nariño pierde el 44,1 % de su área cafetera de calendario y Cauca el 43,4 %</strong>, las proporciones más altas del país. Antioquia, con 94 municipios cafeteros afectados, tiene la mayor dispersión territorial y la menor intensidad relativa, 21,4 %.</p>
+  <h3>Los municipios más expuestos</h3>
+  <div class="tw"><table class=""><thead><tr><th class="">Municipio</th><th class="">Departamento</th><th class="n">Ha afectadas equiv.</th><th class="n">Toneladas</th></tr></thead><tbody><tr><td class="">Pitalito</td><td class="">Huila</td><td class="n">4.686</td><td class="n">8.542</td></tr><tr><td class="">Planadas</td><td class="">Tolima</td><td class="n">4.322</td><td class="n">5.714</td></tr><tr><td class="">La Plata</td><td class="">Huila</td><td class="n">3.113</td><td class="n">4.989</td></tr><tr><td class="">Ciénaga</td><td class="">Magdalena</td><td class="n">3.011</td><td class="n">1.990</td></tr><tr><td class="">Ibagué</td><td class="">Tolima</td><td class="n">2.753</td><td class="n">2.977</td></tr><tr><td class="">El Tambo</td><td class="">Cauca</td><td class="n">2.709</td><td class="n">3.690</td></tr><tr><td class="">Rovira</td><td class="">Tolima</td><td class="n">2.686</td><td class="n">3.094</td></tr><tr><td class="">Garzón</td><td class="">Huila</td><td class="n">2.673</td><td class="n">3.506</td></tr></tbody></table></div>
+  <div class="box">
+    <h4>Por qué esto importa para la discusión de política</h4>
+    <p>La caficultura colombiana es mayoritariamente de pequeña propiedad y depende de una sola cosecha anual para el ingreso familiar del año. Una caída de rendimiento no se compensa con la siguiente siembra, como sí ocurre en un transitorio de ciclo corto.</p>
+    <p>El paquete anticipatorio del Ministerio —fertilizantes subsidiados, bioinsumos y soluciones de cosecha de agua concentradas en el Caribe— no tiene un componente dirigido a la zona cafetera andina. Y el instrumento que sí podría servir, el incentivo al seguro agropecuario, se ejecuta en 2026 para un daño que llega en 2027.</p>
+  </div>
+</section>
+
+<section id="alertas">
+  <p class="sk">6 · Alertas por cadena</p>
+  <h2>Lo que deben saber y podrían exigir los gremios y productores</h2>
+  <div class="dos"><p>Cada alerta identifica la cadena, los territorios donde se concentra el daño, el mes en que se materializa y la exigencia concreta que corresponde. Todas están construidas municipio por municipio a partir del cruce.</p></div>
+  <div class="cadena"><h3>Papa</h3><p class="meta">Cundinamarca, Boyacá, Nariño · 118.116 ha · 296 municipios · 35 % del área</p><dl><dt>Riesgo</dt><dd>1.410.746 t, el porcentaje de área afectada más alto entre los cultivos alimentarios mayores.</dd><dt>Dónde</dt><dd>Villapinzón (13.209 ha, 11,6 % nacional) y Tausa (12.663 ha, 8,3 %) en Cundinamarca; Siachoque, Tunja y Ventaquemada en Boyacá; Pasto y Túquerres en Nariño.</dd><dt>Cuándo</dt><dd>Pico en febrero de 2027 (56.687 ha), luego diciembre (36.114) y septiembre (16.480).</dd><dt>Qué exigir</dt><dd>Riego y apoyo al ingreso ejecutables en el primer semestre de 2027, no en 2026. Compras públicas anticipadas de febrero a abril. Seguro agrícola para el altiplano antes de las siembras de octubre.</dd></dl></div><div class="cadena"><h3>Cebolla de rama y de bulbo</h3><p class="meta">Boyacá, Santander, Nariño, N. de Santander · 207.051 t conjuntas</p><dl><dt>Dónde</dt><dd>Aquitania, Boyacá (30,5 % nacional de la cebolla de rama, 2.429 ha) y Tona, Santander (30,0 %, 1.528 ha) concentran seis de cada diez cebollas largas del país. En bulbo, Ábrego (12,1 %) y San Calixto en N. de Santander, Samacá y Siachoque en Boyacá.</dd><dt>Cuándo</dt><dd>Diciembre de 2026 es el mes crítico para las dos cadenas, seguido de enero de 2027.</dd><dt>Qué exigir</dt><dd>Intervención inmediata sobre el lago de Tota y los distritos de riego de Aquitania y Tona antes de noviembre: un choque simultáneo mueve el precio nacional en semanas.</dd></dl></div><div class="cadena"><h3>Maíz</h3><p class="meta">Meta, Cesar, Córdoba, Bolívar · 227.699 ha · 919 municipios</p><dl><dt>Dónde</dt><dd>Puerto Gaitán, Meta (18.438 ha, 18,1 % nacional); Pelaya en Cesar; Ciénaga de Oro y Cereté en Córdoba; María La Baja y San Juan Nepomuceno en Bolívar.</dd><dt>Cuándo</dt><dd>Dos picos: enero de 2027 (92.819 ha) y septiembre de 2026 (82.022 ha). Este último es de siembra: es ahora.</dd><dt>Qué exigir</dt><dd>Semilla de ciclo corto y asistencia técnica con desembolso en septiembre y octubre; crédito de sostenimiento activo desde diciembre para el pico de enero.</dd></dl></div><div class="cadena"><h3>Arroz</h3><p class="meta">Tolima, Huila, Meta, Casanare, N. de Santander, Bolívar · 115.823 ha · 10 % del área</p><dl><dt>Dónde</dt><dd>Purificación (7.550 ha), Ibagué y Espinal en Tolima; Campoalegre en Huila; Cúcuta en N. de Santander; Achí en Bolívar.</dd><dt>Cuándo</dt><dd>Enero de 2027 (41.081 ha), septiembre de 2026 (34.544) y diciembre de 2026 (33.654).</dd><dt>Qué exigir</dt><dd>Garantía de caudal para los distritos de riego del alto Magdalena durante el estiaje de diciembre y enero, y protocolo público de asignación de agua entre uso agrícola, humano y eléctrico antes del conflicto.</dd></dl></div><div class="cadena"><h3>Plátano y banano</h3><p class="meta">Arauca, Antioquia, Chocó, Risaralda, Córdoba · 168.540 ha</p><dl><dt>Dónde</dt><dd>Tame, Arauca (5.420 ha, 10,1 % nacional); Turbo y San Juan de Urabá en Antioquia; Carmen del Darién en Chocó; Belén de Umbría en Risaralda; Moñitos en Córdoba.</dd><dt>Cuándo</dt><dd>Cultivos permanentes, rezago largo: pico en junio de 2027 (46.883 ha), mayo (30.888) y febrero (28.947).</dd><dt>Riesgo</dt><dd>2.297.439 t conjuntas, el mayor volumen alimentario en riesgo del país.</dd></dl></div><div class="cadena"><h3>Yuca y ñame</h3><p class="meta">Caribe y Montes de María · 107.308 ha · 1.003.041 t</p><dl><dt>Dónde</dt><dd>El Carmen de Bolívar, Villanueva y San Juan Nepomuceno en Bolívar; Ovejas en Sucre; Ciénaga de Oro en Córdoba; Nueva Granada en Magdalena.</dd><dt>Cuándo</dt><dd>Febrero de 2027 (39.372 ha) y pico de siembra en septiembre de 2026.</dd><dt>Qué exigir</dt><dd>Son cultivos de seguridad alimentaria directa del campesinado, no de mercado urbano. Prioridad absoluta en cosecha de agua donde el déficit extremo del Caribe se cruza con producción de autoconsumo.</dd></dl></div><div class="cadena"><h3>Hortalizas y frutales</h3><p class="meta">Boyacá, Antioquia, Nariño, Cundinamarca, Tolima</p><dl><dt>Dónde</dt><dd>Ventaquemada (Boyacá, 12,7 % de la zanahoria nacional) y Túquerres (Nariño, 9,6 %); Fómeque, Marinilla y Peñol en tomate; Fresno, Urrao y Sonsón en aguacate.</dd><dt>Cuándo</dt><dd>Hortalizas de septiembre de 2026 a enero de 2027; frutales con rezago hasta mayo y junio de 2027.</dd><dt>Qué exigir</dt><dd>Monitoreo semanal de precios mayoristas desde octubre; plan de contingencia de abastecimiento urbano para las hortalizas de ciclo corto, las primeras que sentirá el consumidor.</dd></dl></div>
+</section>
+
+<section id="presupuesto">
+  <p class="sk">7 · El presupuesto no está donde va a estar el daño</p>
+  <h2>Lo que sí se anunció, y los tres desajustes</h2>
+  <div class="dos"><p>La anterior administración del Ministerio de Agricultura sí anunció medidas anticipatorias durante 2026: en mayo, 146.000 millones para 421 municipios, apoyados en FAIA-Mitigación —fertilizantes subsidiados y bioinsumos— y FAIA-Emergencia, con 10.000 soluciones de cosecha de agua y riego concentradas en el Caribe. En agosto la cifra reportada llegaba a unos 244.000 millones, canalizados vía Finagro, y se creó por decreto la subcuenta «Fenómeno del Niño 2026-2027» en el Fondo Nacional de Gestión del Riesgo.</p>
+  <p>Decir que no se hizo nada sería falso, y un reclamo falso se desarma solo. El problema es otro, y es más grave. A esto se suma que el actual gobierno canceló los ejercicios de empalme entre administraciones, lo que puso en riesgo la continuidad de esas medidas.</p></div>
+  <div class="cols">
+    <div>
+      <h4>Primero — las medidas cubren 2026, el daño viene después</h4>
+      <p>Todo el dinero anticipatorio se ejecuta en la vigencia 2026, pero el pico del daño alimentario está en febrero, marzo, abril y mayo de 2027. Instrumento e impacto quedan en vigencias distintas: cuando el país sienta el desabastecimiento, los recursos ya se habrán agotado en una vigencia anterior.</p>
+      <h4>Segundo — el presupuesto de 2027 va en dirección contraria</h4>
+      <p>El PGN 2027, radicado por 634,9 billones de pesos, asigna al Ministerio de Agricultura 891.910 millones. Análisis presentados en el Congreso ubican la reducción del sector cerca del 30 % real, una de las caídas más pronunciadas del proyecto. En comisiones, el presidente de la Comisión Tercera de la Cámara señaló la insuficiencia de recursos para El Niño en el Caribe, y una senadora advirtió que el recorte golpea el apoyo campesino justo cuando el campo lo necesita.</p>
+      <h4>Tercero — no hay una partida identificable y trazable</h4>
+      <p>Los recursos anunciados son reasignaciones e instrumentos de demanda —créditos, incentivos, subsidios al seguro—, no una partida presupuestal protegida y auditable. La subcuenta puede recibir recursos, pero «poder recibir» no es «tener asignados». Si la partida existe, el Ministerio debe señalarla con nombre, código y monto; si no, debe crearse.</p>
+    </div>
+    <div>
+      <h4>Alerta media nacional por cosecha, mes a mes</h4>
+      <div class="chart" style="--alto:165px"><div class="bar" style="--h:1.5%"><span class="bv">0</span><i></i><span class="bl">Sep</span></div><div class="bar" style="--h:36.81592039800995%"><span class="bv">7,4</span><i></i><span class="bl">Oct</span></div><div class="bar" style="--h:52.23880597014925%"><span class="bv">10,5</span><i></i><span class="bl">Nov</span></div><div class="bar" style="--h:67.16417910447761%"><span class="bv">13,5</span><i></i><span class="bl">Dic</span></div><div class="bar" style="--h:86.56716417910447%"><span class="bv">17,4</span><i></i><span class="bl">Ene</span></div><div class="bar on" style="--h:100.0%"><span class="bv">20,1</span><i></i><span class="bl">Feb</span></div><div class="bar on" style="--h:81.09452736318407%"><span class="bv">16,3</span><i></i><span class="bl">Mar</span></div><div class="bar" style="--h:61.19402985074626%"><span class="bv">12,3</span><i></i><span class="bl">Abr</span></div><div class="bar" style="--h:42.288557213930346%"><span class="bv">8,5</span><i></i><span class="bl">May</span></div><div class="bar" style="--h:40.298507462686565%"><span class="bv">8,1</span><i></i><span class="bl">Jun</span></div><div class="bar" style="--h:22.388059701492537%"><span class="bv">4,5</span><i></i><span class="bl">Jul</span></div></div>
+      <p class="leyenda">Índice de 0 a 100. La curva sube justo cuando el pronóstico climático ya terminó y la vigencia presupuestal cambió.</p>
+      <div class="box dark">
+        <h4>Un desajuste adicional, territorial</h4>
+        <p>Las 10.000 soluciones de cosecha de agua se concentran en el Caribe, lo cual es defendible: allí están las reducciones de lluvia más extremas. Pero la mayor alerta alimentaria, medida por volumen y por peso en el abastecimiento nacional, está también en el altiplano cundiboyacense, Santander, Nariño y el eje cafetero.</p>
+        <p>Aquitania, en Boyacá, mueve el 30,5 % de la cebolla de rama del país. Tona, en Santander, otro 30,0 %. Entre los dos concentran seis de cada diez cebollas largas de Colombia, y ambos tienen su pico en diciembre de 2026.</p>
+      </div>
+    </div>
+  </div>
+</section>
+
+<section id="exigencias">
+  <p class="sk">8 · Lo que exigimos</p>
+  <h2>Exigencias al Gobierno Nacional</h2>
+  <p>Nueve puntos concretos, verificables y con fecha.</p>
+  <ol class="dem"><li><p>Crear en el Presupuesto General de la Nación de 2027 una partida específica, identificable y protegida para el impacto agroalimentario de la sequía, con nombre, código y monto.</p></li><li><p>Revertir el recorte agropecuario en el trámite del PGN 2027, o explicar técnicamente cómo se atenderá con menos recursos un impacto de 8,46 millones de toneladas.</p></li><li><p>Publicar el listado de los 421 municipios priorizados y confrontarlo con los 1.094 que este análisis identifica con riesgo agroclimático.</p></li><li><p>Que la subcuenta «Fenómeno del Niño 2026-2027» reciba una asignación efectiva —no solo la facultad de recibirla— con reporte mensual por municipio y por instrumento.</p></li><li><p>Un plan nacional de manejo de suelos agrícolas, con recursos para proteger coberturas y restaurar la capacidad agrológica.</p></li><li><p>Que el Puesto de Mando Unificado Sectorial publique boletines públicos y que las mesas agroclimáticas incluyan a organizaciones campesinas y gremios, no solo al Estado.</p></li><li><p>Un protocolo público de asignación de agua entre uso agrícola, humano y eléctrico para el estiaje de diciembre de 2026 y enero de 2027, antes de que el conflicto se presente.</p></li><li><p>Activar compras públicas anticipadas y gestión de reservas para el periodo de febrero a mayo de 2027, cuando el desabastecimiento golpee al consumidor.</p></li><li><p>Un programa específico para la caficultura, hoy ausente del paquete anticipatorio, cuyo pico de afectación cae en mayo de 2027, fuera de toda la planeación vigente.</p></li></ol>
+  <h3>Lo que gremios y productores pueden hacer ahora</h3>
+  <div class="tw"><table class=""><thead><tr><th class="">Momento</th><th class="">Acción</th></tr></thead><tbody><tr><td class="">Sep. – oct. 2026</td><td class="">Revisar la alerta de siembra del municipio antes de sembrar. Donde supere 30, evaluar aplazamiento, riego de establecimiento o variedad de ciclo más corto. Esta ventana se cierra y no se recupera.</td></tr><tr><td class="">Oct. – dic. 2026</td><td class="">Contratar seguro agrícola mientras haya recursos del incentivo disponibles. La demanda va a subir y los recursos son limitados.</td></tr><tr><td class="">Nov. 2026 – ene. 2027</td><td class="">No comprometer volúmenes de entrega para el primer semestre de 2027 sin descontar la caída de rendimiento proyectada para el municipio.</td></tr><tr><td class="">Todo el periodo</td><td class="">Documentar pérdidas con soporte técnico desde el primer día y llevar las cifras municipales a las mesas agroclimáticas, a los concejos y asambleas, y al debate del PGN en el Congreso.</td></tr></tbody></table></div>
+</section>
+
+<section id="limites">
+  <p class="sk">9 · Alcance y límites</p>
+  <h2>Lo que este cruce no sabe</h2>
+  <div class="dos"><p>Ponemos estas limitaciones por delante porque un instrumento sirve tanto por lo que muestra como por lo que reconoce que no sabe, y porque queremos que estas cifras resistan el escrutinio técnico.</p></div>
+  <div class="lim"><div><h4>El riego no está en los datos</h4><p>Las EVA no registran si un cultivo cuenta con riego. Un distrito irrigado y una parcela de ladera con el mismo déficit aparecen igual. El análisis sobreestima el riesgo donde hay riego y lo estima bien donde no lo hay: justo donde está la agricultura campesina.</p></div><div><h4>Los calendarios se asumen estables</h4><p>Se usan los calendarios de 2025. Si la propia sequía atrasa las siembras, el mes de exposición se corre y el modelo no lo captura.</p></div><div><h4>Solo se mide déficit</h4><p>El exceso de lluvia previsto para febrero de 2027 también arruina cosechas y aquí aparece como ausencia de alerta, no como ausencia de riesgo.</p></div><div><h4>La estructura productiva es la de 2025</h4><p>Se asume que cada municipio sembrará en 2026 y 2027 lo mismo que sembró en 2025, en las mismas proporciones.</p></div><div><h4>Es un pronóstico, no un hecho</h4><p>La incertidumbre propia del pronóstico climático no se propaga al índice. Las cifras sirven para priorizar y exigir preparación, no como predicción exacta de pérdida.</p></div><div><h4>Dos formas de contar hectáreas</h4><p>Las cifras de este análisis son hectáreas afectadas equivalentes: el área de cada mes multiplicada por la severidad del déficit. El mapa reporta además las hectáreas en actividad bajo déficit, un conteo sin ponderar que es mayor. Miden cosas distintas.</p></div></div>
+  <div class="box">
+    <h4>Todo es verificable</h4>
+    <p>Toda la metodología, el código y los datos son públicos. Cualquiera puede reproducir el ejercicio, cuestionarlo o mejorarlo. Las fuentes primarias —IDEAM, UPRA y DANE— son de acceso abierto.</p>
+  </div>
+</section>
+
+<section id="herramienta">
+  <p class="sk">Por qué lo publicamos</p>
+  <h2>La información existía y estaba dispersa</h2>
+  <div class="cols">
+    <div>
+      <p>El pronóstico del IDEAM y las Evaluaciones Agropecuarias son públicos desde hace meses. Nadie los había cruzado para responder la pregunta que le importa a un productor y a un alcalde: qué se va a perder aquí, y cuándo.</p>
+      <p>Frente a un fenómeno que los organismos internacionales califican como uno de los más intensos jamás medidos, la respuesta institucional ha consistido en anuncios de reasignaciones para la vigencia que termina, mientras el presupuesto del año en que llega el daño reduce al sector agropecuario cerca de un 30 %.</p>
+      <p>Quien va a decidir si siembra en septiembre, si contrata un seguro en octubre o si compromete una entrega en marzo, tiene derecho a hacerlo con la mejor información disponible y no con el silencio.</p>
+      <p><a class="cta" style="display:inline-block;margin-top:10px;background:var(--marca);color:#fff" href="fenomeno-del-nino-mapa" target="_blank" rel="noopener">Abrir el mapa interactivo ↗</a></p>
+    </div>
+    <div>
+      <figure class=""><img src="activos/nino/alerta-alimentaria-consolidada.jpg?v=84101ca660" alt="Alerta alimentaria consolidada" width="773" height="900" loading="lazy" decoding="async"><figcaption><b>Alerta alimentaria consolidada</b>Promedio del periodo sep. 2026 – jul. 2027, por municipio.</figcaption></figure>
+      <p class="leyenda">La herramienta permite consultar cualquiera de los 1.122 municipios, filtrar por cadena y descargar la base completa. Está organizada en dos consultas: <em>Voy a sembrar</em> y <em>Qué se pierde y cuándo</em>.</p>
+    </div>
+  </div>
+  <div class="box warn">
+    <h4>Instrumento indicativo</h4>
+    <p>La decisión de sembrar o no no debe sustentarse únicamente en esta información, ni sustituye la asistencia técnica agronómica. Las cifras sirven para anticipar, priorizar y exigir preparación.</p>
+  </div>
+</section>
+</main>
+
+<footer><div class="footin">
+  <div>
+    <h4>De dónde salen las cifras</h4>
+    <div class="fuentes">
+      <p><b>IDEAM</b> — Predicción climática estacional, sep. 2026 – feb. 2027.<br>
+      <b>UPRA</b> — Evaluaciones Agropecuarias Municipales y Calendarios EVA 2025.<br>
+      <b>DANE</b> — Marco Geoestadístico Nacional 2018.<br>
+      <b>OMM</b> — Boletines El Niño / Oscilación del Sur, 2026.<br>
+      <b>PMA · FAO · FIDA · OMS · UNICEF</b> — Seguridad alimentaria mundial 2026.<br>
+      <b>OIT</b> — El Niño 2026-2027 y el trabajo en América Latina y el Caribe.<br>
+      <b>MinAgricultura y MinHacienda</b> — comunicados y proyecto de PGN 2027.</p>
+      <p>Cifras de contexto internacional y presupuestal verificadas contra prensa y comunicados oficiales de septiembre de 2026.</p>
+    </div>
+  </div>
+  <div>
+    <h4>Créditos</h4>
+    <p>Equipo RADAR — Red por la Defensa de la Reforma Agraria.<br>Colombia · septiembre de 2026.</p>
+    <ul class="equipo"><li>Cristian López</li><li>Daniela Marcucci</li><li>Johana Silva</li><li>Andrés León</li><li>Santiago Roldán</li><li>Paula Villamil</li><li>Lorenza Arango</li></ul>
+    <p>Documento libre de reproducir y circular, citando la fuente.</p>
+    <h4 style="margin-top:22px">Navegación</h4>
+    <p class="fuentes"><a href="#hallazgo">El hallazgo</a> · <a href="#contexto">Contexto global</a> · <a href="#pronostico">El pronóstico</a> · <a href="#calendario">La trampa del calendario</a> · <a href="#cadenas">Cadenas en riesgo</a> · <a href="#cafe">La economía cafetera</a> · <a href="#alertas">Alertas por cadena</a> · <a href="#presupuesto">El presupuesto</a> · <a href="#exigencias">Exigencias</a> · <a href="#limites">Límites</a> · <a href="#herramienta">La herramienta</a></p>
+  </div>
+</div>
+<p class="lema">¡Ni una hectárea atrás, ni un derecho atrás!</p>
+</footer>
+
+</div>
+
+<div class="pie-sitio"><div>
+  <p><b>Red Nacional por la Defensa de la Reforma Agraria</b> ·
+    <a href="./">Sitio de la Red</a> ·
+    <a href="publicaciones/">Publicaciones</a> ·
+    <a href="mailto:rednal.reformaagraria@gmail.com">rednal.reformaagraria@gmail.com</a></p>
+</div></div>
+
+<script>
+/* Resalta la pestaña de la sección que se está leyendo y la deja a la vista
+   en la barra. Es el guion del análisis, rehecho sin tocar el marcado: mide
+   contra el borde de abajo de la barra fija, y al llegar al final de la
+   página marca la última sección aunque no alcance a subir hasta arriba.
+   La barra se corre de un golpe y no con animación: en el teléfono, correrla
+   con animación mientras la página bajaba hacia una pestaña tocada frenaba
+   el salto a mitad de camino. */
+(function () {
+  var barra = document.querySelector('nav.tabs .tabsin');
+  if (!barra) return;
+  var enlaces = Array.prototype.slice.call(barra.querySelectorAll('a[data-s]'));
+  var secs = enlaces.map(function (a) { return document.getElementById(a.dataset.s); }).filter(Boolean);
+  if (!secs.length) return;
+  var actual = null;
+  function activa() {
+    var linea = barra.parentNode.getBoundingClientRect().bottom + 90;
+    var act = secs[0];
+    secs.forEach(function (s) { if (s.getBoundingClientRect().top <= linea) act = s; });
+    var doc = document.documentElement;
+    if (window.innerHeight + window.scrollY >= doc.scrollHeight - 4) act = secs[secs.length - 1];
+    if (act === actual) return;
+    actual = act;
+    enlaces.forEach(function (a) {
+      var on = a.dataset.s === act.id;
+      a.classList.toggle('on', on);
+      if (on) a.setAttribute('aria-current', 'true'); else a.removeAttribute('aria-current');
+      if (on) {
+        var r = a.getBoundingClientRect(), b = barra.getBoundingClientRect();
+        if (r.left < b.left || r.right > b.right)
+          barra.scrollLeft = a.offsetLeft - 24;
+      }
+    });
+  }
+  window.addEventListener('scroll', activa, { passive: true });
+  window.addEventListener('resize', function () { actual = null; activa(); });
+  activa();
+})();
+</script>
+</body>
+</html>

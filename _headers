@@ -9,71 +9,118 @@
   Cross-Origin-Opener-Policy: same-origin
   Cross-Origin-Resource-Policy: same-origin
   Permissions-Policy: geolocation=(), camera=(), microphone=(), payment=(), usb=(), interest-cohort=()
+  Content-Security-Policy: frame-ancestors 'self'; object-src 'none'; base-uri 'none'
 
 /docs/*
   X-Frame-Options: SAMEORIGIN
   Content-Security-Policy: frame-ancestors 'self'
 
+/activos/figuras/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/activos/fuentes/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/activos/logos/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/activos/lt/*
+  Cache-Control: public, max-age=86400, must-revalidate
+
+/activos/nino/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/activos/portadas/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/publicaciones/*
+  Content-Security-Policy: default-src 'none'; script-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  X-Frame-Options: DENY
+
 /
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-1NQ9dIXKXoUlGsOJdvkbFfOiI1qoy07hbM51FL/cJp8=' 'sha256-BJtLKCsfsnw0hwfTGeC1R1G1rMLmw9N6oRz+BCbdSnY='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-4oRQGccmltfbx+XTpr1twHQcagTp4zInIaXeDes9Cew=' 'sha256-QkCohgpmMd/a8olqmfUXhYAotYUUuGblSlS8mQMmIRc='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /index.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-1NQ9dIXKXoUlGsOJdvkbFfOiI1qoy07hbM51FL/cJp8=' 'sha256-BJtLKCsfsnw0hwfTGeC1R1G1rMLmw9N6oRz+BCbdSnY='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-4oRQGccmltfbx+XTpr1twHQcagTp4zInIaXeDes9Cew=' 'sha256-QkCohgpmMd/a8olqmfUXhYAotYUUuGblSlS8mQMmIRc='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /panel
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-4JwQssTB3dQPtMkwFkpE1R+BRl1JHreF0ulbnjuhLys='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-4JwQssTB3dQPtMkwFkpE1R+BRl1JHreF0ulbnjuhLys='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /panel.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-4JwQssTB3dQPtMkwFkpE1R+BRl1JHreF0ulbnjuhLys='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-4JwQssTB3dQPtMkwFkpE1R+BRl1JHreF0ulbnjuhLys='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /denuncia
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-RzRuFnCptScFUfXqZDXP/wvYLFDbQfXT7NDywDqEymw='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-RzRuFnCptScFUfXqZDXP/wvYLFDbQfXT7NDywDqEymw='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /denuncia.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-RzRuFnCptScFUfXqZDXP/wvYLFDbQfXT7NDywDqEymw='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-RzRuFnCptScFUfXqZDXP/wvYLFDbQfXT7NDywDqEymw='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /ddhh
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-TPEliMH422kWnJ2/IZwrptptC9NYzhGB6q1WHMzHtCk='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-TPEliMH422kWnJ2/IZwrptptC9NYzhGB6q1WHMzHtCk='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /ddhh.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-TPEliMH422kWnJ2/IZwrptptC9NYzhGB6q1WHMzHtCk='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-TPEliMH422kWnJ2/IZwrptptC9NYzhGB6q1WHMzHtCk='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /radar
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-OqQ1jVEW3W93ppc34ORETqLZXS6yKaLalCcM8c4NCcc='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-OqQ1jVEW3W93ppc34ORETqLZXS6yKaLalCcM8c4NCcc='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /radar.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-OqQ1jVEW3W93ppc34ORETqLZXS6yKaLalCcM8c4NCcc='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-OqQ1jVEW3W93ppc34ORETqLZXS6yKaLalCcM8c4NCcc='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /registro
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-kT8gltUMwhrWbvVOAMYwsL4gOiR09MIyXSIpwmyj8n0='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-kT8gltUMwhrWbvVOAMYwsL4gOiR09MIyXSIpwmyj8n0='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /registro.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-kT8gltUMwhrWbvVOAMYwsL4gOiR09MIyXSIpwmyj8n0='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-kT8gltUMwhrWbvVOAMYwsL4gOiR09MIyXSIpwmyj8n0='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /organizaciones
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-ZVCSrE5eQKWGqeGC34TLOKAymPS12u7TUkWFPxcJzXQ='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-ZVCSrE5eQKWGqeGC34TLOKAymPS12u7TUkWFPxcJzXQ='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /organizaciones.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-ZVCSrE5eQKWGqeGC34TLOKAymPS12u7TUkWFPxcJzXQ='; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-ZVCSrE5eQKWGqeGC34TLOKAymPS12u7TUkWFPxcJzXQ='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
-/columna-contrarreformas-agrarias-made-in-miami
-  Content-Security-Policy: default-src 'none'; script-src ; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+/leer
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-Q+8h+HNTKlPkrrtrZ3gyy7bKP3XkYgMHnBDkYeB91zg='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
-/columna-contrarreformas-agrarias-made-in-miami.html
-  Content-Security-Policy: default-src 'none'; script-src ; style-src 'unsafe-inline'; img-src data: blob:; font-src data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+/leer.html
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-Q+8h+HNTKlPkrrtrZ3gyy7bKP3XkYgMHnBDkYeB91zg='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  X-Frame-Options: DENY
+
+/fenomeno-del-nino
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-FgaX8CyvpHnI/l6LFcljiSOjzIf3UGh97bHt6kzRqeI='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'
+  X-Frame-Options: DENY
+
+/fenomeno-del-nino.html
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-FgaX8CyvpHnI/l6LFcljiSOjzIf3UGh97bHt6kzRqeI='; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'
+  X-Frame-Options: DENY
+
+/fenomeno-del-nino-mapa
+  Content-Security-Policy: script-src 'sha256-aWpz331mARsUl4wf3G0lvSt1w2ELBqSqrhhhgtMzTCg=' https://cdnjs.cloudflare.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; connect-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'
+  X-Frame-Options: DENY
+
+/fenomeno-del-nino-mapa.html
+  Content-Security-Policy: script-src 'sha256-aWpz331mARsUl4wf3G0lvSt1w2ELBqSqrhhhgtMzTCg=' https://cdnjs.cloudflare.com; style-src 'unsafe-inline' https://fonts.googleapis.com; font-src https://fonts.gstatic.com; img-src data: blob:; connect-src 'none'; frame-ancestors 'none'; base-uri 'none'; form-action 'none'
+  X-Frame-Options: DENY
+
+/404
+  Content-Security-Policy: default-src 'none'; script-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  X-Frame-Options: DENY
+
+/404.html
+  Content-Security-Policy: default-src 'none'; script-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY

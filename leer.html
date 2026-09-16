@@ -1,0 +1,611 @@
+<!doctype html>
+<html lang="es">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>Publicación — Red Nacional por la Defensa de la Reforma Agraria</title>
+<meta name="description" content="Publicación de la Red Nacional por la Defensa de la Reforma Agraria.">
+<link rel="canonical" href="https://redagraria.pages.dev/leer">
+<meta property="og:site_name" content="Red Nacional por la Defensa de la Reforma Agraria">
+<meta property="og:locale" content="es_CO">
+<meta property="og:type" content="website">
+<meta property="og:title" content="Red Nacional por la Defensa de la Reforma Agraria">
+<meta property="og:description" content="Publicación de la Red Nacional por la Defensa de la Reforma Agraria.">
+<meta property="og:url" content="https://redagraria.pages.dev/leer">
+<meta property="og:image" content="https://redagraria.pages.dev/activos/portadas/respaldo-publicacion-1200.jpg?v=87dbab4c08">
+<meta property="og:image:type" content="image/jpeg">
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="630">
+<meta property="og:image:alt" content="Red Nacional por la Defensa de la Reforma Agraria">
+<meta name="twitter:card" content="summary_large_image">
+<style>
+@font-face{font-family:"RedTitular";src:url("activos/fuentes/OpenSans_Condensed-ExtraBold.ttf?v=fd0c313e2a") format("truetype");font-weight:800;font-display:swap}
+@font-face{font-family:"RedTexto";src:url("activos/fuentes/OpenSans-Regular.ttf?v=33e93bec67") format("truetype");font-weight:400;font-display:swap}
+@font-face{font-family:"RedTexto";src:url("activos/fuentes/OpenSans-SemiBold.ttf?v=126a7c4db9") format("truetype");font-weight:600;font-display:swap}
+:root{
+  --olivo-hondo:#2F3A1A; --olivo:#46551F; --olivo-vivo:#7A9A2E;
+  --tierra:#8C4415; --ocre:#B87A20; --papel:#fff; --suave:#ECF0E4;
+  --tinta:#1C2113; --gris:#5F6752; --linea:#DBE1CE;
+  --sombra:0 1px 2px rgba(47,58,26,.06),0 4px 14px rgba(47,58,26,.07);
+  color-scheme:light;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+html{-webkit-text-size-adjust:100%}
+body{background:var(--suave);color:var(--tinta);
+  font:400 17px/1.68 "RedTexto",system-ui,-apple-system,"Segoe UI",sans-serif}
+img{max-width:100%;height:auto;display:block}
+a{color:var(--olivo)}
+strong,b{font-weight:600}
+[hidden]{display:none!important}
+:focus-visible{outline:3px solid var(--ocre);outline-offset:2px;border-radius:3px}
+.saltar{position:absolute;left:12px;top:-60px;background:var(--papel);color:var(--olivo-hondo);
+  padding:10px 14px;border-radius:8px;z-index:9;font-weight:600}
+.saltar:focus{top:12px}
+.caja{max-width:760px;margin:0 auto;padding:0 22px}
+.caja-ancha{max-width:1040px}
+.cab{background:var(--olivo-hondo);color:#fff;padding:16px 0}
+.cab .caja{display:flex;align-items:center;gap:14px;justify-content:space-between;flex-wrap:wrap}
+.cab-logo img{height:44px;width:auto}
+.cab-nav{display:flex;gap:8px;flex-wrap:wrap}
+.volver{color:#E9E4D4;font-size:14px;font-weight:600;text-decoration:none;line-height:1.2;
+  border:1px solid rgba(255,255,255,.28);border-radius:9px;padding:9px 14px;white-space:nowrap}
+.volver:hover{background:rgba(255,255,255,.1)}
+.enc{background:var(--papel);padding:36px 0 30px;border-bottom:1px solid var(--linea)}
+.enc-columna{border-top:6px solid var(--ocre)}
+.rotulo{font:800 12.5px/1.5 "RedTitular",sans-serif;letter-spacing:.14em;text-transform:uppercase;
+  color:var(--tierra);margin-bottom:14px}
+.cinta{display:inline-block;background:var(--tierra);color:#fff;border-radius:5px;padding:3px 8px 2px;
+  margin:0 8px 4px 0;letter-spacing:.1em;font-size:11px;vertical-align:1px}
+.cinta-urgente{background:#A3261B}
+h1{font:800 clamp(28px,5vw,44px)/1.08 "RedTitular",sans-serif;color:var(--olivo-hondo);margin-bottom:18px}
+h1.mayus{font-size:clamp(23px,3.7vw,33px);line-height:1.14;letter-spacing:.01em}
+.bajada{font-size:19px;line-height:1.6;color:var(--gris);max-width:62ch;margin-bottom:6px}
+.firma{display:flex;gap:16px;align-items:center;margin-top:20px}
+.retrato{width:76px;height:76px;border-radius:50%;overflow:hidden;flex:none;background:var(--olivo-hondo)}
+.retrato img{width:100%;height:100%;object-fit:cover;transform:scale(1.22)}
+.firma b{display:block;font:800 18px/1.2 "RedTitular",sans-serif;color:var(--olivo-hondo)}
+.firma span{display:block;font-size:14px;color:var(--gris);margin-top:3px}
+.aviso{margin-top:18px;padding:12px 15px;background:var(--suave);border-left:3px solid var(--ocre);
+  border-radius:0 9px 9px 0;font-size:13.5px;line-height:1.5;color:var(--gris)}
+.portada{margin-top:22px}
+.portada img{width:100%;max-height:360px;object-fit:cover;border-radius:12px;background:var(--suave)}
+.portada figcaption,.pb-fig figcaption{font-size:12.5px;line-height:1.45;color:var(--gris);margin-top:8px}
+.portada figcaption a{color:var(--gris)}
+.cuerpo{background:var(--papel);padding:32px 0 40px}
+.cuerpo p{margin-bottom:1.1em;max-width:68ch}
+.pb-h2{font:800 17px/1.3 "RedTitular",sans-serif;letter-spacing:.06em;color:var(--tierra);
+  margin:2.1em 0 .9em;padding-bottom:8px;border-bottom:1px solid var(--linea)}
+.pb-h3{font:800 20px/1.25 "RedTitular",sans-serif;color:var(--olivo-hondo);margin:1.7em 0 .6em}
+.pb-h2+.pb-h3{margin-top:.8em}
+.pb-destacado{font-size:18.5px;line-height:1.55;font-weight:600;color:var(--olivo-hondo);
+  border-left:4px solid var(--ocre);padding:2px 0 2px 18px;margin:1.2em 0 1.3em}
+.pb-lista{margin:0 0 1.2em 1.25em;max-width:66ch}
+.pb-lista li{margin-bottom:.55em;padding-left:.2em}
+.pb-lista ul{margin:.5em 0 0 1.2em}
+.pb-marcas{list-style:none;margin-left:0}
+.pb-marcas>li{display:grid;grid-template-columns:auto 1fr;gap:12px;align-items:baseline;padding-left:0}
+.pb-marca{font:800 19px/1.3 "RedTitular",sans-serif;color:var(--tierra);min-width:2.2ch}
+.pb-cita{margin:1.5em 0;padding:16px 20px;background:var(--suave);border-left:4px solid var(--tierra);
+  border-radius:0 12px 12px 0}
+.pb-cita p{font-style:italic;margin:0 0 .5em}
+.pb-cita p::before{content:"\201C"}
+.pb-cita p::after{content:"\201D"}
+.pb-cita cite{display:block;font-style:normal;font-size:12.5px;letter-spacing:.04em;color:var(--gris)}
+.pb-cifras{display:grid;grid-template-columns:repeat(auto-fit,minmax(150px,1fr));gap:10px;margin:1.3em 0 1.6em}
+.pb-cifra{background:var(--suave);border-top:3px solid var(--tierra);border-radius:10px;padding:14px 14px 12px}
+.pb-cifra b{display:block;font:800 30px/1 "RedTitular",sans-serif;color:var(--tierra);margin-bottom:7px}
+.pb-cifra span{display:block;font-size:13.5px;line-height:1.42}
+.pb-fig,.pb-grafico,.pb-cuadro{margin:1.6em 0 1.8em}
+.pb-fig img,.pb-grafico img{width:100%;border-radius:10px;border:1px solid var(--linea);background:#fff}
+.pb-ampliar{display:block;cursor:zoom-in}
+.pb-detalle{margin-top:10px;border:1px solid var(--linea);border-radius:10px;background:var(--papel)}
+.pb-detalle summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:14px;color:var(--olivo)}
+.pb-detalle[open] summary{border-bottom:1px solid var(--linea)}
+.pb-detalle>:not(summary){margin:12px 14px}
+.pb-detalle .pb-lista{margin-left:2em;font-size:15px}
+.pb-rueda{overflow-x:auto;-webkit-overflow-scrolling:touch;border:1px solid var(--linea);border-radius:10px;background:var(--papel)}
+.pb-tabla{border-collapse:collapse;width:100%;font-size:14px;line-height:1.42}
+.pb-ancha{min-width:560px}
+.pb-tabla caption{text-align:left;padding:10px 12px 4px;font-weight:600;font-size:13.5px;color:var(--olivo-hondo)}
+.pb-tabla th,.pb-tabla td{padding:9px 12px;text-align:left;vertical-align:top;border-bottom:1px solid var(--linea)}
+.pb-tabla thead th{background:var(--olivo-hondo);color:#fff;font-weight:600;font-size:12.5px;letter-spacing:.02em;vertical-align:bottom}
+.pb-tabla tbody th{font-weight:400}
+.pb-tabla .num{text-align:right;white-space:nowrap;font-variant-numeric:tabular-nums}
+.pb-tabla tfoot th,.pb-tabla tfoot td{font-weight:600;background:var(--suave);border-bottom:0}
+.pb-tabla tr:last-child>*{border-bottom:0}
+.pb-tabla-tit{display:block;font:800 17px/1.3 "RedTitular",sans-serif;color:var(--olivo-hondo);margin-bottom:10px}
+.pb-tabla-tit span{display:block;font:400 13.5px/1.45 "RedTexto",sans-serif;color:var(--gris);margin-top:3px}
+.cuerpo .pb-tabla-pie{font-size:12.5px;line-height:1.45;color:var(--gris);margin:8px 0 0}
+.cuerpo .pb-nota{font-size:13.5px;line-height:1.6;color:var(--gris);border-top:1px solid var(--linea);padding-top:14px;margin-top:2em}
+.pb-recuadro{background:var(--suave);border:1px solid var(--linea);border-radius:14px;padding:4px 22px 8px;margin:1.8em 0}
+.pb-recuadro>:first-child{margin-top:18px}
+.pb-recuadro-llamado{background:var(--olivo-hondo);border:0;color:#F3F1E8}
+.pb-recuadro-llamado .pb-h2,.pb-recuadro-llamado .pb-h3{color:#fff;border-color:rgba(255,255,255,.2)}
+.pb-recuadro-llamado .pb-destacado{color:#fff}
+.pb-recuadro-cierre{background:var(--papel);border:2px solid var(--ocre)}
+.docs{display:flex;flex-wrap:wrap;gap:10px;margin-top:34px;padding-top:24px;border-top:1px solid var(--linea)}
+.btn{display:inline-block;font-weight:600;font-size:14.5px;line-height:1.2;text-decoration:none;
+  border-radius:10px;padding:12px 18px;border:1.5px solid var(--linea);background:var(--papel);color:var(--olivo)}
+button.btn{font-family:inherit;cursor:pointer}
+.btn-1{background:var(--olivo);border-color:var(--olivo);color:#fff}
+.btn-1:hover{background:var(--olivo-hondo)}
+.btn:hover{border-color:var(--olivo-vivo)}
+.otras{padding:36px 0 56px}
+.otras h2{font:800 18px/1.2 "RedTitular",sans-serif;letter-spacing:.05em;text-transform:uppercase;
+  color:var(--tierra);margin-bottom:16px}
+.otras-lista{list-style:none;display:grid;gap:10px}
+.otra{display:grid;grid-template-columns:112px 1fr;gap:14px;align-items:center;background:var(--papel);
+  border:1px solid var(--linea);border-radius:12px;padding:10px;text-decoration:none;color:var(--tinta)}
+.otra:hover{border-color:var(--olivo-vivo);box-shadow:var(--sombra)}
+.otra img{width:112px;height:72px;object-fit:cover;border-radius:8px;background:var(--suave)}
+.otra .rot{display:block;font-size:10.5px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;
+  color:var(--tierra);margin-bottom:3px;line-height:1.35}
+.otra b{display:block;font-size:15px;line-height:1.35}
+.otras-todas{margin-top:18px}
+.saltos{display:flex;flex-wrap:wrap;gap:8px;margin-top:18px}
+.saltos a{font-size:14px;font-weight:600;text-decoration:none;border:1.5px solid var(--linea);border-radius:999px;padding:7px 14px}
+.saltos a:hover{border-color:var(--olivo-vivo)}
+.familia{scroll-margin-top:16px}
+.familia+.familia{margin-top:38px}
+.familia>h2{font:800 22px/1.2 "RedTitular",sans-serif;color:var(--olivo-hondo);margin-bottom:14px;
+  padding-bottom:8px;border-bottom:2px solid var(--ocre)}
+.familia>h2 span{color:var(--gris);font-weight:800}
+.repo-lista{list-style:none;display:grid;gap:14px}
+.repo-item{display:grid;grid-template-columns:220px 1fr;gap:18px;background:var(--papel);border:1px solid var(--linea);
+  border-radius:14px;padding:12px;align-items:start}
+.repo-img img{width:220px;height:150px;object-fit:cover;border-radius:9px;background:var(--suave)}
+.repo-txt .rot{font-size:11px;font-weight:600;letter-spacing:.11em;text-transform:uppercase;color:var(--tierra);margin-bottom:4px}
+.repo-txt h3{font:800 20px/1.2 "RedTitular",sans-serif;margin-bottom:6px}
+.repo-txt h3 a{color:var(--olivo-hondo);text-decoration:none}
+.repo-txt h3 a:hover{text-decoration:underline}
+.cuerpo .repo-txt p{font-size:15px;line-height:1.55;margin-bottom:.6em}
+.cuerpo .repo-txt .repo-acc{font-size:14px;font-weight:600;margin:0}
+.repo-analisis .repo-img img,.otra-analisis img{object-fit:contain;background:#F2F1EA}
+.leer-estado{padding:48px 0 60px;background:var(--papel)}
+.leer-estado p{margin-bottom:1em}
+.portada-dinamica img{aspect-ratio:16/9;object-fit:cover}
+.pie{background:var(--olivo-hondo);color:#E9E4D4;padding:24px 0;font-size:13.5px;line-height:1.6}
+.pie a{color:#fff}
+.pie p+p{margin-top:4px}
+@media (max-width:760px){
+  .repo-item{grid-template-columns:1fr}
+  .repo-img img{width:100%;height:auto;aspect-ratio:16/9}
+}
+@media (max-width:600px){
+  body{font-size:16px}
+  .caja{padding:0 16px}
+  .enc{padding:28px 0 24px}
+  .otra{grid-template-columns:84px 1fr;gap:12px}
+  .otra img{width:84px;height:60px}
+  .cab-logo img{height:38px}
+  .pb-recuadro{padding:2px 16px 6px}
+}
+@media print{
+  .cab-nav,.otras,.saltar,.docs{display:none}
+  body{background:#fff}
+}
+</style>
+</head>
+<body>
+<a class="saltar" href="#contenido">Ir al contenido</a>
+<header class="cab">
+  <div class="caja ">
+    <a class="cab-logo" href="./"><img src="activos/logos/logo-red-blanco.webp?v=8f0298d6a5" width="760" height="387" alt="Red Nacional por la Defensa de la Reforma Agraria"></a>
+    <nav class="cab-nav" aria-label="Navegación">
+      <a class="volver" href="./">← Volver al sitio</a>
+      <a class="volver" href="publicaciones/">Todas las publicaciones</a>
+    </nav>
+  </div>
+</header>
+
+<main id="contenido">
+<div class="leer-estado" id="leerEstado" role="status" aria-live="polite">
+  <div class="caja">
+    <p id="leerMensaje">Cargando la publicación…</p>
+    <p id="leerAcciones" hidden>
+      <button class="btn btn-1" id="leerReintentar" type="button" hidden>Intentar de nuevo</button>
+      <a class="btn" href="publicaciones/">Ver todas las publicaciones</a>
+    </p>
+  </div>
+</div>
+
+<article id="leerPub" hidden></article>
+
+<section class="otras" aria-labelledby="otras-tit">
+  <div class="caja">
+    <h2 id="otras-tit">Lo demás que ha publicado la Red</h2>
+    <ul class="otras-lista" id="leerOtras">
+      <li><a class="otra otra-analisis" href="fenomeno-del-nino"><img src="activos/nino/deficit-de-precipitacion-en-diciembre-de-2026.jpg?v=d2620ef5aa" width="773" height="900" alt="" loading="lazy" decoding="async"><span><span class="rot">Análisis · Alerta alimentaria · Septiembre de 2026</span><b>Lo que “El Niño” le va a costar a la comida de Colombia</b></span></a></li>
+      <li><a class="otra otra-boletin" href="publicaciones/boletin-005-recorte-presupuesto-campo"><img src="activos/portadas/boletin-005-recorte-presupuesto-campo.jpg?v=edd049b35a" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 005 · 28 de agosto de 2026</span><b>Le recortan 6,1% al presupuesto del campo</b></span></a></li>
+      <li><a class="otra otra-columna" href="publicaciones/columna-contrarreformas-agrarias-made-in-miami"><img src="activos/portadas/columna-contrarreformas-agrarias-made-in-miami.jpg?v=45d820934a" width="720" height="405" alt="" loading="lazy" decoding="async"><span><span class="rot">Columna de opinión</span><b>Contrarreformas agrarias made in Miami</b></span></a></li>
+      <li><a class="otra otra-boletin" href="publicaciones/boletin-004-libro-de-la-verdad"><img src="activos/portadas/boletin-004-libro-de-la-verdad.jpg?v=6873c0e61c" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 004</span><b>La Red reacciona al «libro de la verdad»</b></span></a></li>
+      <li><a class="otra otra-boletin" href="publicaciones/boletin-003-regreso-al-pasado"><img src="activos/portadas/boletin-003-regreso-al-pasado.jpg?v=e16b6456ec" width="720" height="315" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 003</span><b>Regreso al pasado: los de siempre se toman el sector agropecuario</b></span></a></li>
+      <li><a class="otra otra-boletin" href="publicaciones/boletin-002-contrarreforma-desinformacion"><img src="activos/portadas/boletin-002-contrarreforma-desinformacion.jpg?v=bb69db895e" width="720" height="480" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 002</span><b>La contrarreforma agraria comienza con desinformación</b></span></a></li>
+    </ul>
+    <p class="otras-todas"><a class="btn" href="publicaciones/">Ver todas las publicaciones</a></p>
+  </div>
+</section>
+
+</main>
+
+<footer class="pie">
+  <div class="caja ">
+    <p><b>Red Nacional por la Defensa de la Reforma Agraria</b></p>
+    <p><a href="./">Sitio de la Red</a> ·
+      <a href="publicaciones/">Publicaciones</a> ·
+      <a href="mailto:rednal.reformaagraria@gmail.com">rednal.reformaagraria@gmail.com</a></p>
+  </div>
+</footer>
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   Los bloques de una publicación, convertidos en HTML.
+
+   Un solo dibujante para dos lugares:
+     · armar_publicaciones.js, al compilar, con los textos transcritos de
+       cada PDF (publicaciones_texto/<slug>.json);
+     · leer.html, en el navegador, con lo que el equipo publica desde el
+       panel (llega del receptor de Apps Script).
+   Si cada lado tuviera su copia, un boletín y una publicación del panel
+   terminarían viéndose distinto, y un arreglo en uno no llegaría al otro.
+
+   Por eso el archivo funciona igual en Node (module.exports) y pegado
+   dentro de un <script> (window.BloquesRed). No usa nada que no exista en
+   los dos lados.
+
+   Todo texto pasa por esc(): lo que sube el panel lo escribe una persona y
+   no se confía en que no traiga etiquetas. Las direcciones de imagen pasan
+   además por opciones.imagen(url), que devuelve la dirección final o '' si
+   no se permite (así una imagen que la política de contenido bloquearía no
+   deja un marco vacío).
+
+   Esquema (el mismo de revisar_transcripciones.js):
+     p {txt, neg?} · h {txt, nivel} · destacado {txt} · lista {items, marcas?}
+     cita {txt, quien} · cifra {n, txt} · tabla {...} · imagen {url, ...}
+     nota {txt, neg?} · y en cualquiera recuadro:'<nombre>'                  */
+(function (raiz) {
+  'use strict';
+
+  const esc = t => String(t == null ? '' : t).replace(/[&<>"']/g,
+    c => ({ '&': '&amp;', '<': '&lt;', '>': '&gt;', '"': '&quot;', "'": '&#39;' }[c]));
+
+  const hay = t => String(t == null ? '' : t).trim() !== '';
+
+  /* El arranque en negrilla y el resto van unidos por un espacio, salvo que
+     el resto empiece por un signo: «Fuentes.» + «Proyecto…» lleva espacio;
+     «Tierras que ingresan» + «, clasificadas…» no. */
+  function unir(neg, txt) {
+    if (!hay(neg)) return esc(txt);
+    const resto = hay(txt) ? (/^[,.;:)\]!?»”’…]/.test(String(txt)) ? '' : ' ') + esc(txt) : '';
+    return '<strong>' + esc(neg) + '</strong>' + resto;
+  }
+
+  /* un nombre de recuadro sirve de clase CSS: solo letras, números y guiones */
+  const clase = s => String(s).toLowerCase().replace(/[^a-z0-9-]+/g, '-');
+
+  /* Las cifras van alineadas a la derecha para que se puedan comparar
+     columna abajo. Solo si la celda es una cifra y nada más. */
+  const esCifra = t => /^[+\-−]?\s?\$?\s?[\d][\d.,]*\s?%?$/.test(String(t).trim());
+
+  function celda(c, etiqueta, extra) {
+    if (c && typeof c === 'object') {
+      return '<' + etiqueta + extra + '><strong>' + esc(c.neg) + '</strong>' +
+        (hay(c.txt) ? '<br>' + esc(c.txt) : '') + '</' + etiqueta + '>';
+    }
+    const num = esCifra(c) ? ' class="num"' : '';
+    return '<' + etiqueta + extra + num + '>' + esc(c) + '</' + etiqueta + '>';
+  }
+
+  function tabla(b) {
+    /* Cada fila tiene que ser una fila: una entrada suelta (null, un número,
+       un texto) reventaba el dibujante entero y dejaba la página cargando. */
+    const filas = (Array.isArray(b.filas) ? b.filas : []).filter(Array.isArray);
+    const cols = Math.max(b.cab ? b.cab.length : 0, ...filas.map(f => f.length), 0);
+    let h = '<div class="pb-rueda"><table class="pb-tabla' + (cols >= 4 ? ' pb-ancha' : '') + '">';
+    if (b.recorte && hay(b.tit)) h += '<caption>' + esc(b.tit) + (hay(b.sub) ? ' · ' + esc(b.sub) : '') + '</caption>';
+    if (Array.isArray(b.cab) && b.cab.length)
+      h += '<thead><tr>' + b.cab.map(c => celda(c, 'th', ' scope="col"')).join('') + '</tr></thead>';
+    h += '<tbody>' + filas.map(f => '<tr>' +
+      f.map((c, k) => k === 0 ? celda(c, 'th', ' scope="row"') : celda(c, 'td', '')).join('') +
+      '</tr>').join('') + '</tbody>';
+    if (Array.isArray(b.total) && b.total.length)
+      h += '<tfoot><tr>' + b.total.map((c, k) => k === 0 ? celda(c, 'th', ' scope="row"') : celda(c, 'td', '')).join('') + '</tr></tfoot>';
+    return h + '</table></div>';
+  }
+
+  /* La imagen va dentro de un enlace a sí misma: en un teléfono, el mapa de
+     relaciones del boletín 003 o un gráfico con rótulos chicos no se leen a
+     lo ancho de la pantalla, y abierta aparte se puede ampliar con los dedos. */
+  function imagenHTML(url, alt, ancho, alto, o) {
+    const src = o.imagen(url);
+    if (!src) return '';
+    const dims = (+ancho > 0 && +alto > 0) ? ' width="' + (+ancho) + '" height="' + (+alto) + '"' : '';
+    return '<a class="pb-ampliar" href="' + esc(src) + '" target="_blank" rel="noopener" title="Abrir la imagen en tamaño completo">' +
+      '<img src="' + esc(src) + '" alt="' + esc(alt) + '"' + dims + ' loading="lazy" decoding="async"></a>';
+  }
+
+  function item(x) {
+    if (x && typeof x === 'object') {
+      const sub = Array.isArray(x.items) && x.items.some(hay)
+        ? '<ul>' + x.items.filter(hay).map(s => '<li>' + esc(s) + '</li>').join('') + '</ul>' : '';
+      return unir(x.neg, x.txt) + sub;
+    }
+    return esc(x);
+  }
+  const itemVacio = x => x && typeof x === 'object' ? !(hay(x.neg) || hay(x.txt)) : !hay(x);
+
+  function bloque(b, o) {
+    switch (b.t) {
+      case 'p':
+        return (hay(b.txt) || hay(b.neg)) ? '<p>' + unir(b.neg, b.txt) + '</p>' : '';
+      case 'h': {
+        if (!hay(b.txt)) return '';
+        const n = b.nivel === 3 ? 3 : 2;
+        return '<h' + n + ' class="pb-h' + n + '">' + esc(b.txt) + '</h' + n + '>';
+      }
+      case 'destacado':
+        return hay(b.txt) ? '<p class="pb-destacado">' + esc(b.txt) + '</p>' : '';
+      case 'lista': {
+        const items = (Array.isArray(b.items) ? b.items : []).filter(x => !itemVacio(x));
+        if (!items.length) return '';
+        const marcas = Array.isArray(b.marcas) && b.marcas.length ? b.marcas : null;
+        if (marcas) {
+          return '<ol class="pb-lista pb-marcas">' + items.map((x, k) =>
+            '<li><span class="pb-marca" aria-hidden="true">' + esc(marcas[k] || '') + '</span><div>' + item(x) + '</div></li>'
+          ).join('') + '</ol>';
+        }
+        return '<ul class="pb-lista">' + items.map(x => '<li>' + item(x) + '</li>').join('') + '</ul>';
+      }
+      case 'cita':
+        return hay(b.txt) ? '<blockquote class="pb-cita"><p>' + esc(b.txt) + '</p>' +
+          (hay(b.quien) ? '<cite>' + esc(b.quien) + '</cite>' : '') + '</blockquote>' : '';
+      case 'cifra':
+        return (hay(b.n) || hay(b.txt)) ? '<div class="pb-cifra"><b>' + esc(b.n) + '</b><span>' + esc(b.txt) + '</span></div>' : '';
+      case 'tabla': {
+        if (!Array.isArray(b.filas) || !b.filas.some(Array.isArray)) return '';
+        const pie = hay(b.pie) ? '<p class="pb-tabla-pie">' + esc(b.pie) + '</p>' : '';
+        /* Con recorte se ve el gráfico tal como lo imprime el PDF (ya trae su
+           título) y la tabla queda plegada debajo, con las mismas cifras en
+           texto. No van las dos cosas a la vista con título repetido. */
+        const img = b.recorte ? imagenHTML(b.recorte.url, b.recorte.alt, b.recorte.ancho, b.recorte.alto, o) : '';
+        if (img) {
+          return '<figure class="pb-grafico">' + img +
+            '<details class="pb-detalle"><summary>Ver las cifras del gráfico en una tabla</summary>' +
+            tabla(b) + pie + '</details></figure>';
+        }
+        return '<figure class="pb-cuadro">' +
+          (hay(b.tit) ? '<figcaption class="pb-tabla-tit">' + esc(b.tit) +
+            (hay(b.sub) ? '<span>' + esc(b.sub) + '</span>' : '') + '</figcaption>' : '') +
+          tabla(b) + pie + '</figure>';
+      }
+      case 'imagen': {
+        const img = imagenHTML(b.url, b.alt, b.ancho, b.alto, o);
+        if (!img) return '';
+        const desc = Array.isArray(b.descripcion) && b.descripcion.some(hay)
+          ? '<details class="pb-detalle"><summary>Ver en texto lo que muestra la imagen</summary><ul class="pb-lista">' +
+            b.descripcion.filter(hay).map(s => '<li>' + esc(s) + '</li>').join('') + '</ul></details>' : '';
+        return '<figure class="pb-fig">' + img +
+          (hay(b.pie) ? '<figcaption>' + esc(b.pie) + '</figcaption>' : '') + desc + '</figure>';
+      }
+      case 'nota':
+        return (hay(b.txt) || hay(b.neg)) ? '<p class="pb-nota">' + unir(b.neg, b.txt) + '</p>' : '';
+      default:
+        return '';
+    }
+  }
+
+  /* Un tramo sin recuadro: las tarjetas de cifra seguidas van en una grilla. */
+  function tramo(bs, o) {
+    let h = '';
+    for (let i = 0; i < bs.length;) {
+      if (bs[i].t === 'cifra') {
+        let j = i;
+        while (j < bs.length && bs[j].t === 'cifra') j++;
+        h += '<div class="pb-cifras">' + bs.slice(i, j).map(b => bloque(b, o)).join('') + '</div>';
+        i = j;
+      } else { h += bloque(bs[i], o); i++; }
+    }
+    return h;
+  }
+
+  function armar(bloques, opciones) {
+    const o = Object.assign({ imagen: u => (typeof u === 'string' ? u : '') }, opciones || {});
+    const lista = (Array.isArray(bloques) ? bloques : []).filter(b => b && typeof b === 'object');
+    let h = '';
+    for (let i = 0; i < lista.length;) {
+      const rec = lista[i].recuadro || '';
+      let j = i;
+      while (j < lista.length && (lista[j].recuadro || '') === rec) j++;
+      const dentro = tramo(lista.slice(i, j), o);
+      h += rec ? '<div class="pb-recuadro pb-recuadro-' + clase(rec) + '">' + dentro + '</div>' : dentro;
+      i = j;
+    }
+    return h;
+  }
+
+  const api = { armar, esc, unir };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else raiz.BloquesRed = api;
+})(typeof window !== 'undefined' ? window : this);
+
+/* ══════════════════════════════════════════════════════════════════════
+   leer.html#<id>: la página de lo que el equipo publica desde el panel.
+
+   Las publicaciones que vienen de fábrica tienen su página hecha al
+   compilar (publicaciones/<slug>). Lo del panel sale sin compilar: la Red
+   lo publica y tiene que verse de una vez. Esta página pide al receptor lo
+   publicado (?contenido=1, lo mismo que lee la portada), busca el id que
+   trae la dirección y lo dibuja con el mismo dibujante de las páginas
+   compiladas (bloques_html.js), así todo se ve igual.
+
+   Nada de lo que llega se pega sin escapar, y las imágenes solo se aceptan
+   si vienen de donde el panel las guarda (lh3.googleusercontent.com): la
+   política de contenido bloquearía cualquier otra y dejaría un hueco.
+   armar_publicaciones.js reemplaza las marcas de este archivo al compilar. */
+(function () {
+  'use strict';
+
+  /* En producción habla con el Apps Script; abierto en localhost, con el
+     servidor de pruebas. Así ensayar nunca escribe en el sistema real. */
+  const API_RED = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)
+    ? '/api'
+    : 'https://script.google.com/macros/s/AKfycbzhYzR5BNKpYP4lmwJouZDiS0-s1muUkdBdfm6FQ4r_QxCUcLIy1OXysAEgfCjYtOEZ/exec';
+
+  const B = window.BloquesRed;
+  const esc = B.esc;
+  const $ = s => document.querySelector(s);
+
+  const NOMBRE_PUB = { comunicado: 'Comunicado', noticia: 'Noticia', informe: 'Informe', evento: 'Evento' };
+  /* sin portada propia: el respaldo de la familia, nunca un marco vacío */
+  const RESPALDO = {
+    comunicado: 'activos/portadas/respaldo-comunicado.jpg?v=1779f29905',
+    otro: 'activos/portadas/respaldo-publicacion.jpg?v=4757a1e12c',
+  };
+  const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+                 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  const TITULO_SITIO = 'Red Nacional por la Defensa de la Reforma Agraria';
+
+  function fechaLegible(iso) {
+    const [a, m, d] = String(iso || '').split('-').map(Number);
+    if (!a || !m || m > 12) return String(iso || '');
+    return (d ? d + ' de ' : '') + MESES[m - 1] + ' de ' + a;
+  }
+
+  const imagenPermitida = u =>
+    typeof u === 'string' && /^https:\/\/lh3\.googleusercontent\.com\/[^\s"'<>\\]+$/.test(u) ? u : '';
+  const enlacePermitido = u =>
+    typeof u === 'string' && /^https:\/\/[^\s"'<>\\]+$/.test(u) ? u : '';
+
+  function idDeLaDireccion() {
+    try { return decodeURIComponent(location.hash.replace(/^#/, '')).trim(); }
+    catch (e) { return ''; }
+  }
+
+  function mostrarEstado(mensaje, reintentar) {
+    $('#leerPub').hidden = true;
+    $('#leerEstado').hidden = false;
+    $('#leerMensaje').textContent = mensaje;
+    $('#leerAcciones').hidden = false;
+    $('#leerReintentar').hidden = !reintentar;
+  }
+
+  let items = null;
+  async function traer() {
+    if (/PEGUE-AQUI/.test(API_RED)) throw new Error('sin receptor');
+    const r = await fetch(API_RED + '?contenido=1', { cache: 'no-store' });
+    if (!r.ok) throw new Error('HTTP ' + r.status);
+    const datos = await r.json();
+    if (!datos || !datos.ok || !Array.isArray(datos.items)) throw new Error('respuesta sin items');
+    return datos.items;
+  }
+
+  function nombreDe(it) {
+    const c = it.contenido || {};
+    return it.tipo === 'comunicado' && c.numero ? 'Comunicado ' + c.numero : (NOMBRE_PUB[it.tipo] || 'Publicación');
+  }
+
+  function pintar(it) {
+    const c = it.contenido || {};
+    const n = nombreDe(it);
+    const fecha = fechaLegible(c.fecha || it.fecha);
+    const titulo = String(it.titulo || '').trim() || n;
+    const propia = imagenPermitida(c.portada);
+    const respaldo = it.tipo === 'comunicado' ? RESPALDO.comunicado : RESPALDO.otro;
+    const enlace = enlacePermitido(c.enlace);
+    const paginas = String(c.paginas || '').trim();
+
+    document.title = titulo + ' — ' + TITULO_SITIO;
+    const art = $('#leerPub');
+    art.innerHTML =
+      '<div class="enc"><div class="caja">' +
+        '<p class="rotulo">' + (c.urgente ? '<span class="cinta cinta-urgente">Urgente</span>' : '') +
+          esc(n) + (fecha ? ' · ' + esc(fecha) : '') + '</p>' +
+        '<h1>' + esc(titulo) + '</h1>' +
+        (c.bajada ? '<p class="bajada">' + esc(c.bajada) + '</p>' : '') +
+        '<figure class="portada portada-dinamica"><img src="' + esc(propia || respaldo) + '" alt=""></figure>' +
+      '</div></div>' +
+      '<div class="cuerpo"><div class="caja">' +
+        B.armar(c.bloques, { imagen: imagenPermitida }) +
+        (enlace ? '<div class="docs"><a class="btn btn-1" href="' + esc(enlace) + '" target="_blank" rel="noopener">' +
+          'Ver el documento adjunto' + (paginas ? ' · ' + esc(paginas) + (/^\d+$/.test(paginas) ? ' páginas' : '') : '') +
+          '</a></div>' : '') +
+      '</div></div>';
+
+    /* Si la portada de Drive no carga (borrada, sin permiso), va el respaldo;
+       y una imagen del cuerpo que no carga se quita en vez de quedar rota. */
+    const img = art.querySelector('.portada img');
+    img.addEventListener('error', () => { if (img.getAttribute('src') !== respaldo) img.src = respaldo; });
+    art.querySelectorAll('.cuerpo figure img').forEach(i =>
+      i.addEventListener('error', () => { const f = i.closest('figure'); if (f) f.remove(); }));
+
+    $('#leerEstado').hidden = true;
+    art.hidden = false;
+  }
+
+  /* Lo demás del panel va delante de lo compilado, que ya viene escrito. */
+  function pintarOtrosDelPanel(actual) {
+    const lista = $('#leerOtras');
+    lista.querySelectorAll('[data-panel]').forEach(li => li.remove());
+    const otros = items.filter(x => x && String(x.id) !== actual).slice(0, 3);
+    for (const it of otros.reverse()) {
+      const c = it.contenido || {};
+      const li = document.createElement('li');
+      li.setAttribute('data-panel', '');
+      const fecha = fechaLegible(c.fecha || it.fecha);
+      const respaldo = it.tipo === 'comunicado' ? RESPALDO.comunicado : RESPALDO.otro;
+      li.innerHTML = '<a class="otra" href="#' + encodeURIComponent(String(it.id)) + '">' +
+        '<img src="' + esc(imagenPermitida(c.portada) || respaldo) +
+          '" alt="" width="720" height="405" loading="lazy" decoding="async">' +
+        '<span><span class="rot">' + esc(nombreDe(it)) + (fecha ? ' · ' + esc(fecha) : '') + '</span>' +
+        '<b>' + esc(String(it.titulo || '').trim() || nombreDe(it)) + '</b></span></a>';
+      /* la miniatura de Drive que no carga también cae al respaldo */
+      const mini = li.querySelector('img');
+      mini.addEventListener('error', () => { if (mini.getAttribute('src') !== respaldo) mini.src = respaldo; });
+      lista.insertBefore(li, lista.firstChild);
+    }
+  }
+
+  async function mostrar() {
+    const id = idDeLaDireccion();
+    if (!id) {
+      mostrarEstado('La dirección no dice qué publicación abrir. Puede ver todas las publicaciones de la Red en el repositorio.', false);
+      return;
+    }
+    if (!items) {
+      try { items = await traer(); }
+      catch (e) {
+        mostrarEstado('No se pudo cargar la publicación. Revise la conexión e intente de nuevo.', true);
+        return;
+      }
+    }
+    const it = items.find(x => x && String(x.id) === id);
+    if (!it) {
+      mostrarEstado('No se encontró esta publicación. Puede que el enlace esté incompleto o que la publicación ya no esté disponible.', false);
+      return;
+    }
+    /* Si el contenido llega deforme (una tabla con una fila que no es fila,
+       una lista que no es lista), el dibujante se cae a mitad de camino y la
+       página quedaba con «Cargando la publicación…» para siempre. Se dice qué
+       pasó y se deja el botón de intentar de nuevo. */
+    try {
+      pintar(it);
+      pintarOtrosDelPanel(id);
+    } catch (e) {
+      mostrarEstado('No se pudo mostrar esta publicación: su contenido llegó incompleto. ' +
+        'Puede intentar de nuevo o ver las demás en el repositorio.', true);
+      return;
+    }
+    window.scrollTo(0, 0);
+  }
+
+  $('#leerReintentar').addEventListener('click', () => {
+    $('#leerMensaje').textContent = 'Cargando la publicación…';
+    $('#leerReintentar').hidden = true;
+    mostrar();
+  });
+  window.addEventListener('hashchange', mostrar);
+  mostrar();
+})();
+
+</script>
+</body>
+</html>
