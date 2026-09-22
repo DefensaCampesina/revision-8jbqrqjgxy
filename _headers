@@ -38,11 +38,11 @@
   X-Frame-Options: DENY
 
 /
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-iIgyb9DUFMzPGBs+13zxhQukk8V9sFfq1SCMF/oJRh0=' 'sha256-lqOzVM1Gs0Hv6daeMo05MZQSr0fi7tbZCtx1lzTuajE='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-iIgyb9DUFMzPGBs+13zxhQukk8V9sFfq1SCMF/oJRh0=' 'sha256-0gzL3nFiZ6E6a1b94sLGxU9XNOWoLxZrVRqFe6u4Jm4='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /index.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-iIgyb9DUFMzPGBs+13zxhQukk8V9sFfq1SCMF/oJRh0=' 'sha256-lqOzVM1Gs0Hv6daeMo05MZQSr0fi7tbZCtx1lzTuajE='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-iIgyb9DUFMzPGBs+13zxhQukk8V9sFfq1SCMF/oJRh0=' 'sha256-0gzL3nFiZ6E6a1b94sLGxU9XNOWoLxZrVRqFe6u4Jm4='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /panel
@@ -94,11 +94,11 @@
   X-Frame-Options: DENY
 
 /leer
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-Q+8h+HNTKlPkrrtrZ3gyy7bKP3XkYgMHnBDkYeB91zg='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-ICpFjWBJHticHP3xY6KzQR0uI/dMNAn2tbumwVUG4jI='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /leer.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-Q+8h+HNTKlPkrrtrZ3gyy7bKP3XkYgMHnBDkYeB91zg='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-ICpFjWBJHticHP3xY6KzQR0uI/dMNAn2tbumwVUG4jI='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
 
 /fenomeno-del-nino

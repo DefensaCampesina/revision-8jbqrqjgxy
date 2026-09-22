@@ -97,6 +97,7 @@ h1.mayus{font-size:clamp(23px,3.7vw,33px);line-height:1.14;letter-spacing:.01em}
 .pb-cifra span{display:block;font-size:13.5px;line-height:1.42}
 .pb-fig,.pb-grafico,.pb-cuadro{margin:1.6em 0 1.8em}
 .pb-fig img,.pb-grafico img{width:100%;border-radius:10px;border:1px solid var(--linea);background:#fff}
+.pb-fig.pb-angosta{max-width:460px;margin-left:auto;margin-right:auto}
 .pb-ampliar{display:block;cursor:zoom-in}
 .pb-detalle{margin-top:10px;border:1px solid var(--linea);border-radius:10px;background:var(--papel)}
 .pb-detalle summary{cursor:pointer;padding:10px 14px;font-weight:600;font-size:14px;color:var(--olivo)}
@@ -215,12 +216,12 @@ button.btn{font-family:inherit;cursor:pointer}
   <div class="caja">
     <h2 id="otras-tit">Lo demás que ha publicado la Red</h2>
     <ul class="otras-lista" id="leerOtras">
+      <li><a class="otra otra-boletin" href="publicaciones/boletin-007-congreso-defensa-reforma-agraria"><img src="activos/portadas/boletin-007-congreso-defensa-reforma-agraria.jpg?v=caea09bdcd" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 007 · 22 de septiembre de 2026</span><b>El Congreso activa la defensa de la Reforma Agraria</b></span></a></li>
+      <li><a class="otra otra-boletin" href="publicaciones/boletin-006-appa-suelos-alimentos"><img src="activos/portadas/boletin-006-appa-suelos-alimentos.jpg?v=7d1dd5ac78" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 006 · 7 de septiembre de 2026</span><b>Dos iniciativas ponen en riesgo los suelos que producen alimentos</b></span></a></li>
       <li><a class="otra otra-analisis" href="fenomeno-del-nino"><img src="activos/nino/deficit-de-precipitacion-en-diciembre-de-2026.jpg?v=d2620ef5aa" width="773" height="900" alt="" loading="lazy" decoding="async"><span><span class="rot">Análisis · Alerta alimentaria · Septiembre de 2026</span><b>Lo que “El Niño” le va a costar a la comida de Colombia</b></span></a></li>
       <li><a class="otra otra-boletin" href="publicaciones/boletin-005-recorte-presupuesto-campo"><img src="activos/portadas/boletin-005-recorte-presupuesto-campo.jpg?v=edd049b35a" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 005 · 28 de agosto de 2026</span><b>Le recortan 6,1% al presupuesto del campo</b></span></a></li>
       <li><a class="otra otra-columna" href="publicaciones/columna-contrarreformas-agrarias-made-in-miami"><img src="activos/portadas/columna-contrarreformas-agrarias-made-in-miami.jpg?v=45d820934a" width="720" height="405" alt="" loading="lazy" decoding="async"><span><span class="rot">Columna de opinión</span><b>Contrarreformas agrarias made in Miami</b></span></a></li>
       <li><a class="otra otra-boletin" href="publicaciones/boletin-004-libro-de-la-verdad"><img src="activos/portadas/boletin-004-libro-de-la-verdad.jpg?v=6873c0e61c" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 004</span><b>La Red reacciona al «libro de la verdad»</b></span></a></li>
-      <li><a class="otra otra-boletin" href="publicaciones/boletin-003-regreso-al-pasado"><img src="activos/portadas/boletin-003-regreso-al-pasado.jpg?v=e16b6456ec" width="720" height="315" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 003</span><b>Regreso al pasado: los de siempre se toman el sector agropecuario</b></span></a></li>
-      <li><a class="otra otra-boletin" href="publicaciones/boletin-002-contrarreforma-desinformacion"><img src="activos/portadas/boletin-002-contrarreforma-desinformacion.jpg?v=bb69db895e" width="720" height="480" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 002</span><b>La contrarreforma agraria comienza con desinformación</b></span></a></li>
     </ul>
     <p class="otras-todas"><a class="btn" href="publicaciones/">Ver todas las publicaciones</a></p>
   </div>
@@ -260,7 +261,7 @@ button.btn{font-family:inherit;cursor:pointer}
 
    Esquema (el mismo de revisar_transcripciones.js):
      p {txt, neg?} · h {txt, nivel} · destacado {txt} · lista {items, marcas?}
-     cita {txt, quien} · cifra {n, txt} · tabla {...} · imagen {url, ...}
+     cita {txt, quien} · cifra {n, txt} · tabla {...} · imagen {url, angosta?, ...}
      nota {txt, neg?} · y en cualquiera recuadro:'<nombre>'                  */
 (function (raiz) {
   'use strict';
@@ -383,7 +384,9 @@ button.btn{font-family:inherit;cursor:pointer}
         const desc = Array.isArray(b.descripcion) && b.descripcion.some(hay)
           ? '<details class="pb-detalle"><summary>Ver en texto lo que muestra la imagen</summary><ul class="pb-lista">' +
             b.descripcion.filter(hay).map(s => '<li>' + esc(s) + '</li>').join('') + '</ul></details>' : '';
-        return '<figure class="pb-fig">' + img +
+        /* angosta: una imagen que el documento trae chica (el mapa del
+           boletín 007 mide 223 px) no se estira a todo el ancho */
+        return '<figure class="pb-fig' + (b.angosta ? ' pb-angosta' : '') + '">' + img +
           (hay(b.pie) ? '<figcaption>' + esc(b.pie) + '</figcaption>' : '') + desc + '</figure>';
       }
       case 'nota':
