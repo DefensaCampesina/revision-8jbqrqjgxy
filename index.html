@@ -1118,6 +1118,7 @@ textarea{resize:vertical;min-height:130px}
    recortado a dos renglones y justificado abría huecos entre palabras. */
 #s-red p:not(.ante):not(.hero-credito):not(.mapa-pie):not(.linea-sub):not(.lam p),
 #s-red .lista li,
+.seccion p.plomo,
 .cabsec p:not(.ante){text-align:justify;-webkit-hyphens:auto;hyphens:auto}
 
 /* ── denuncias en el mapa de «Qué es la Red» ──
@@ -7459,6 +7460,199 @@ const SECCIONES = [
    en «Qué es la Red», y la dirección se corrige sola a #red. */
 const ALIAS_SECCION = { inicio: 'red' };
 
+/* ───────── el orden y el nombre de las publicaciones ─────────
+   Aquí va pegado publicaciones_orden.js (construir.js llena la marca
+   ORDEN_PUBLICACIONES_JS), el mismo archivo que usan el lector de lo que
+   sube el panel, las páginas compiladas y el panel. Deja window.OrdenRed.
+   Antes cada lugar tenía su copia de «cuándo salió esto» y su manera de
+   nombrar lo del panel, y no decían lo mismo. */
+/* ══════════════════════════════════════════════════════════════════════
+   El orden y el nombre de las publicaciones, iguales en todas partes.
+
+   Lo usan la portada (carrusel y «Boletines y comunicados»), el lector de
+   lo que sube el panel (leer.html), las páginas de publicaciones/ («Lo
+   demás que ha publicado la Red» y el repositorio), el panel (la vista
+   previa) y armar_publicaciones.js al compilar. Antes cada lugar tenía su
+   copia de «cuándo salió esto» y su forma de nombrar lo del panel: el
+   análisis de El Niño iba fijado a mano de primero, y un boletín subido por
+   el panel salía como «Informe» y repetido junto al compilado.
+
+   Funciona igual en Node (module.exports) y pegado dentro de un <script>
+   (window.OrdenRed), como bloques_html.js. No usa nada que no exista en los
+   dos lados.
+
+   Las reglas:
+     · Lo más reciente va primero, sin fijar nada a mano.
+     · La fecha que manda es la que trae día: «22 de septiembre de 2026»,
+       o la ISO del panel (2026-09-22). Si lo impreso solo dice el mes
+       («Septiembre de 2026»), manda `publicada`: el día en que salió en el
+       sitio (ISO), que es un hecho y no una fecha inventada para el
+       documento. Sin ninguna de las dos, cuenta el mes; sin nada, va al
+       final, en el orden en que venía.
+     · Lo que el equipo sube por el panel y ya tiene página compilada (el
+       mismo título, o el mismo número del mismo tipo) no se repite: se
+       queda la compilada.                                                  */
+(function (raiz) {
+  'use strict';
+
+  const MESES = { enero: 1, febrero: 2, marzo: 3, abril: 4, mayo: 5, junio: 6, julio: 7, agosto: 8,
+                  septiembre: 9, setiembre: 9, octubre: 10, noviembre: 11, diciembre: 12 };
+  const NOMBRE_MES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+                      'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+  const texto = t => String(t == null ? '' : t);
+  const sinTildes = t => texto(t).normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  /* aaaammdd como número (20260922); con solo el mes, aaaamm00; sin fecha, 0 */
+  function deISO(t) {
+    const m = texto(t).trim().match(/^(\d{4})-(\d{2})(?:-(\d{2}))?/);
+    if (!m || +m[2] < 1 || +m[2] > 12) return 0;
+    const d = m[3] ? +m[3] : 0;
+    return d > 31 ? 0 : +m[1] * 10000 + +m[2] * 100 + d;
+  }
+  function deTexto(t) {
+    const s = sinTildes(t).toLowerCase();
+    /* con día: «22 de septiembre de 2026», también con el día de la semana
+       adelante («Martes, 22 de septiembre de 2026.») */
+    let m = s.match(/(\d{1,2})\s+de\s+([a-z]+)\s+(?:de|del)\s+(\d{4})/);
+    if (m && MESES[m[2]] && +m[1] >= 1 && +m[1] <= 31) return +m[3] * 10000 + MESES[m[2]] * 100 + +m[1];
+    m = s.match(/([a-z]+)\s+(?:de|del)\s+(\d{4})/);
+    if (m && MESES[m[1]]) return +m[2] * 10000 + MESES[m[1]] * 100;
+    return 0;
+  }
+  /* la fecha para ordenar: primero la que trae día, después la de
+     publicación en el sitio, después el mes */
+  function clave(p) {
+    if (!p) return 0;
+    const f = deISO(p.fecha) || deTexto(p.fecha);
+    if (f % 100) return f;
+    const pub = deISO(p.publicada);
+    if (pub % 100) return pub;
+    return f || pub || 0;
+  }
+  /* de lo más reciente a lo más viejo; los empates y lo que no tiene fecha
+     conservan el orden en que venían */
+  function ordenar(lista) {
+    return (Array.isArray(lista) ? lista : []).map((p, i) => ({ p, i, k: clave(p) }))
+      .sort((a, b) => b.k - a.k || a.i - b.i)
+      .map(x => x.p);
+  }
+
+  /* «22 de septiembre de 2026» desde 2026-09-22; sin día, «septiembre de 2026» */
+  function fechaLegible(iso) {
+    const m = texto(iso).trim().match(/^(\d{4})-(\d{2})(?:-(\d{2}))?/);
+    if (!m || +m[2] < 1 || +m[2] > 12) return texto(iso).trim();
+    return (m[3] && +m[3] ? +m[3] + ' de ' : '') + NOMBRE_MES[+m[2] - 1] + ' de ' + m[1];
+  }
+
+  /* un título comparable: sin tildes, sin mayúsculas, sin signos */
+  const normalizar = t => sinTildes(t).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+  /* ── lo que sube el panel ── */
+  /* los tipos que son familias de la Red; lo demás (noticia, informe,
+     evento) va como «publicación» */
+  const FAMILIA_DE_TIPO = { boletin: 'boletin', comunicado: 'comunicado', columna: 'columna' };
+  const TIPOS = {
+    boletin:    'Boletín Agrario',
+    comunicado: 'Comunicado',
+    columna:    'Columna de opinión',
+    noticia:    'Noticia',
+    informe:    'Informe',
+    evento:     'Evento',
+  };
+  /* Se pregunta por la llave propia: un tipo llamado «constructor» devolvía
+     una función del prototipo. */
+  const propio = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  const familiaDe = tipo => propio(FAMILIA_DE_TIPO, tipo) ? FAMILIA_DE_TIPO[tipo] : 'publicacion';
+  /* «007» y no «7»: así numera la Red sus boletines y comunicados */
+  const numero = n => { const t = texto(n).trim(); return /^\d{1,3}$/.test(t) ? t.padStart(3, '0') : t; };
+  function nombre(tipo, n) {
+    const base = propio(TIPOS, tipo) ? TIPOS[tipo] : 'Publicación';
+    return (tipo === 'boletin' || tipo === 'comunicado') && numero(n) ? base + ' ' + numero(n) : base;
+  }
+
+  /* Las imágenes del panel viven en Drive (lh3.googleusercontent.com), el
+     único origen de imágenes que admite la política de contenido. */
+  const imagenDrive = u =>
+    typeof u === 'string' && /^https:\/\/lh3\.googleusercontent\.com\/[^\s"'<>\\]+$/.test(u) ? u : '';
+  /* el documento original, también en Drive */
+  const documentoDrive = u =>
+    typeof u === 'string' && /^https:\/\/(drive|docs)\.google\.com\/[^\s"'<>\\]+$/.test(u) ? u : '';
+  const enlaceSeguro = u => typeof u === 'string' && /^https:\/\/[^\s"'<>\\]+$/.test(u) ? u : '';
+
+  /* Una entrada del receptor (?contenido=1) con la forma de las compiladas:
+     familia, n, fecha legible, tit, resumen, etiqueta, autor… Nada se
+     escapa aquí: quien la pinte la escapa. */
+  function desdePanel(it) {
+    const c = (it && it.contenido) || {};
+    const tipo = texto(it && it.tipo);
+    const familia = familiaDe(tipo);
+    const pdf = c.pdf && typeof c.pdf === 'object' ? c.pdf : {};
+    const titulo = texto(it && it.titulo).trim();
+    return {
+      panel: true,
+      id: texto(it && it.id),
+      tipo, familia,
+      n: nombre(tipo, c.numero),
+      numero: numero(c.numero),
+      fecha: fechaLegible(c.fecha || (it && it.fecha)),
+      fechaISO: texto(c.fecha || (it && it.fecha)).trim(),
+      tit: texto(c.tituloCorto).trim() || titulo || nombre(tipo, c.numero),
+      titImpreso: titulo,
+      resumen: texto(c.bajada).trim(),
+      etiqueta: familia === 'boletin' ? texto(c.etiqueta).trim() : '',
+      urgente: !!c.urgente,
+      autor: familia === 'columna' ? texto(c.autor).trim() : '',
+      oficio: familia === 'columna' ? texto(c.oficio).trim() : '',
+      imgURL: imagenDrive(c.portada),
+      portadaAlt: texto(c.portadaAlt).trim(),
+      retratoURL: familia === 'columna' ? imagenDrive(c.retrato) : '',
+      pdfURL: documentoDrive(pdf.url) || documentoDrive(c.enlace),
+      pdfDescarga: documentoDrive(pdf.descarga),
+      enlace: enlaceSeguro(c.enlace),
+      href: 'leer#' + encodeURIComponent(texto(it && it.id)),
+    };
+  }
+
+  /* ¿Esta entrada del panel ya tiene página compilada? El mismo título (el
+     corto de las tarjetas o el impreso en el documento), o el mismo número
+     del mismo tipo. `fijas` son las de publicaciones.json. */
+  function repetida(p, fijas) {
+    if (!p) return false;
+    const titulos = [p.tit, p.titImpreso].map(normalizar).filter(t => t.length >= 12);
+    return (Array.isArray(fijas) ? fijas : []).some(f => {
+      if (!f || f.panel) return false;
+      const suyos = [f.tit, f.titImpreso].map(normalizar).filter(Boolean);
+      if (titulos.some(t => suyos.includes(t))) return true;
+      return (p.familia === 'boletin' || p.familia === 'comunicado') && p.familia === f.familia &&
+        !!p.numero && normalizar(p.n) === normalizar(f.n);
+    });
+  }
+
+  /* Todo junto: lo compilado más lo del panel que no esté repetido, en orden.
+     Lo del panel sin id no tiene a qué página llevar: se deja por fuera. */
+  function juntar(fijas, delPanel) {
+    const base = Array.isArray(fijas) ? fijas : [];
+    const nuevas = (Array.isArray(delPanel) ? delPanel : [])
+      .filter(it => it && it.id)
+      .map(it => (it.panel ? it : desdePanel(it)))
+      .filter(p => !repetida(p, base));
+    /* lo del panel entra delante: a igual fecha, lo que acaba de subir el
+       equipo va primero */
+    return ordenar(nuevas.concat(base));
+  }
+
+  const api = { clave, ordenar, fechaLegible, normalizar, nombre, numero, familiaDe,
+                desdePanel, repetida, juntar, imagenDrive, documentoDrive, enlaceSeguro, TIPOS };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else raiz.OrdenRed = api;
+})(typeof window !== 'undefined' ? window : this);
+
+
+/* Se pregunta siempre por la llave propia: un tipo o una familia llamada
+   «constructor» devolvía una función del prototipo y reventaba el pintado. */
+const propio = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+
 /* ───────── las publicaciones de la Red ─────────
    Boletines, comunicados y columnas salen de UN solo lugar: publicaciones.json.
    construir.js lo mete aquí con dos datos más por entrada: `pagina`, la
@@ -7468,27 +7662,31 @@ const ALIAS_SECCION = { inicio: 'red' };
    no decían lo mismo (el oficio del autor, el resumen del boletín 001).
    Las fechas que no aparecen impresas en el documento se dejan vacías: no se
    inventan. */
-const PUBLICACIONES_DATOS = [{"slug":"fenomeno-del-nino","familia":"analisis","n":"Análisis · Alerta alimentaria","fecha":"Septiembre de 2026","etiqueta":"Alerta alimentaria","tit":"Lo que “El Niño” le va a costar a la comida de Colombia","resumen":"Análisis municipio por municipio y cultivo por cultivo del impacto del fenómeno de El Niño 2026–2027 sobre la producción de alimentos en Colombia. 8,46 millones de toneladas de alimentos en riesgo en 1.094 municipios entre septiembre de 2026 y julio de 2027.","pdf":"docs/cartilla-alerta-alimentaria.pdf","portada":"nino/deficit-de-precipitacion-en-diciembre-de-2026.jpg","portadaAlt":"Déficit de precipitación en diciembre de 2026","portadaFuente":"","autor":"","oficio":"","destaca":false,"pagina":"fenomeno-del-nino","fijo":true,"portadaURL":"activos/nino/deficit-de-precipitacion-en-diciembre-de-2026.jpg?v=d2620ef5aa","portadaAncho":773,"portadaAlto":900},{"slug":"columna-contrarreformas-agrarias-made-in-miami","familia":"columna","n":"Columna de opinión","fecha":"","etiqueta":"Columna","tit":"Contrarreformas agrarias made in Miami","resumen":"Miami, convertida en «la Wall Street del Sur», concentra fondos de inversión que buscan el control de tierras y territorios en América Latina. La columna sostiene que desde allí se impulsa frenar la reforma agraria y volver a la receta de ampliar la frontera agrícola, y recuerda lo que pasó la última vez que se aplicó.","pdf":"docs/columna-mondragon-miami.pdf","portada":"columna-contrarreformas-agrarias-made-in-miami.jpg","portadaAlt":"Héctor Mondragón","portadaFuente":"retratoMondragon","autor":"Héctor Mondragón","oficio":"Economista · Analista agrario","destaca":false,"pagina":"publicaciones/columna-contrarreformas-agrarias-made-in-miami","portadaURL":"activos/portadas/columna-contrarreformas-agrarias-made-in-miami.jpg?v=45d820934a","portadaAncho":720,"portadaAlto":405},{"slug":"boletin-007-congreso-defensa-reforma-agraria","familia":"boletin","n":"Boletín Agrario 007","fecha":"22 de septiembre de 2026","etiqueta":"Congreso","tit":"El Congreso activa la defensa de la Reforma Agraria","resumen":"El Congreso instaló la Comisión Accidental por la Defensa de la Reforma Agraria y el Campesinado, y la Red le presentó su herramienta Radar Agrario. El boletín trae también el primer análisis de Radar Agrario: El Niño pone en riesgo 8,46 millones de toneladas de alimentos.","pdf":"docs/boletin007.pdf","portada":"boletin-007-congreso-defensa-reforma-agraria.jpg","portadaAlt":"Salón de la Comisión Primera de la Cámara de Representantes durante una sesión","portadaFuente":"b007Comision","autor":"","oficio":"","destaca":true,"pagina":"publicaciones/boletin-007-congreso-defensa-reforma-agraria","portadaURL":"activos/portadas/boletin-007-congreso-defensa-reforma-agraria.jpg?v=caea09bdcd","portadaAncho":720,"portadaAlto":540},{"slug":"boletin-006-appa-suelos-alimentos","familia":"boletin","n":"Boletín Agrario 006","fecha":"7 de septiembre de 2026","etiqueta":"Alerta","tit":"Dos iniciativas ponen en riesgo los suelos que producen alimentos","resumen":"Un proyecto de ley busca eliminar las Áreas de Protección para la Producción de Alimentos (APPA). El Ministerio de Agricultura propone derogar las de Sopó, Nemocón, Cogua, Tenjo y Tabio, cerca de 15.800 hectáreas. La Red reunió además en el CINEP a organizaciones de amplia trayectoria para construir su hoja de ruta.","pdf":"docs/boletin006.pdf","portada":"boletin-006-appa-suelos-alimentos.jpg","portadaAlt":"Cultivos en Sora, Boyacá","portadaFuente":"destacado","autor":"","oficio":"","destaca":false,"pagina":"publicaciones/boletin-006-appa-suelos-alimentos","portadaURL":"activos/portadas/boletin-006-appa-suelos-alimentos.jpg?v=7d1dd5ac78","portadaAncho":720,"portadaAlto":540},{"slug":"boletin-005-recorte-presupuesto-campo","familia":"boletin","n":"Boletín Agrario 005","fecha":"28 de agosto de 2026","etiqueta":"Alerta presupuestal","tit":"Le recortan 6,1% al presupuesto del campo","resumen":"Comparado con el proyecto que radicó el Gobierno de Gustavo Petro, el sector Agricultura y Desarrollo Rural pierde $181.058 millones. Cinco de sus seis entidades quedan con menos apropiación, mientras el presupuesto total del país crece 10,3%.","pdf":"docs/boletin005.pdf","portada":"boletin-005-recorte-presupuesto-campo.jpg","portadaAlt":"Plaza de mercado de Cachipay, Cundinamarca","portadaFuente":"plazaMercado","autor":"","oficio":"","destaca":true,"pagina":"publicaciones/boletin-005-recorte-presupuesto-campo","portadaURL":"activos/portadas/boletin-005-recorte-presupuesto-campo.jpg?v=edd049b35a","portadaAncho":720,"portadaAlto":540},{"slug":"boletin-004-libro-de-la-verdad","familia":"boletin","n":"Boletín Agrario 004","fecha":"","etiqueta":"Verificación","tit":"La Red reacciona al «libro de la verdad»","resumen":"Una guía para que no los engañen con el engaño. Buena parte de las «irregularidades» que denuncia ese informe no son irregularidades: son los pasos normales de un trámite que toda entrega de tierras debe seguir por ley.","pdf":"docs/boletin004.pdf","portada":"boletin-004-libro-de-la-verdad.jpg","portadaAlt":"Campo cultivado en Nobsa","portadaFuente":"campoLabrado","autor":"","oficio":"","destaca":false,"pagina":"publicaciones/boletin-004-libro-de-la-verdad","portadaURL":"activos/portadas/boletin-004-libro-de-la-verdad.jpg?v=6873c0e61c","portadaAncho":720,"portadaAlto":540},{"slug":"boletin-003-regreso-al-pasado","familia":"boletin","n":"Boletín Agrario 003","fecha":"","etiqueta":"Análisis","tit":"Regreso al pasado: los de siempre se toman el sector agropecuario","resumen":"Los nombramientos en el Ministerio de Agricultura y en sus entidades adscritas envían mensajes inequívocos: regresan los operadores de las élites terratenientes, las mismas que se han beneficiado toda la vida de la política del sector.","pdf":"docs/boletin003.pdf","portada":"boletin-003-regreso-al-pasado.jpg","portadaAlt":"Panorámica de una vereda de montaña","portadaFuente":"vereda","autor":"","oficio":"","destaca":false,"pagina":"publicaciones/boletin-003-regreso-al-pasado","portadaURL":"activos/portadas/boletin-003-regreso-al-pasado.jpg?v=e16b6456ec","portadaAncho":720,"portadaAlto":315},{"slug":"boletin-002-contrarreforma-desinformacion","familia":"boletin","n":"Boletín Agrario 002","fecha":"","etiqueta":"Análisis","tit":"La contrarreforma agraria comienza con desinformación","resumen":"El gobierno de De la Espriella ha tendido un manto de duda sobre los avances de la reforma agraria alcanzados durante los últimos cuatro años. Los cuestionamientos revelan el interés de regresar al país donde la redistribución fue sustituida por la simple formalización.","pdf":"docs/boletin002.pdf","portada":"boletin-002-contrarreforma-desinformacion.jpg","portadaAlt":"Vaca echada en un potrero","portadaFuente":"ganado","autor":"","oficio":"","destaca":false,"pagina":"publicaciones/boletin-002-contrarreforma-desinformacion","portadaURL":"activos/portadas/boletin-002-contrarreforma-desinformacion.jpg?v=bb69db895e","portadaAncho":720,"portadaAlto":480},{"slug":"boletin-001-viene-una-contrarreforma","familia":"boletin","n":"Boletín Agrario 001","fecha":"","etiqueta":"Alerta","tit":"Colombia debe prepararse: viene una contrarreforma agraria","resumen":"En los últimos cuatro años Colombia recuperó el lugar de la reforma agraria: el centro de la justicia social, la democratización de la tierra y la producción de alimentos. Tras el proceso electoral, se han registrado hechos que encienden serias alertas sobre la continuidad y la protección de la reforma agraria.","pdf":"docs/boletin001.pdf","portada":"boletin-001-viene-una-contrarreforma.jpg","portadaAlt":"Paisaje rural en Florencia","portadaFuente":"campoFlorencia","autor":"","oficio":"","destaca":false,"pagina":"publicaciones/boletin-001-viene-una-contrarreforma","portadaURL":"activos/portadas/boletin-001-viene-una-contrarreforma.jpg?v=23044f09f3","portadaAncho":720,"portadaAlto":424},{"slug":"comunicado-002-jurisdiccion-agraria","familia":"comunicado","n":"Comunicado 002","fecha":"","etiqueta":"Comunicado","tit":"La Red celebra la radicación del proyecto de ley de la Jurisdicción Agraria y Rural","resumen":"La radicación coincide con los tres años del Acto Legislativo 03 de 2023, que creó la Jurisdicción Agraria y Rural. La Red llama a un debate con rigor jurídico y sin pánicos infundados.","pdf":"docs/comunicado002.pdf","portada":"comunicado-002-jurisdiccion-agraria.jpg","portadaAlt":"Asamblea con presidentes de juntas de acción comunal","portadaFuente":"lamJusticia","autor":"","oficio":"","destaca":false,"pagina":"publicaciones/comunicado-002-jurisdiccion-agraria","portadaURL":"activos/portadas/comunicado-002-jurisdiccion-agraria.jpg?v=0f3d8b6030","portadaAncho":720,"portadaAlto":480},{"slug":"comunicado-001-crimen-organizado-tierras","familia":"comunicado","n":"Comunicado 001","fecha":"","etiqueta":"Comunicado","tit":"El crimen organizado vuelve por las tierras de la Reforma Agraria","resumen":"La Red alerta sobre una operación de alcance nacional mediante la cual estructuras del narcotráfico buscan reapropiarse, con maniobras judiciales, presiones institucionales y violencia directa, de tierras destinadas a familias campesinas.","pdf":"docs/comunicado001.pdf","portada":"comunicado-001-crimen-organizado-tierras.jpg","portadaAlt":"Cultivos en las lomas de Siachoque, Boyacá","portadaFuente":"lamTierra","autor":"","oficio":"","destaca":false,"pagina":"publicaciones/comunicado-001-crimen-organizado-tierras","portadaURL":"activos/portadas/comunicado-001-crimen-organizado-tierras.jpg?v=bdea089a3f","portadaAncho":720,"portadaAlto":540}];
+const PUBLICACIONES_DATOS = [{"slug":"fenomeno-del-nino","familia":"analisis","n":"Análisis · Alerta alimentaria","fecha":"Septiembre de 2026","etiqueta":"Alerta alimentaria","tit":"Lo que “El Niño” le va a costar a la comida de Colombia","resumen":"Análisis municipio por municipio y cultivo por cultivo del impacto del fenómeno de El Niño 2026–2027 sobre la producción de alimentos en Colombia. 8,46 millones de toneladas de alimentos en riesgo en 1.094 municipios entre septiembre de 2026 y julio de 2027.","pdf":"docs/cartilla-alerta-alimentaria.pdf","portada":"nino/deficit-de-precipitacion-en-diciembre-de-2026.jpg","portadaAlt":"Déficit de precipitación en diciembre de 2026","portadaFuente":"","autor":"","oficio":"","destaca":false,"pagina":"fenomeno-del-nino","publicada":"2026-09-15","titImpreso":"Lo que “El Niño” le va a costar a la comida de Colombia","portadaURL":"activos/nino/deficit-de-precipitacion-en-diciembre-de-2026.jpg?v=d2620ef5aa","portadaAncho":773,"portadaAlto":900},{"slug":"columna-contrarreformas-agrarias-made-in-miami","familia":"columna","n":"Columna de opinión","fecha":"","etiqueta":"Columna","tit":"Contrarreformas agrarias made in Miami","resumen":"Miami, convertida en «la Wall Street del Sur», concentra fondos de inversión que buscan el control de tierras y territorios en América Latina. La columna sostiene que desde allí se impulsa frenar la reforma agraria y volver a la receta de ampliar la frontera agrícola, y recuerda lo que pasó la última vez que se aplicó.","pdf":"docs/columna-mondragon-miami.pdf","portada":"columna-contrarreformas-agrarias-made-in-miami.jpg","portadaAlt":"Héctor Mondragón","portadaFuente":"retratoMondragon","autor":"Héctor Mondragón","oficio":"Economista · Analista agrario","destaca":false,"pagina":"publicaciones/columna-contrarreformas-agrarias-made-in-miami","titImpreso":"Contrarreformas agrarias Made in Miami","publicada":"","portadaURL":"activos/portadas/columna-contrarreformas-agrarias-made-in-miami.jpg?v=45d820934a","portadaAncho":720,"portadaAlto":405},{"slug":"boletin-007-congreso-defensa-reforma-agraria","familia":"boletin","n":"Boletín Agrario 007","fecha":"22 de septiembre de 2026","etiqueta":"Congreso","tit":"El Congreso activa la defensa de la Reforma Agraria","resumen":"El Congreso instaló la Comisión Accidental por la Defensa de la Reforma Agraria y el Campesinado, y la Red le presentó su herramienta Radar Agrario. El boletín trae también el primer análisis de Radar Agrario: El Niño pone en riesgo 8,46 millones de toneladas de alimentos.","pdf":"docs/boletin007.pdf","portada":"boletin-007-congreso-defensa-reforma-agraria.jpg","portadaAlt":"Salón de la Comisión Primera de la Cámara de Representantes durante una sesión","portadaFuente":"b007Comision","autor":"","oficio":"","destaca":true,"pagina":"publicaciones/boletin-007-congreso-defensa-reforma-agraria","titImpreso":"El Congreso activa la defensa de la Reforma Agraria","publicada":"","portadaURL":"activos/portadas/boletin-007-congreso-defensa-reforma-agraria.jpg?v=caea09bdcd","portadaAncho":720,"portadaAlto":540},{"slug":"boletin-006-appa-suelos-alimentos","familia":"boletin","n":"Boletín Agrario 006","fecha":"7 de septiembre de 2026","etiqueta":"Alerta","tit":"Dos iniciativas ponen en riesgo los suelos que producen alimentos","resumen":"Un proyecto de ley busca eliminar las Áreas de Protección para la Producción de Alimentos (APPA). El Ministerio de Agricultura propone derogar las de Sopó, Nemocón, Cogua, Tenjo y Tabio, cerca de 15.800 hectáreas. La Red reunió además en el CINEP a organizaciones de amplia trayectoria para construir su hoja de ruta.","pdf":"docs/boletin006.pdf","portada":"boletin-006-appa-suelos-alimentos.jpg","portadaAlt":"Cultivos en Sora, Boyacá","portadaFuente":"destacado","autor":"","oficio":"","destaca":false,"pagina":"publicaciones/boletin-006-appa-suelos-alimentos","titImpreso":"Dos iniciativas del Gobierno Nacional y de la bancada de gobierno en el Congreso ponen en riesgo la protección de los suelos estratégicos para la producción de alimentos.","publicada":"","portadaURL":"activos/portadas/boletin-006-appa-suelos-alimentos.jpg?v=7d1dd5ac78","portadaAncho":720,"portadaAlto":540},{"slug":"boletin-005-recorte-presupuesto-campo","familia":"boletin","n":"Boletín Agrario 005","fecha":"28 de agosto de 2026","etiqueta":"Alerta presupuestal","tit":"Le recortan 6,1% al presupuesto del campo","resumen":"Comparado con el proyecto que radicó el Gobierno de Gustavo Petro, el sector Agricultura y Desarrollo Rural pierde $181.058 millones. Cinco de sus seis entidades quedan con menos apropiación, mientras el presupuesto total del país crece 10,3%.","pdf":"docs/boletin005.pdf","portada":"boletin-005-recorte-presupuesto-campo.jpg","portadaAlt":"Plaza de mercado de Cachipay, Cundinamarca","portadaFuente":"plazaMercado","autor":"","oficio":"","destaca":true,"pagina":"publicaciones/boletin-005-recorte-presupuesto-campo","titImpreso":"ALERTA: le recortan 6,1% al presupuesto del campo. Cuatro emergencias reconocidas por el propio Gobierno y ni una respuesta presupuestal a la altura","publicada":"","portadaURL":"activos/portadas/boletin-005-recorte-presupuesto-campo.jpg?v=edd049b35a","portadaAncho":720,"portadaAlto":540},{"slug":"boletin-004-libro-de-la-verdad","familia":"boletin","n":"Boletín Agrario 004","fecha":"","etiqueta":"Verificación","tit":"La Red reacciona al «libro de la verdad»","resumen":"Una guía para que no los engañen con el engaño. Buena parte de las «irregularidades» que denuncia ese informe no son irregularidades: son los pasos normales de un trámite que toda entrega de tierras debe seguir por ley.","pdf":"docs/boletin004.pdf","portada":"boletin-004-libro-de-la-verdad.jpg","portadaAlt":"Campo cultivado en Nobsa","portadaFuente":"campoLabrado","autor":"","oficio":"","destaca":false,"pagina":"publicaciones/boletin-004-libro-de-la-verdad","titImpreso":"La Red Nacional por la Defensa de la Reforma Agraria reacciona al \"libro de la verdad\": una guía para que no los engañen con el engaño","publicada":"","portadaURL":"activos/portadas/boletin-004-libro-de-la-verdad.jpg?v=6873c0e61c","portadaAncho":720,"portadaAlto":540},{"slug":"boletin-003-regreso-al-pasado","familia":"boletin","n":"Boletín Agrario 003","fecha":"","etiqueta":"Análisis","tit":"Regreso al pasado: los de siempre se toman el sector agropecuario","resumen":"Los nombramientos en el Ministerio de Agricultura y en sus entidades adscritas envían mensajes inequívocos: regresan los operadores de las élites terratenientes, las mismas que se han beneficiado toda la vida de la política del sector.","pdf":"docs/boletin003.pdf","portada":"boletin-003-regreso-al-pasado.jpg","portadaAlt":"Panorámica de una vereda de montaña","portadaFuente":"vereda","autor":"","oficio":"","destaca":false,"pagina":"publicaciones/boletin-003-regreso-al-pasado","titImpreso":"Regreso al pasado: los de siempre se toman el sector agropecuario","publicada":"","portadaURL":"activos/portadas/boletin-003-regreso-al-pasado.jpg?v=e16b6456ec","portadaAncho":720,"portadaAlto":315},{"slug":"boletin-002-contrarreforma-desinformacion","familia":"boletin","n":"Boletín Agrario 002","fecha":"","etiqueta":"Análisis","tit":"La contrarreforma agraria comienza con desinformación","resumen":"El gobierno de De la Espriella ha tendido un manto de duda sobre los avances de la reforma agraria alcanzados durante los últimos cuatro años. Los cuestionamientos revelan el interés de regresar al país donde la redistribución fue sustituida por la simple formalización.","pdf":"docs/boletin002.pdf","portada":"boletin-002-contrarreforma-desinformacion.jpg","portadaAlt":"Vaca echada en un potrero","portadaFuente":"ganado","autor":"","oficio":"","destaca":false,"pagina":"publicaciones/boletin-002-contrarreforma-desinformacion","titImpreso":"La contrarreforma agraria comienza con desinformación","publicada":"","portadaURL":"activos/portadas/boletin-002-contrarreforma-desinformacion.jpg?v=bb69db895e","portadaAncho":720,"portadaAlto":480},{"slug":"boletin-001-viene-una-contrarreforma","familia":"boletin","n":"Boletín Agrario 001","fecha":"","etiqueta":"Alerta","tit":"Colombia debe prepararse: viene una contrarreforma agraria","resumen":"En los últimos cuatro años Colombia recuperó el lugar de la reforma agraria: el centro de la justicia social, la democratización de la tierra y la producción de alimentos. Tras el proceso electoral, se han registrado hechos que encienden serias alertas sobre la continuidad y la protección de la reforma agraria.","pdf":"docs/boletin001.pdf","portada":"boletin-001-viene-una-contrarreforma.jpg","portadaAlt":"Paisaje rural en Florencia","portadaFuente":"campoFlorencia","autor":"","oficio":"","destaca":false,"pagina":"publicaciones/boletin-001-viene-una-contrarreforma","titImpreso":"Colombia debe prepararse: viene una contrarreforma agraria","publicada":"","portadaURL":"activos/portadas/boletin-001-viene-una-contrarreforma.jpg?v=23044f09f3","portadaAncho":720,"portadaAlto":424},{"slug":"comunicado-002-jurisdiccion-agraria","familia":"comunicado","n":"Comunicado 002","fecha":"","etiqueta":"Comunicado","tit":"La Red celebra la radicación del proyecto de ley de la Jurisdicción Agraria y Rural","resumen":"La radicación coincide con los tres años del Acto Legislativo 03 de 2023, que creó la Jurisdicción Agraria y Rural. La Red llama a un debate con rigor jurídico y sin pánicos infundados.","pdf":"docs/comunicado002.pdf","portada":"comunicado-002-jurisdiccion-agraria.jpg","portadaAlt":"Asamblea con presidentes de juntas de acción comunal","portadaFuente":"lamJusticia","autor":"","oficio":"","destaca":false,"pagina":"publicaciones/comunicado-002-jurisdiccion-agraria","titImpreso":"LA RED NACIONAL POR LA DEFENSA DE LA REFORMA AGRARIA CELEBRA LA RADICACIÓN DEL PROYECTO DE LEY ORDINARIA DE LA JURISDICCIÓN AGRARIA Y RURAL","publicada":"","portadaURL":"activos/portadas/comunicado-002-jurisdiccion-agraria.jpg?v=0f3d8b6030","portadaAncho":720,"portadaAlto":480},{"slug":"comunicado-001-crimen-organizado-tierras","familia":"comunicado","n":"Comunicado 001","fecha":"","etiqueta":"Comunicado","tit":"El crimen organizado vuelve por las tierras de la Reforma Agraria","resumen":"La Red alerta sobre una operación de alcance nacional mediante la cual estructuras del narcotráfico buscan reapropiarse, con maniobras judiciales, presiones institucionales y violencia directa, de tierras destinadas a familias campesinas.","pdf":"docs/comunicado001.pdf","portada":"comunicado-001-crimen-organizado-tierras.jpg","portadaAlt":"Cultivos en las lomas de Siachoque, Boyacá","portadaFuente":"lamTierra","autor":"","oficio":"","destaca":false,"pagina":"publicaciones/comunicado-001-crimen-organizado-tierras","titImpreso":"EL CRIMEN ORGANIZADO VUELVE POR LAS TIERRAS DE LA REFORMA AGRARIA","publicada":"","portadaURL":"activos/portadas/comunicado-001-crimen-organizado-tierras.jpg?v=bdea089a3f","portadaAncho":720,"portadaAlto":540}];
 
-/* Las tres listas de siempre, con la forma que ya usan el carrusel, las
-   tarjetas y el bot. Un boletín hace seguimiento, un comunicado fija la
-   posición de la Red, y una columna es la firma de quien la escribe: por eso
-   lleva el autor a la vista y no se presenta como posición institucional. */
-const deFamilia = f => PUBLICACIONES_DATOS.filter(p => p.familia === f).map(p => Object.assign({}, p));
+/* Las listas de siempre, con la forma que ya usan el carrusel, las tarjetas
+   y el bot. Un boletín hace seguimiento, un comunicado fija la posición de
+   la Red, y una columna es la firma de quien la escribe: por eso lleva el
+   autor a la vista y no se presenta como posición institucional. */
+const COMPILADAS = PUBLICACIONES_DATOS.map(p => Object.assign({}, p));
+const deFamilia = f => COMPILADAS.filter(p => p.familia === f);
 const COLUMNAS    = deFamilia('columna');
 const BOLETINES   = deFamilia('boletin');
 /* Un análisis (el de El Niño) tiene su página propia fuera de publicaciones/:
    su dirección ya viene en `pagina` (fenomeno-del-nino). */
 const ANALISIS    = deFamilia('analisis');
-/* Aquí entra también, al frente, lo que el equipo sube desde el panel
-   (traerDelEquipo): esas entradas llevan `panel`, `id` y `tipo`. */
 const COMUNICADOS = deFamilia('comunicado');
-/* el nombre que se ve de cada tipo del panel */
-const NOMBRE_PUB = { comunicado:'Comunicado', noticia:'Noticia', informe:'Informe', evento:'Evento' };
-/* Se pregunta por la llave propia y no por NOMBRE_PUB[tipo]: un tipo llamado
-   «constructor» o «toString» devolvía una función del prototipo y reventaba
-   el pintado de las tarjetas. Lo que no esté en la lista es «Publicación». */
-const nombrePub = t => Object.prototype.hasOwnProperty.call(NOMBRE_PUB, t) ? NOMBRE_PUB[t] : 'Publicación';
+
+/* Lo que el equipo sube desde el panel (traerDelEquipo), ya con la forma de
+   las compiladas: OrdenRed.desdePanel le pone familia, número, fecha legible
+   y adónde lleva. Antes todo lo del panel se metía a la lista de comunicados,
+   y por eso el Boletín 006 subido como «Informe» salía rotulado «Informe» y
+   repetido junto a la página compilada. */
+let DEL_PANEL = [];
+/* La lista única que pintan el carrusel y las tarjetas: lo compilado más lo
+   del panel que no tenga ya página propia, de lo más reciente a lo más viejo.
+   El orden ya no se decide en dos lugares ni se fija nada a mano. */
+let TODAS = OrdenRed.juntar(COMPILADAS, DEL_PANEL);
 
 /* La imagen de respaldo de lo que sube el panel sin portada: el logo de la
    Red sobre olivo (armar_activos.py), la misma que usa leer.html. Boletín y
@@ -7500,20 +7698,25 @@ const RESPALDO_PUB = {
   boletin:    'activos/portadas/respaldo-boletin.jpg?v=60843515ba',
   columna:    'activos/portadas/respaldo-columna.jpg?v=4757a1e12c',
   comunicado: 'activos/portadas/respaldo-comunicado.jpg?v=1779f29905',
-  otro:       'activos/portadas/respaldo-publicacion.jpg?v=4757a1e12c',
+  publicacion:'activos/portadas/respaldo-publicacion.jpg?v=4757a1e12c',
 };
-/* lo del panel va por su tipo (comunicado u otro); lo de fábrica, por su familia */
-const respaldoDe = p => RESPALDO_PUB[p.panel ? (p.tipo === 'comunicado' ? 'comunicado' : 'otro') : p.familia] || RESPALDO_PUB.otro;
-/* Las portadas del panel viven en Drive (lh3.googleusercontent.com), el único
-   origen de imágenes que admite la política de contenido. Cualquier otra
-   dirección quedaría bloqueada y dejaría un hueco: va el respaldo. */
-const portadaPanel = u =>
-  typeof u === 'string' && /^https:\/\/lh3\.googleusercontent\.com\/[^\s"'<>\\]+$/.test(u) ? u : '';
+/* Todo va por su familia, lo de fábrica y lo del panel: un boletín subido por
+   el panel sin portada cae en el respaldo de boletín, no en el de «otro».
+   Noticia, informe y evento (familia «publicacion») y el análisis van al de
+   publicación. La llave se llama igual en los cuatro archivos que tienen
+   este mapa (leer_codigo.js, otras_panel.js, panel_fuente.html y aquí): con
+   dos nombres, copiar el mapa de un lado a otro perdía los respaldos sin
+   que nadie se enterara. */
+const respaldoDe = p => propio(RESPALDO_PUB, p && p.familia) ? RESPALDO_PUB[p.familia] : RESPALDO_PUB.publicacion;
 /* Adónde lleva y qué imagen lleva cada publicación. Lo de fábrica va a su
    página propia; lo del panel, al lector (leer#<id>), que lo pide al
-   receptor. Sin página ni id, al repositorio: nunca a un enlace roto. */
-const hrefDe = p => p.pagina || (p.id ? 'leer#' + encodeURIComponent(String(p.id)) : 'publicaciones/');
-const imagenDe = p => p.portadaURL || portadaPanel(p.imgURL) || respaldoDe(p);
+   receptor y que ya viene en `href`. Sin ninguno de los dos, al repositorio:
+   nunca a un enlace roto. Las portadas del panel viven en Drive
+   (lh3.googleusercontent.com), el único origen de imágenes que admite la
+   política de contenido: cualquier otra dirección quedaría bloqueada y
+   dejaría un hueco, así que OrdenRed.imagenDrive la descarta y va el respaldo. */
+const hrefDe = p => p.pagina || p.href || 'publicaciones/';
+const imagenDe = p => p.portadaURL || OrdenRed.imagenDrive(p.imgURL) || respaldoDe(p);
 
 
 /* Las denuncias del mapa. Las arma anonimizar_denuncias.py desde la hoja de
@@ -8135,22 +8338,12 @@ $('#heroCredito').textContent = PORTADAS[0].pie;
 let PUBLICACIONES = [];
 const via = $('#carrVia'), puntos = $('#carrPuntos'), barra = $('#carrBarra');
 
-/* Las fechas vienen escritas a mano y en dos formas: «28 de agosto de 2026»
-   y «Septiembre de 2026». Se leen las dos, y también la ISO del mapa de
-   denuncias. Lo que no traiga fecha vale 0 y se va al final: es preferible
-   que quede atrás a que se cuele adelante por una fecha inventada. */
+/* Los meses en letras: los usa la fecha de corte del mapa de denuncias.
+   Leer las fechas de las publicaciones para ordenarlas ya no se hace aquí:
+   eso es OrdenRed.clave(), el mismo lector que usan el repositorio y el
+   lector del panel. */
 const MESES_PUB = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
                    'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-function cuando(f) {
-  const t = String(f || '').toLowerCase();
-  const iso = t.match(/^(\d{4})-(\d{2})-(\d{2})/);
-  if (iso) return +iso[1] * 10000 + +iso[2] * 100 + +iso[3];
-  const anio = (t.match(/\b(19|20)\d{2}\b/) || [])[0];
-  if (!anio) return 0;
-  const mes = MESES_PUB.findIndex(m => t.includes(m));
-  const dia = (t.match(/^\s*(\d{1,2})\s+de\b/) || [])[1];
-  return +anio * 10000 + (mes < 0 ? 0 : mes + 1) * 100 + (+dia || 0);
-}
 
 /* «3 denuncias», «1 denuncia»: lo usan el mapa de alertas y su lista.
    «Lo último», los cajones y el panel por municipio, que también lo usaban,
@@ -8159,25 +8352,28 @@ const nDen = n => n + (n === 1 ? ' denuncia' : ' denuncias');
 
 /* Lo que se ve de cada publicación, igual en el carrusel y en las tarjetas de
    «Boletines y comunicados»: la cinta, el renglón de número y fecha, el texto
-   del botón, adónde lleva y qué imagen lleva. Todo sale del dato; el panel
-   conserva su tipo (comunicado, noticia, informe, evento). */
+   del botón, adónde lleva y qué imagen lleva. Todo sale del dato y todo se
+   decide por la FAMILIA, venga de publicaciones.json o del panel: un boletín
+   subido por el panel dice «Boletín Agrario 008 · 29 de septiembre de 2026» y
+   «Leer el boletín», igual que uno compilado. Noticia, informe y evento son
+   familia «publicacion» y llevan su propio nombre («Informe») y «Leer
+   completo». */
 const NOMBRE_FAMILIA = { columna:'Columna de opinión', boletin:'Boletín', comunicado:'Comunicado', analisis:'Análisis' };
+const LEER_FAMILIA = { columna:'Leer la columna', boletin:'Leer el boletín',
+                       comunicado:'Leer el comunicado', analisis:'Leer el análisis' };
 function vistaPub(p) {
   const familia = p.familia || 'comunicado';
   /* el análisis lleva a la vista su rótulo completo («Análisis · Alerta
      alimentaria»); así el renglón de al lado queda solo con la fecha */
-  const tipo = p.panel ? nombrePub(p.tipo)
-    : familia === 'boletin' ? (p.etiqueta || 'Boletín')
-    : familia === 'analisis' ? (p.n || NOMBRE_FAMILIA.analisis) : NOMBRE_FAMILIA[familia];
+  const tipo = familia === 'boletin' ? (p.etiqueta || NOMBRE_FAMILIA.boletin)
+    : familia === 'analisis' ? (p.n || NOMBRE_FAMILIA.analisis)
+    : propio(NOMBRE_FAMILIA, familia) ? NOMBRE_FAMILIA[familia] : (p.n || 'Publicación');
   /* la columna lleva la firma a la vista; lo demás, su número */
   const quien = familia === 'columna' ? (p.autor || '') : (p.n && p.n !== tipo ? p.n : '');
-  const esComunicado = p.panel ? p.tipo === 'comunicado' : familia === 'comunicado';
   return {
     familia, tipo, tit: p.tit || p.n || tipo, txt: p.resumen || '',
     meta: [quien, p.fecha].filter(Boolean).join(' · '),
-    leer: familia === 'columna' ? 'Leer la columna' : familia === 'boletin' ? 'Leer el boletín'
-      : familia === 'analisis' ? 'Leer el análisis'
-      : esComunicado ? 'Leer el comunicado' : 'Leer completo',
+    leer: propio(LEER_FAMILIA, familia) ? LEER_FAMILIA[familia] : 'Leer completo',
     href: hrefDe(p), img: imagenDe(p), respaldo: respaldoDe(p),
   };
 }
@@ -8193,20 +8389,12 @@ document.addEventListener('error', e => {
 
 function rearmarCarrusel() {
   /* El carrusel abre con LO ÚLTIMO que haya salido, sea columna, boletín,
-     comunicado o lo que suba el equipo. Se ordena por fecha y no por tipo,
-     para que al subir una publicación nueva quede de primera sola, sin tocar
-     el código. Cada lámina lleva a la página de su publicación: el PDF queda
-     allá, junto al texto. */
-  PUBLICACIONES = ANALISIS.concat(COLUMNAS, BOLETINES, COMUNICADOS)
-    .map(p => Object.assign(vistaPub(p), { cuando: p.fecha, fijo: !!p.fijo }));
-
-  /* Primero lo que la Red dejó fijado (`fijo` en publicaciones.json: hoy, el
-     análisis de El Niño, que la Red quiere de primero y solo trae mes, sin
-     día). Después, de lo más reciente a lo más viejo; lo que no traiga fecha,
-     al final (el orden de JavaScript es estable: entre las sin fecha manda la
-     lista). Sin lo fijado, cualquier cosa que el equipo subiera con día de
-     ese mismo mes se le ponía delante. */
-  PUBLICACIONES.sort((a, b) => (b.fijo ? 1 : 0) - (a.fijo ? 1 : 0) || cuando(b.cuando) - cuando(a.cuando));
+     comunicado, análisis o lo que acabe de subir el equipo: TODAS ya viene
+     ordenada por fecha (OrdenRed), de lo más reciente a lo más viejo, sin
+     nada fijado a mano y sin repetir lo que ya tiene página propia. Cada
+     lámina lleva a la página de su publicación: el PDF queda allá, junto al
+     texto. */
+  PUBLICACIONES = TODAS.map(vistaPub);
 
   via.innerHTML = PUBLICACIONES.map((p, i) => `
     <div class="carr-lam" role="group" aria-roledescription="diapositiva"
@@ -8315,7 +8503,8 @@ function tarjetaPub(p, i) {
   /* El nombre del enlace es el titular y su renglón de número y fecha: sin
      esto, un lector de pantalla leería la tarjeta entera como nombre. */
   const idT = 'pubTar' + i + 't', idM = 'pubTar' + i + 'm';
-  const etq = v.familia === 'boletin' && !p.panel && p.etiqueta;
+  /* la cinta del boletín, venga de publicaciones.json o del panel */
+  const etq = v.familia === 'boletin' && p.etiqueta;
   const medidas = p.portadaAncho && p.portadaAlto
     ? ` width="${+p.portadaAncho}" height="${+p.portadaAlto}"` : ' width="720" height="405"';
   return `<a class="bol bol-${esc(v.familia)}${p.destaca ? ' destaca' : ''}" href="${esc(v.href)}"
@@ -8339,35 +8528,43 @@ function tarjetaPub(p, i) {
 let pubTipo = 'todo';
 
 function pintarComunicados() {
-  const ver = f => pubTipo === 'todo' || pubTipo === f;
-  /* Lo del panel va primero en «Todo»: es lo más reciente. En «Comunicados»
-     entra solo si el equipo lo subió como comunicado; una noticia, un informe
-     o un evento no son comunicados. */
-  const delPanel = COMUNICADOS.filter(c => c.panel);
-  const panel = delPanel.filter(c => pubTipo === 'todo' || (pubTipo === 'comunicado' && c.tipo === 'comunicado'));
-  const ana = ver('analisis') ? ANALISIS : [];
-  const col = ver('columna') ? COLUMNAS : [];
-  const bol = ver('boletin') ? BOLETINES : [];
-  const com = ver('comunicado') ? COMUNICADOS.filter(c => !c.panel) : [];
-  $('#comunicados2').innerHTML = panel.concat(ana, col, bol, com).map(tarjetaPub).join('');
+  /* Se filtra por FAMILIA sobre la lista ya ordenada: un boletín que el
+     equipo subió por el panel sale entre los boletines, una columna entre las
+     columnas y un comunicado entre los comunicados. Noticia, informe y evento
+     (familia «publicacion») solo salen en «Todo», porque no son ninguna de
+     las tres. Antes todo lo del panel entraba como comunicado. */
+  const lista = pubTipo === 'todo' ? TODAS : TODAS.filter(p => p.familia === pubTipo);
+  $('#comunicados2').innerHTML = lista.map(tarjetaPub).join('');
 
   const cu = $('#pubCuenta');
   if (!cu) return;
-  const nCom = com.length + panel.filter(c => c.tipo === 'comunicado').length;
+  /* Las cuentas salen de lo que se acaba de pintar, así que siempre cuadran
+     con las tarjetas que hay a la vista. */
+  const cuantas = f => lista.filter(p => p.familia === f).length;
+  const nAna = cuantas('analisis'), nBol = cuantas('boletin');
+  const nCom = cuantas('comunicado'), nCol = cuantas('columna');
   const partes = [
-    ana.length + ' análisis',
-    bol.length + (bol.length === 1 ? ' boletín' : ' boletines'),
+    nAna + ' análisis',
+    nBol + (nBol === 1 ? ' boletín' : ' boletines'),
     nCom + (nCom === 1 ? ' comunicado' : ' comunicados'),
-    col.length + (col.length === 1 ? ' columna' : ' columnas'),
+    nCol + (nCol === 1 ? ' columna' : ' columnas'),
   ];
   /* noticias, informes y eventos del panel, contados por su tipo */
-  const otros = {};
-  panel.filter(c => c.tipo !== 'comunicado').forEach(c => {
-    const nombre = nombrePub(c.tipo).toLowerCase();
+  const otros = Object.create(null);
+  lista.filter(p => p.familia === 'publicacion').forEach(p => {
+    const nombre = OrdenRed.nombre(p.tipo).toLowerCase();
     otros[nombre] = (otros[nombre] || 0) + 1;
   });
-  Object.entries(otros).forEach(([nombre, n]) => partes.push(n + ' ' + nombre + (n === 1 ? '' : 's')));
-  cu.textContent = partes.join(' · ');
+  /* El plural: «2 informes», y «2 publicaciones» —la palabra aguda en «-ón»
+     pierde la tilde y suma «-es»—, no «2 publicacións». Un tipo que esta
+     página no conoce (uno viejo de la hoja, o uno nuevo del panel) se llama
+     «Publicación», y así es como sale mal. */
+  const enPlural = t => /ón$/.test(t) ? t.slice(0, -2) + 'ones' : t + 's';
+  Object.keys(otros).forEach(nombre =>
+    partes.push(otros[nombre] + ' ' + (otros[nombre] === 1 ? nombre : enPlural(nombre))));
+  /* Con un filtro puesto sobraban los ceros: «0 análisis · 9 boletines ·
+     0 comunicados · 0 columnas». Se nombra solo lo que hay a la vista. */
+  cu.textContent = partes.filter(t => !/^0 /.test(t)).join(' · ');
 }
 pintarComunicados();
 
@@ -8463,9 +8660,9 @@ function enumerar(l) {
   const zonas = D.sin_municipio || [];
 
   /* La cifra y la fecha de corte, con las mismas palabras de la portada
-     vieja. La fecha se arma aquí y no con fechaLegible(), que usa una lista
-     de meses declarada más abajo: llamarla desde este punto la encontraría
-     sin estrenar. */
+     vieja. La fecha se arma aquí y no con OrdenRed.fechaLegible(), que
+     devuelve el texto tal cual cuando la fecha no sirve: aquí una fecha mala
+     tiene que quedar vacía y no escribir «Actualizado el <basura>». */
   const cuenta = $('#denCuenta');
   if (cuenta) {
     const fISO = iso => { const [a, m, d] = String(iso || '').split('-').map(Number);
@@ -9097,20 +9294,10 @@ const API_RED = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)
 
 /* Lo del panel ya no se arma aquí por bloques: su tarjeta lleva al lector
    (leer#<id>), que lo pide al mismo receptor y lo dibuja con el dibujante de
-   las páginas compiladas. Aquí solo hace falta lo que se ve en la tarjeta. */
-function desdeElPanel(it) {
-  const c = it.contenido || {};
-  return {
-    panel: true, id: String(it.id || ''), tipo: it.tipo, linea: it.linea, familia: 'comunicado',
-    n: it.tipo === 'comunicado' && c.numero ? 'Comunicado ' + c.numero : nombrePub(it.tipo),
-    fecha: fechaLegible(c.fecha || it.fecha),
-    tit: it.titulo || '',
-    resumen: c.bajada || '',
-    urgente: !!c.urgente,
-    /* solo la portada de Drive; sin ella, imagenDe() pone el respaldo */
-    imgURL: portadaPanel(c.portada),
-  };
-}
+   las páginas compiladas. Lo que se ve en la tarjeta (familia, número, fecha
+   legible, cinta, firma, portada y adónde lleva) lo arma OrdenRed.desdePanel,
+   el mismo que usan el lector y la vista previa del panel: aquí ya no hay una
+   segunda manera de nombrar lo que sube el equipo. */
 
 (async function traerDelEquipo() {
   if (/PEGUE-AQUI/.test(API_RED)) return;          // todavía sin conectar
@@ -9121,9 +9308,12 @@ function desdeElPanel(it) {
   } catch (e) { return; }                          // sin conexión: se queda lo de adentro
   if (!datos || !datos.ok || !Array.isArray(datos.items) || !datos.items.length) return;
 
-  /* Los nuevos van primero, delante de los que vienen de fábrica. Sin id no
-     hay a qué página llevar: esa entrada se deja por fuera. */
-  COMUNICADOS.unshift(...datos.items.filter(it => it && it.id).map(desdeElPanel));
+  /* Sin id no hay a qué página llevar: esa entrada se deja por fuera (lo hace
+     OrdenRed.juntar). Lo que el equipo subió y ya tiene página compilada —el
+     Boletín 006, que salió como «Informe»— tampoco entra: manda la compilada.
+     El resto se mezcla por fecha con lo de fábrica. */
+  DEL_PANEL = datos.items.filter(it => it && it.id).map(it => OrdenRed.desdePanel(it));
+  TODAS = OrdenRed.juntar(COMPILADAS, DEL_PANEL);
 
   /* volver a armar lo que depende de la lista */
   /* El destacado de la portada se retiró; aquí quedaba su relleno, usando
@@ -9136,14 +9326,9 @@ function desdeElPanel(it) {
   pintarComunicados();
 })();
 
-const MESES_RED = ['enero','febrero','marzo','abril','mayo','junio','julio',
-                   'agosto','septiembre','octubre','noviembre','diciembre'];
-function fechaLegible(iso) {
-  const [a, m, d] = String(iso || '').split('-').map(Number);
-  if (!a || !m || m > 12) return String(iso || '');
-  /* sin día («2026-09») no se escribe «undefined de septiembre» */
-  return (d ? d + ' de ' : '') + MESES_RED[m - 1] + ' de ' + a;
-}
+/* La fecha en letras de lo que sube el panel la escribe ahora
+   OrdenRed.fechaLegible: era la tercera copia de la lista de meses en esta
+   página. */
 
 /* ═══════════════════════════ BOT AGRARIO ═══════════════════════════
    Busca por palabras dentro de los documentos de la Red que ya viven en

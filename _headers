@@ -34,27 +34,27 @@
   Cache-Control: public, max-age=31536000, immutable
 
 /publicaciones/*
-  Content-Security-Policy: default-src 'none'; script-src 'none'; style-src 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'none'; form-action 'none'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-gQ5+gZeyzt/f31AS36ypKY2G9fVpIXz7yLB/2b2k/7c='; style-src 'unsafe-inline'; img-src 'self' data: https://lh3.googleusercontent.com; font-src 'self'; connect-src 'self' https://script.google.com https://script.googleusercontent.com; form-action 'none'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
   Cache-Control: public, max-age=0, must-revalidate, no-transform
 
 /
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-iIgyb9DUFMzPGBs+13zxhQukk8V9sFfq1SCMF/oJRh0=' 'sha256-0gzL3nFiZ6E6a1b94sLGxU9XNOWoLxZrVRqFe6u4Jm4='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-iIgyb9DUFMzPGBs+13zxhQukk8V9sFfq1SCMF/oJRh0=' 'sha256-0da4aeB02iSmgaQrdF17gJjamGKblwRbZ527H5u97hU='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
   Cache-Control: public, max-age=0, must-revalidate, no-transform
 
 /index.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-iIgyb9DUFMzPGBs+13zxhQukk8V9sFfq1SCMF/oJRh0=' 'sha256-0gzL3nFiZ6E6a1b94sLGxU9XNOWoLxZrVRqFe6u4Jm4='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-iIgyb9DUFMzPGBs+13zxhQukk8V9sFfq1SCMF/oJRh0=' 'sha256-0da4aeB02iSmgaQrdF17gJjamGKblwRbZ527H5u97hU='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
   Cache-Control: public, max-age=0, must-revalidate, no-transform
 
 /panel
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-4JwQssTB3dQPtMkwFkpE1R+BRl1JHreF0ulbnjuhLys='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-Ouf0BhQVd0nPxlcc2zmQJI7P81J3WKkc7ugYOupLz5s=' 'sha256-QgbqZFcfzErcw7AEYiN76xNA9gUqMFYria0qk3CAxbY=' 'sha256-gC/8xCHuuUmzDgJzOqYTJ0/SRPhp8Oze9/hVGqhVDV4=' 'sha256-MSt9o58BJFLj1QSX4BWzuVwmxaNC23AiTQXBioUHd3g=' 'sha256-sZhnbRuTvqm/+6SLVLAOr5u5ZN4N5iZAJ8l1g/miYgk='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
   Cache-Control: public, max-age=0, must-revalidate, no-transform
 
 /panel.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-4JwQssTB3dQPtMkwFkpE1R+BRl1JHreF0ulbnjuhLys='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-Ouf0BhQVd0nPxlcc2zmQJI7P81J3WKkc7ugYOupLz5s=' 'sha256-QgbqZFcfzErcw7AEYiN76xNA9gUqMFYria0qk3CAxbY=' 'sha256-gC/8xCHuuUmzDgJzOqYTJ0/SRPhp8Oze9/hVGqhVDV4=' 'sha256-MSt9o58BJFLj1QSX4BWzuVwmxaNC23AiTQXBioUHd3g=' 'sha256-sZhnbRuTvqm/+6SLVLAOr5u5ZN4N5iZAJ8l1g/miYgk='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
   Cache-Control: public, max-age=0, must-revalidate, no-transform
 
@@ -109,12 +109,12 @@
   Cache-Control: public, max-age=0, must-revalidate, no-transform
 
 /leer
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-ICpFjWBJHticHP3xY6KzQR0uI/dMNAn2tbumwVUG4jI='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-XaNLhqztKw+QhHExwLuoVSWhdb8yEQL8n3WTteci7/M='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
   Cache-Control: public, max-age=0, must-revalidate, no-transform
 
 /leer.html
-  Content-Security-Policy: default-src 'none'; script-src 'sha256-ICpFjWBJHticHP3xY6KzQR0uI/dMNAn2tbumwVUG4jI='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
+  Content-Security-Policy: default-src 'none'; script-src 'sha256-XaNLhqztKw+QhHExwLuoVSWhdb8yEQL8n3WTteci7/M='; style-src 'unsafe-inline'; img-src 'self' data: blob: https://lh3.googleusercontent.com; font-src 'self' data:; media-src data: blob:; connect-src 'self' https://script.google.com https://script.googleusercontent.com; frame-src 'self'; form-action 'self'; base-uri 'none'; frame-ancestors 'none'; object-src 'none'; upgrade-insecure-requests
   X-Frame-Options: DENY
   Cache-Control: public, max-age=0, must-revalidate, no-transform
 

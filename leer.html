@@ -72,14 +72,20 @@ h1.mayus{font-size:clamp(23px,3.7vw,33px);line-height:1.14;letter-spacing:.01em}
 .portada figcaption,.pb-fig figcaption{font-size:12.5px;line-height:1.45;color:var(--gris);margin-top:8px}
 .portada figcaption a{color:var(--gris)}
 .cuerpo{background:var(--papel);padding:32px 0 40px}
-.cuerpo p{margin-bottom:1.1em;max-width:68ch}
+.cuerpo p,.pb-lista li,.pb-destacado{text-align:justify;-webkit-hyphens:auto;hyphens:auto;
+  overflow-wrap:break-word}
+.cuerpo p a,.pb-lista li a{word-break:break-all}
+.cuerpo p{margin-bottom:1.1em}
+.portada figcaption,.pb-fig figcaption,.cuerpo .pb-tabla-pie,.cuerpo .pb-nota,
+.cuerpo .bajada,.cuerpo .repo-txt p,.pb-detalle .pb-lista li{text-align:left;
+  -webkit-hyphens:manual;hyphens:manual}
 .pb-h2{font:800 17px/1.3 "RedTitular",sans-serif;letter-spacing:.06em;color:var(--tierra);
   margin:2.1em 0 .9em;padding-bottom:8px;border-bottom:1px solid var(--linea)}
 .pb-h3{font:800 20px/1.25 "RedTitular",sans-serif;color:var(--olivo-hondo);margin:1.7em 0 .6em}
 .pb-h2+.pb-h3{margin-top:.8em}
 .pb-destacado{font-size:18.5px;line-height:1.55;font-weight:600;color:var(--olivo-hondo);
   border-left:4px solid var(--ocre);padding:2px 0 2px 18px;margin:1.2em 0 1.3em}
-.pb-lista{margin:0 0 1.2em 1.25em;max-width:66ch}
+.pb-lista{margin:0 0 1.2em 1.25em}
 .pb-lista li{margin-bottom:.55em;padding-left:.2em}
 .pb-lista ul{margin:.5em 0 0 1.2em}
 .pb-marcas{list-style:none;margin-left:0}
@@ -217,8 +223,8 @@ button.btn{font-family:inherit;cursor:pointer}
     <h2 id="otras-tit">Lo demás que ha publicado la Red</h2>
     <ul class="otras-lista" id="leerOtras">
       <li><a class="otra otra-boletin" href="publicaciones/boletin-007-congreso-defensa-reforma-agraria"><img src="activos/portadas/boletin-007-congreso-defensa-reforma-agraria.jpg?v=caea09bdcd" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 007 · 22 de septiembre de 2026</span><b>El Congreso activa la defensa de la Reforma Agraria</b></span></a></li>
-      <li><a class="otra otra-boletin" href="publicaciones/boletin-006-appa-suelos-alimentos"><img src="activos/portadas/boletin-006-appa-suelos-alimentos.jpg?v=7d1dd5ac78" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 006 · 7 de septiembre de 2026</span><b>Dos iniciativas ponen en riesgo los suelos que producen alimentos</b></span></a></li>
       <li><a class="otra otra-analisis" href="fenomeno-del-nino"><img src="activos/nino/deficit-de-precipitacion-en-diciembre-de-2026.jpg?v=d2620ef5aa" width="773" height="900" alt="" loading="lazy" decoding="async"><span><span class="rot">Análisis · Alerta alimentaria · Septiembre de 2026</span><b>Lo que “El Niño” le va a costar a la comida de Colombia</b></span></a></li>
+      <li><a class="otra otra-boletin" href="publicaciones/boletin-006-appa-suelos-alimentos"><img src="activos/portadas/boletin-006-appa-suelos-alimentos.jpg?v=7d1dd5ac78" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 006 · 7 de septiembre de 2026</span><b>Dos iniciativas ponen en riesgo los suelos que producen alimentos</b></span></a></li>
       <li><a class="otra otra-boletin" href="publicaciones/boletin-005-recorte-presupuesto-campo"><img src="activos/portadas/boletin-005-recorte-presupuesto-campo.jpg?v=edd049b35a" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 005 · 28 de agosto de 2026</span><b>Le recortan 6,1% al presupuesto del campo</b></span></a></li>
       <li><a class="otra otra-columna" href="publicaciones/columna-contrarreformas-agrarias-made-in-miami"><img src="activos/portadas/columna-contrarreformas-agrarias-made-in-miami.jpg?v=45d820934a" width="720" height="405" alt="" loading="lazy" decoding="async"><span><span class="rot">Columna de opinión</span><b>Contrarreformas agrarias made in Miami</b></span></a></li>
       <li><a class="otra otra-boletin" href="publicaciones/boletin-004-libro-de-la-verdad"><img src="activos/portadas/boletin-004-libro-de-la-verdad.jpg?v=6873c0e61c" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 004</span><b>La Red reacciona al «libro de la verdad»</b></span></a></li>
@@ -280,6 +286,26 @@ button.btn{font-family:inherit;cursor:pointer}
     return '<strong>' + esc(neg) + '</strong>' + resto;
   }
 
+  /* Una dirección dentro del texto se vuelve enlace y, sobre todo, se puede
+     partir en dos renglones. Con el texto justificado, una dirección larga
+     («www.redagrariacolombia.com/fenomeno-del-nino») no cabía en lo que
+     quedaba del renglón, se iba entera al siguiente y dejaba el anterior con
+     huecos enormes entre palabras. Se aplica al texto YA escapado: por eso la
+     expresión excluye < y >, que solo pueden venir de las etiquetas que pone
+     este mismo dibujante. Solo http, https y www: nunca javascript: ni data:. */
+  const RE_DIRECCION = /(?:https?:\/\/|www\.)[^\s<>"']+/g;
+  function enlazar(escapado) {
+    return String(escapado).replace(RE_DIRECCION, u => {
+      /* el punto o el paréntesis final son puntuación de la frase, no de la
+         dirección: «…/fenomeno-del-nino.» no lleva el punto adentro */
+      const cola = (u.match(/[.,;:!?)\]»”"']+$/) || [''])[0];
+      const dir = u.slice(0, u.length - cola.length);
+      if (!dir) return u;
+      const href = /^https?:/.test(dir) ? dir : 'https://' + dir;
+      return '<a href="' + href + '" target="_blank" rel="noopener">' + dir + '</a>' + cola;
+    });
+  }
+
   /* un nombre de recuadro sirve de clase CSS: solo letras, números y guiones */
   const clase = s => String(s).toLowerCase().replace(/[^a-z0-9-]+/g, '-');
 
@@ -328,16 +354,16 @@ button.btn{font-family:inherit;cursor:pointer}
     if (x && typeof x === 'object') {
       const sub = Array.isArray(x.items) && x.items.some(hay)
         ? '<ul>' + x.items.filter(hay).map(s => '<li>' + esc(s) + '</li>').join('') + '</ul>' : '';
-      return unir(x.neg, x.txt) + sub;
+      return enlazar(unir(x.neg, x.txt)) + sub;
     }
-    return esc(x);
+    return enlazar(esc(x));
   }
   const itemVacio = x => x && typeof x === 'object' ? !(hay(x.neg) || hay(x.txt)) : !hay(x);
 
   function bloque(b, o) {
     switch (b.t) {
       case 'p':
-        return (hay(b.txt) || hay(b.neg)) ? '<p>' + unir(b.neg, b.txt) + '</p>' : '';
+        return (hay(b.txt) || hay(b.neg)) ? '<p>' + enlazar(unir(b.neg, b.txt)) + '</p>' : '';
       case 'h': {
         if (!hay(b.txt)) return '';
         const n = b.nivel === 3 ? 3 : 2;
@@ -384,13 +410,13 @@ button.btn{font-family:inherit;cursor:pointer}
         const desc = Array.isArray(b.descripcion) && b.descripcion.some(hay)
           ? '<details class="pb-detalle"><summary>Ver en texto lo que muestra la imagen</summary><ul class="pb-lista">' +
             b.descripcion.filter(hay).map(s => '<li>' + esc(s) + '</li>').join('') + '</ul></details>' : '';
-        /* angosta: una imagen que el documento trae chica (el mapa del
-           boletín 007 mide 223 px) no se estira a todo el ancho */
+        /* angosta: una imagen que el documento trae chica no se estira a
+           todo el ancho de la columna (se vería pixelada) */
         return '<figure class="pb-fig' + (b.angosta ? ' pb-angosta' : '') + '">' + img +
           (hay(b.pie) ? '<figcaption>' + esc(b.pie) + '</figcaption>' : '') + desc + '</figure>';
       }
       case 'nota':
-        return (hay(b.txt) || hay(b.neg)) ? '<p class="pb-nota">' + unir(b.neg, b.txt) + '</p>' : '';
+        return (hay(b.txt) || hay(b.neg)) ? '<p class="pb-nota">' + enlazar(unir(b.neg, b.txt)) + '</p>' : '';
       default:
         return '';
     }
@@ -431,14 +457,207 @@ button.btn{font-family:inherit;cursor:pointer}
 })(typeof window !== 'undefined' ? window : this);
 
 /* ══════════════════════════════════════════════════════════════════════
+   El orden y el nombre de las publicaciones, iguales en todas partes.
+
+   Lo usan la portada (carrusel y «Boletines y comunicados»), el lector de
+   lo que sube el panel (leer.html), las páginas de publicaciones/ («Lo
+   demás que ha publicado la Red» y el repositorio), el panel (la vista
+   previa) y armar_publicaciones.js al compilar. Antes cada lugar tenía su
+   copia de «cuándo salió esto» y su forma de nombrar lo del panel: el
+   análisis de El Niño iba fijado a mano de primero, y un boletín subido por
+   el panel salía como «Informe» y repetido junto al compilado.
+
+   Funciona igual en Node (module.exports) y pegado dentro de un <script>
+   (window.OrdenRed), como bloques_html.js. No usa nada que no exista en los
+   dos lados.
+
+   Las reglas:
+     · Lo más reciente va primero, sin fijar nada a mano.
+     · La fecha que manda es la que trae día: «22 de septiembre de 2026»,
+       o la ISO del panel (2026-09-22). Si lo impreso solo dice el mes
+       («Septiembre de 2026»), manda `publicada`: el día en que salió en el
+       sitio (ISO), que es un hecho y no una fecha inventada para el
+       documento. Sin ninguna de las dos, cuenta el mes; sin nada, va al
+       final, en el orden en que venía.
+     · Lo que el equipo sube por el panel y ya tiene página compilada (el
+       mismo título, o el mismo número del mismo tipo) no se repite: se
+       queda la compilada.                                                  */
+(function (raiz) {
+  'use strict';
+
+  const MESES = { enero: 1, febrero: 2, marzo: 3, abril: 4, mayo: 5, junio: 6, julio: 7, agosto: 8,
+                  septiembre: 9, setiembre: 9, octubre: 10, noviembre: 11, diciembre: 12 };
+  const NOMBRE_MES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+                      'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+  const texto = t => String(t == null ? '' : t);
+  const sinTildes = t => texto(t).normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  /* aaaammdd como número (20260922); con solo el mes, aaaamm00; sin fecha, 0 */
+  function deISO(t) {
+    const m = texto(t).trim().match(/^(\d{4})-(\d{2})(?:-(\d{2}))?/);
+    if (!m || +m[2] < 1 || +m[2] > 12) return 0;
+    const d = m[3] ? +m[3] : 0;
+    return d > 31 ? 0 : +m[1] * 10000 + +m[2] * 100 + d;
+  }
+  function deTexto(t) {
+    const s = sinTildes(t).toLowerCase();
+    /* con día: «22 de septiembre de 2026», también con el día de la semana
+       adelante («Martes, 22 de septiembre de 2026.») */
+    let m = s.match(/(\d{1,2})\s+de\s+([a-z]+)\s+(?:de|del)\s+(\d{4})/);
+    if (m && MESES[m[2]] && +m[1] >= 1 && +m[1] <= 31) return +m[3] * 10000 + MESES[m[2]] * 100 + +m[1];
+    m = s.match(/([a-z]+)\s+(?:de|del)\s+(\d{4})/);
+    if (m && MESES[m[1]]) return +m[2] * 10000 + MESES[m[1]] * 100;
+    return 0;
+  }
+  /* la fecha para ordenar: primero la que trae día, después la de
+     publicación en el sitio, después el mes */
+  function clave(p) {
+    if (!p) return 0;
+    const f = deISO(p.fecha) || deTexto(p.fecha);
+    if (f % 100) return f;
+    const pub = deISO(p.publicada);
+    if (pub % 100) return pub;
+    return f || pub || 0;
+  }
+  /* de lo más reciente a lo más viejo; los empates y lo que no tiene fecha
+     conservan el orden en que venían */
+  function ordenar(lista) {
+    return (Array.isArray(lista) ? lista : []).map((p, i) => ({ p, i, k: clave(p) }))
+      .sort((a, b) => b.k - a.k || a.i - b.i)
+      .map(x => x.p);
+  }
+
+  /* «22 de septiembre de 2026» desde 2026-09-22; sin día, «septiembre de 2026» */
+  function fechaLegible(iso) {
+    const m = texto(iso).trim().match(/^(\d{4})-(\d{2})(?:-(\d{2}))?/);
+    if (!m || +m[2] < 1 || +m[2] > 12) return texto(iso).trim();
+    return (m[3] && +m[3] ? +m[3] + ' de ' : '') + NOMBRE_MES[+m[2] - 1] + ' de ' + m[1];
+  }
+
+  /* un título comparable: sin tildes, sin mayúsculas, sin signos */
+  const normalizar = t => sinTildes(t).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+  /* ── lo que sube el panel ── */
+  /* los tipos que son familias de la Red; lo demás (noticia, informe,
+     evento) va como «publicación» */
+  const FAMILIA_DE_TIPO = { boletin: 'boletin', comunicado: 'comunicado', columna: 'columna' };
+  const TIPOS = {
+    boletin:    'Boletín Agrario',
+    comunicado: 'Comunicado',
+    columna:    'Columna de opinión',
+    noticia:    'Noticia',
+    informe:    'Informe',
+    evento:     'Evento',
+  };
+  /* Se pregunta por la llave propia: un tipo llamado «constructor» devolvía
+     una función del prototipo. */
+  const propio = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  const familiaDe = tipo => propio(FAMILIA_DE_TIPO, tipo) ? FAMILIA_DE_TIPO[tipo] : 'publicacion';
+  /* «007» y no «7»: así numera la Red sus boletines y comunicados */
+  const numero = n => { const t = texto(n).trim(); return /^\d{1,3}$/.test(t) ? t.padStart(3, '0') : t; };
+  function nombre(tipo, n) {
+    const base = propio(TIPOS, tipo) ? TIPOS[tipo] : 'Publicación';
+    return (tipo === 'boletin' || tipo === 'comunicado') && numero(n) ? base + ' ' + numero(n) : base;
+  }
+
+  /* Las imágenes del panel viven en Drive (lh3.googleusercontent.com), el
+     único origen de imágenes que admite la política de contenido. */
+  const imagenDrive = u =>
+    typeof u === 'string' && /^https:\/\/lh3\.googleusercontent\.com\/[^\s"'<>\\]+$/.test(u) ? u : '';
+  /* el documento original, también en Drive */
+  const documentoDrive = u =>
+    typeof u === 'string' && /^https:\/\/(drive|docs)\.google\.com\/[^\s"'<>\\]+$/.test(u) ? u : '';
+  const enlaceSeguro = u => typeof u === 'string' && /^https:\/\/[^\s"'<>\\]+$/.test(u) ? u : '';
+
+  /* Una entrada del receptor (?contenido=1) con la forma de las compiladas:
+     familia, n, fecha legible, tit, resumen, etiqueta, autor… Nada se
+     escapa aquí: quien la pinte la escapa. */
+  function desdePanel(it) {
+    const c = (it && it.contenido) || {};
+    const tipo = texto(it && it.tipo);
+    const familia = familiaDe(tipo);
+    const pdf = c.pdf && typeof c.pdf === 'object' ? c.pdf : {};
+    const titulo = texto(it && it.titulo).trim();
+    return {
+      panel: true,
+      id: texto(it && it.id),
+      tipo, familia,
+      n: nombre(tipo, c.numero),
+      numero: numero(c.numero),
+      fecha: fechaLegible(c.fecha || (it && it.fecha)),
+      fechaISO: texto(c.fecha || (it && it.fecha)).trim(),
+      tit: texto(c.tituloCorto).trim() || titulo || nombre(tipo, c.numero),
+      titImpreso: titulo,
+      resumen: texto(c.bajada).trim(),
+      etiqueta: familia === 'boletin' ? texto(c.etiqueta).trim() : '',
+      urgente: !!c.urgente,
+      autor: familia === 'columna' ? texto(c.autor).trim() : '',
+      oficio: familia === 'columna' ? texto(c.oficio).trim() : '',
+      imgURL: imagenDrive(c.portada),
+      portadaAlt: texto(c.portadaAlt).trim(),
+      retratoURL: familia === 'columna' ? imagenDrive(c.retrato) : '',
+      pdfURL: documentoDrive(pdf.url) || documentoDrive(c.enlace),
+      pdfDescarga: documentoDrive(pdf.descarga),
+      enlace: enlaceSeguro(c.enlace),
+      href: 'leer#' + encodeURIComponent(texto(it && it.id)),
+    };
+  }
+
+  /* ¿Esta entrada del panel ya tiene página compilada? El mismo título (el
+     corto de las tarjetas o el impreso en el documento), o el mismo número
+     del mismo tipo. `fijas` son las de publicaciones.json. */
+  function repetida(p, fijas) {
+    if (!p) return false;
+    const titulos = [p.tit, p.titImpreso].map(normalizar).filter(t => t.length >= 12);
+    return (Array.isArray(fijas) ? fijas : []).some(f => {
+      if (!f || f.panel) return false;
+      const suyos = [f.tit, f.titImpreso].map(normalizar).filter(Boolean);
+      if (titulos.some(t => suyos.includes(t))) return true;
+      return (p.familia === 'boletin' || p.familia === 'comunicado') && p.familia === f.familia &&
+        !!p.numero && normalizar(p.n) === normalizar(f.n);
+    });
+  }
+
+  /* Todo junto: lo compilado más lo del panel que no esté repetido, en orden.
+     Lo del panel sin id no tiene a qué página llevar: se deja por fuera. */
+  function juntar(fijas, delPanel) {
+    const base = Array.isArray(fijas) ? fijas : [];
+    const nuevas = (Array.isArray(delPanel) ? delPanel : [])
+      .filter(it => it && it.id)
+      .map(it => (it.panel ? it : desdePanel(it)))
+      .filter(p => !repetida(p, base));
+    /* lo del panel entra delante: a igual fecha, lo que acaba de subir el
+       equipo va primero */
+    return ordenar(nuevas.concat(base));
+  }
+
+  const api = { clave, ordenar, fechaLegible, normalizar, nombre, numero, familiaDe,
+                desdePanel, repetida, juntar, imagenDrive, documentoDrive, enlaceSeguro, TIPOS };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else raiz.OrdenRed = api;
+})(typeof window !== 'undefined' ? window : this);
+
+/* ══════════════════════════════════════════════════════════════════════
    leer.html#<id>: la página de lo que el equipo publica desde el panel.
 
    Las publicaciones que vienen de fábrica tienen su página hecha al
    compilar (publicaciones/<slug>). Lo del panel sale sin compilar: la Red
    lo publica y tiene que verse de una vez. Esta página pide al receptor lo
    publicado (?contenido=1, lo mismo que lee la portada), busca el id que
-   trae la dirección y lo dibuja con el mismo dibujante de las páginas
-   compiladas (bloques_html.js), así todo se ve igual.
+   trae la dirección y lo dibuja EXACTAMENTE como una página compilada: el
+   mismo rótulo con su cinta, el título impreso, la firma de la columna con
+   su aviso, la portada, el mismo dibujante de bloques (bloques_html.js) y
+   los mismos botones del documento original. Un boletín subido por el panel
+   no se puede ver distinto de uno hecho a mano.
+
+   Los nombres y el orden salen de publicaciones_orden.js, el mismo módulo
+   que usan la portada y las páginas compiladas: así un boletín del panel se
+   llama «Boletín Agrario 008» y no «Informe», y se intercala por fecha.
+
+   Si lo que pide la dirección ya tiene página compilada (el equipo subió por
+   el panel un boletín que también se compiló), esta página no lo dibuja otra
+   vez: lleva a la compilada, que es la buena.
 
    Nada de lo que llega se pega sin escapar, y las imágenes solo se aceptan
    si vienen de donde el panel las guarda (lh3.googleusercontent.com): la
@@ -454,29 +673,26 @@ button.btn{font-family:inherit;cursor:pointer}
     : 'https://script.google.com/macros/s/AKfycbzhYzR5BNKpYP4lmwJouZDiS0-s1muUkdBdfm6FQ4r_QxCUcLIy1OXysAEgfCjYtOEZ/exec';
 
   const B = window.BloquesRed;
+  const O = window.OrdenRed;
   const esc = B.esc;
   const $ = s => document.querySelector(s);
 
-  const NOMBRE_PUB = { comunicado: 'Comunicado', noticia: 'Noticia', informe: 'Informe', evento: 'Evento' };
+  /* lo que ya tiene página propia, con lo justo para nombrarlo, ordenarlo,
+     reconocerlo repetido y pintar su tarjeta */
+  const COMPILADAS = [{"slug":"boletin-007-congreso-defensa-reforma-agraria","familia":"boletin","n":"Boletín Agrario 007","tit":"El Congreso activa la defensa de la Reforma Agraria","titImpreso":"El Congreso activa la defensa de la Reforma Agraria","fecha":"22 de septiembre de 2026","publicada":"","autor":"","img":"activos/portadas/boletin-007-congreso-defensa-reforma-agraria.jpg?v=caea09bdcd","ancho":720,"alto":540,"href":"publicaciones/boletin-007-congreso-defensa-reforma-agraria"},{"slug":"fenomeno-del-nino","familia":"analisis","n":"Análisis · Alerta alimentaria","tit":"Lo que “El Niño” le va a costar a la comida de Colombia","titImpreso":"Lo que “El Niño” le va a costar a la comida de Colombia","fecha":"Septiembre de 2026","publicada":"2026-09-15","autor":"","img":"activos/nino/deficit-de-precipitacion-en-diciembre-de-2026.jpg?v=d2620ef5aa","ancho":773,"alto":900,"href":"fenomeno-del-nino"},{"slug":"boletin-006-appa-suelos-alimentos","familia":"boletin","n":"Boletín Agrario 006","tit":"Dos iniciativas ponen en riesgo los suelos que producen alimentos","titImpreso":"Dos iniciativas del Gobierno Nacional y de la bancada de gobierno en el Congreso ponen en riesgo la protección de los suelos estratégicos para la producción de alimentos.","fecha":"7 de septiembre de 2026","publicada":"","autor":"","img":"activos/portadas/boletin-006-appa-suelos-alimentos.jpg?v=7d1dd5ac78","ancho":720,"alto":540,"href":"publicaciones/boletin-006-appa-suelos-alimentos"},{"slug":"boletin-005-recorte-presupuesto-campo","familia":"boletin","n":"Boletín Agrario 005","tit":"Le recortan 6,1% al presupuesto del campo","titImpreso":"ALERTA: le recortan 6,1% al presupuesto del campo. Cuatro emergencias reconocidas por el propio Gobierno y ni una respuesta presupuestal a la altura","fecha":"28 de agosto de 2026","publicada":"","autor":"","img":"activos/portadas/boletin-005-recorte-presupuesto-campo.jpg?v=edd049b35a","ancho":720,"alto":540,"href":"publicaciones/boletin-005-recorte-presupuesto-campo"},{"slug":"columna-contrarreformas-agrarias-made-in-miami","familia":"columna","n":"Columna de opinión","tit":"Contrarreformas agrarias made in Miami","titImpreso":"Contrarreformas agrarias Made in Miami","fecha":"","publicada":"","autor":"Héctor Mondragón","img":"activos/portadas/columna-contrarreformas-agrarias-made-in-miami.jpg?v=45d820934a","ancho":720,"alto":405,"href":"publicaciones/columna-contrarreformas-agrarias-made-in-miami"},{"slug":"boletin-004-libro-de-la-verdad","familia":"boletin","n":"Boletín Agrario 004","tit":"La Red reacciona al «libro de la verdad»","titImpreso":"La Red Nacional por la Defensa de la Reforma Agraria reacciona al \"libro de la verdad\": una guía para que no los engañen con el engaño","fecha":"","publicada":"","autor":"","img":"activos/portadas/boletin-004-libro-de-la-verdad.jpg?v=6873c0e61c","ancho":720,"alto":540,"href":"publicaciones/boletin-004-libro-de-la-verdad"},{"slug":"boletin-003-regreso-al-pasado","familia":"boletin","n":"Boletín Agrario 003","tit":"Regreso al pasado: los de siempre se toman el sector agropecuario","titImpreso":"Regreso al pasado: los de siempre se toman el sector agropecuario","fecha":"","publicada":"","autor":"","img":"activos/portadas/boletin-003-regreso-al-pasado.jpg?v=e16b6456ec","ancho":720,"alto":315,"href":"publicaciones/boletin-003-regreso-al-pasado"},{"slug":"boletin-002-contrarreforma-desinformacion","familia":"boletin","n":"Boletín Agrario 002","tit":"La contrarreforma agraria comienza con desinformación","titImpreso":"La contrarreforma agraria comienza con desinformación","fecha":"","publicada":"","autor":"","img":"activos/portadas/boletin-002-contrarreforma-desinformacion.jpg?v=bb69db895e","ancho":720,"alto":480,"href":"publicaciones/boletin-002-contrarreforma-desinformacion"},{"slug":"boletin-001-viene-una-contrarreforma","familia":"boletin","n":"Boletín Agrario 001","tit":"Colombia debe prepararse: viene una contrarreforma agraria","titImpreso":"Colombia debe prepararse: viene una contrarreforma agraria","fecha":"","publicada":"","autor":"","img":"activos/portadas/boletin-001-viene-una-contrarreforma.jpg?v=23044f09f3","ancho":720,"alto":424,"href":"publicaciones/boletin-001-viene-una-contrarreforma"},{"slug":"comunicado-002-jurisdiccion-agraria","familia":"comunicado","n":"Comunicado 002","tit":"La Red celebra la radicación del proyecto de ley de la Jurisdicción Agraria y Rural","titImpreso":"LA RED NACIONAL POR LA DEFENSA DE LA REFORMA AGRARIA CELEBRA LA RADICACIÓN DEL PROYECTO DE LEY ORDINARIA DE LA JURISDICCIÓN AGRARIA Y RURAL","fecha":"","publicada":"","autor":"","img":"activos/portadas/comunicado-002-jurisdiccion-agraria.jpg?v=0f3d8b6030","ancho":720,"alto":480,"href":"publicaciones/comunicado-002-jurisdiccion-agraria"},{"slug":"comunicado-001-crimen-organizado-tierras","familia":"comunicado","n":"Comunicado 001","tit":"El crimen organizado vuelve por las tierras de la Reforma Agraria","titImpreso":"EL CRIMEN ORGANIZADO VUELVE POR LAS TIERRAS DE LA REFORMA AGRARIA","fecha":"","publicada":"","autor":"","img":"activos/portadas/comunicado-001-crimen-organizado-tierras.jpg?v=bdea089a3f","ancho":720,"alto":540,"href":"publicaciones/comunicado-001-crimen-organizado-tierras"}];
+
   /* sin portada propia: el respaldo de la familia, nunca un marco vacío */
   const RESPALDO = {
+    boletin: 'activos/portadas/respaldo-boletin.jpg?v=60843515ba',
     comunicado: 'activos/portadas/respaldo-comunicado.jpg?v=1779f29905',
-    otro: 'activos/portadas/respaldo-publicacion.jpg?v=4757a1e12c',
+    columna: 'activos/portadas/respaldo-columna.jpg?v=4757a1e12c',
+    publicacion: 'activos/portadas/respaldo-publicacion.jpg?v=4757a1e12c',
   };
-  const MESES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
-                 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+  const respaldoDe = familia => RESPALDO[familia] || RESPALDO.publicacion;
   const TITULO_SITIO = 'Red Nacional por la Defensa de la Reforma Agraria';
-
-  function fechaLegible(iso) {
-    const [a, m, d] = String(iso || '').split('-').map(Number);
-    if (!a || !m || m > 12) return String(iso || '');
-    return (d ? d + ' de ' : '') + MESES[m - 1] + ' de ' + a;
-  }
-
-  const imagenPermitida = u =>
-    typeof u === 'string' && /^https:\/\/lh3\.googleusercontent\.com\/[^\s"'<>\\]+$/.test(u) ? u : '';
-  const enlacePermitido = u =>
-    typeof u === 'string' && /^https:\/\/[^\s"'<>\\]+$/.test(u) ? u : '';
+  /* cuántas van en «Lo demás que ha publicado la Red» (las mismas que
+     escribe armar_publicaciones.js al compilar) */
+  const TOPE_OTRAS = 6;
 
   function idDeLaDireccion() {
     try { return decodeURIComponent(location.hash.replace(/^#/, '')).trim(); }
@@ -501,42 +717,90 @@ button.btn{font-family:inherit;cursor:pointer}
     return datos.items;
   }
 
-  function nombreDe(it) {
-    const c = it.contenido || {};
-    return it.tipo === 'comunicado' && c.numero ? 'Comunicado ' + c.numero : (NOMBRE_PUB[it.tipo] || 'Publicación');
+  /* ── el encabezado, pieza por pieza, como en paginaPublicacion() ──── */
+  function rotulo(p) {
+    /* «Urgente» va primero: es lo que hace que la gente se detenga. La
+       etiqueta es la cinta del boletín («Alerta», «Congreso»). */
+    const urgente = p.urgente ? '<span class="cinta cinta-urgente">Urgente</span>' : '';
+    const cinta = p.etiqueta && !/^(columna|comunicado)$/i.test(p.etiqueta)
+      ? '<span class="cinta">' + esc(p.etiqueta) + '</span>' : '';
+    return urgente + cinta + esc(p.n) + (p.fecha ? ' · ' + esc(p.fecha) : '');
   }
 
-  function pintar(it) {
-    const c = it.contenido || {};
-    const n = nombreDe(it);
-    const fecha = fechaLegible(c.fecha || it.fecha);
-    const titulo = String(it.titulo || '').trim() || n;
-    const propia = imagenPermitida(c.portada);
-    const respaldo = it.tipo === 'comunicado' ? RESPALDO.comunicado : RESPALDO.otro;
-    const enlace = enlacePermitido(c.enlace);
-    const paginas = String(c.paginas || '').trim();
+  /* La portada del panel llega de Drive y no se sabe de qué tamaño es: la
+     caja le fija 16/9 para que la página no salte cuando cargue. */
+  function portadaHTML(p) {
+    const respaldo = respaldoDe(p.familia);
+    return '<figure class="portada portada-dinamica"><img src="' + esc(p.imgURL || respaldo) +
+      '" alt="' + esc(p.portadaAlt || '') + '"></figure>';
+  }
 
-    document.title = titulo + ' — ' + TITULO_SITIO;
+  function firmaHTML(p) {
+    const respaldo = respaldoDe('columna');
+    return '<div class="firma">' +
+        '<span class="retrato"><img src="' + esc(p.retratoURL || respaldo) +
+          '" alt="' + esc(p.portadaAlt || p.autor || '') + '"></span>' +
+        '<div><b>' + esc(p.autor) + '</b>' + (p.oficio ? '<span>' + esc(p.oficio) + '</span>' : '') + '</div>' +
+      '</div>' +
+      '<p class="aviso">Esta columna recoge la opinión de quien la firma. No es una posición ' +
+        'institucional de la Red Nacional por la Defensa de la Reforma Agraria.</p>';
+  }
+
+  /* El documento original: el PDF que el panel subió a Drive (ver y
+     descargar), o el enlace que se pegó a mano cuando el receptor todavía no
+     sabía recibir documentos. */
+  function docsHTML(p, paginas) {
+    if (p.pdfURL) {
+      /* el número de páginas va donde la persona decide si abrirlo, igual
+         que en la rama del enlace pegado a mano */
+      const cuantas = paginas ? ' · ' + esc(paginas) + (/^\d+$/.test(paginas) ? ' páginas' : '') : '';
+      return '<div class="docs">' +
+        '<a class="btn btn-1" href="' + esc(p.pdfURL) + '" target="_blank" rel="noopener">Ver el documento original' + cuantas + '</a>' +
+        (p.pdfDescarga ? '<a class="btn" href="' + esc(p.pdfDescarga) + '">Descargar el PDF</a>' : '') +
+        '</div>';
+    }
+    if (p.enlace) {
+      return '<div class="docs"><a class="btn btn-1" href="' + esc(p.enlace) + '" target="_blank" rel="noopener">' +
+        'Ver el documento adjunto' + (paginas ? ' · ' + esc(paginas) + (/^\d+$/.test(paginas) ? ' páginas' : '') : '') +
+        '</a></div>';
+    }
+    return '';
+  }
+
+  function pintar(p, paginas) {
+    const esColumna = p.familia === 'columna';
+    const titulo = p.titImpreso || p.tit;
+    /* un título todo en mayúsculas (así los imprime la Red) pide una letra
+       más chica, o se come la pantalla */
+    const mayus = titulo === titulo.toUpperCase() && /[A-ZÁÉÍÓÚÑ]/.test(titulo);
+    const cuerpo = B.armar(p.bloques, { imagen: O.imagenDrive });
+    /* Los boletines, comunicados y columnas se ven como su página compilada,
+       y esas no imprimen la bajada: el resumen vive en las tarjetas. Una
+       noticia, un informe o un evento no tienen documento detrás y muchas
+       veces la bajada es todo lo que traen: ahí sí se imprime. */
+    const bajada = p.resumen && (p.familia === 'publicacion' || !cuerpo)
+      ? '<p class="bajada">' + esc(p.resumen) + '</p>' : '';
+
+    document.title = (p.tit || titulo) + ' — ' + TITULO_SITIO;
     const art = $('#leerPub');
+    art.className = 'pub pub-' + p.familia;
     art.innerHTML =
-      '<div class="enc"><div class="caja">' +
-        '<p class="rotulo">' + (c.urgente ? '<span class="cinta cinta-urgente">Urgente</span>' : '') +
-          esc(n) + (fecha ? ' · ' + esc(fecha) : '') + '</p>' +
-        '<h1>' + esc(titulo) + '</h1>' +
-        (c.bajada ? '<p class="bajada">' + esc(c.bajada) + '</p>' : '') +
-        '<figure class="portada portada-dinamica"><img src="' + esc(propia || respaldo) + '" alt=""></figure>' +
+      '<div class="enc' + (esColumna ? ' enc-columna' : '') + '"><div class="caja">' +
+        '<p class="rotulo">' + rotulo(p) + '</p>' +
+        '<h1' + (mayus ? ' class="mayus"' : '') + '>' + esc(titulo) + '</h1>' +
+        bajada +
+        (esColumna ? firmaHTML(p) : portadaHTML(p)) +
       '</div></div>' +
       '<div class="cuerpo"><div class="caja">' +
-        B.armar(c.bloques, { imagen: imagenPermitida }) +
-        (enlace ? '<div class="docs"><a class="btn btn-1" href="' + esc(enlace) + '" target="_blank" rel="noopener">' +
-          'Ver el documento adjunto' + (paginas ? ' · ' + esc(paginas) + (/^\d+$/.test(paginas) ? ' páginas' : '') : '') +
-          '</a></div>' : '') +
+        cuerpo +
+        docsHTML(p, paginas) +
       '</div></div>';
 
-    /* Si la portada de Drive no carga (borrada, sin permiso), va el respaldo;
+    /* Si la imagen de Drive no carga (borrada, sin permiso), va el respaldo;
        y una imagen del cuerpo que no carga se quita en vez de quedar rota. */
-    const img = art.querySelector('.portada img');
-    img.addEventListener('error', () => { if (img.getAttribute('src') !== respaldo) img.src = respaldo; });
+    const respaldo = respaldoDe(esColumna ? 'columna' : p.familia);
+    const img = art.querySelector('.portada img, .retrato img');
+    if (img) img.addEventListener('error', () => { if (img.getAttribute('src') !== respaldo) img.src = respaldo; });
     art.querySelectorAll('.cuerpo figure img').forEach(i =>
       i.addEventListener('error', () => { const f = i.closest('figure'); if (f) f.remove(); }));
 
@@ -544,27 +808,33 @@ button.btn{font-family:inherit;cursor:pointer}
     art.hidden = false;
   }
 
-  /* Lo demás del panel va delante de lo compilado, que ya viene escrito. */
-  function pintarOtrosDelPanel(actual) {
+  /* ── «Lo demás que ha publicado la Red» ───────────────────────────── */
+  /* Lo compilado ya viene escrito en la página; con lo del panel se rehace
+     entero, en orden y sin repetir. Desde aquí, lo del panel es otro pedazo
+     de esta misma página (#<id>) y lo compilado, su página propia. */
+  function pintarOtras(delPanel, actual) {
     const lista = $('#leerOtras');
-    lista.querySelectorAll('[data-panel]').forEach(li => li.remove());
-    const otros = items.filter(x => x && String(x.id) !== actual).slice(0, 3);
-    for (const it of otros.reverse()) {
-      const c = it.contenido || {};
-      const li = document.createElement('li');
-      li.setAttribute('data-panel', '');
-      const fecha = fechaLegible(c.fecha || it.fecha);
-      const respaldo = it.tipo === 'comunicado' ? RESPALDO.comunicado : RESPALDO.otro;
-      li.innerHTML = '<a class="otra" href="#' + encodeURIComponent(String(it.id)) + '">' +
-        '<img src="' + esc(imagenPermitida(c.portada) || respaldo) +
-          '" alt="" width="720" height="405" loading="lazy" decoding="async">' +
-        '<span><span class="rot">' + esc(nombreDe(it)) + (fecha ? ' · ' + esc(fecha) : '') + '</span>' +
-        '<b>' + esc(String(it.titulo || '').trim() || nombreDe(it)) + '</b></span></a>';
-      /* la miniatura de Drive que no carga también cae al respaldo */
-      const mini = li.querySelector('img');
-      mini.addEventListener('error', () => { if (mini.getAttribute('src') !== respaldo) mini.src = respaldo; });
-      lista.insertBefore(li, lista.firstChild);
-    }
+    const todas = O.juntar(COMPILADAS, delPanel)
+      .filter(p => !(p.panel && p.id === actual))
+      .slice(0, TOPE_OTRAS);
+    if (!todas.length) return;
+    lista.innerHTML = todas.map(p => {
+      const respaldo = respaldoDe(p.familia);
+      const href = p.panel ? '#' + encodeURIComponent(p.id) : p.href;
+      const img = p.panel ? (p.imgURL || respaldo) : p.img;
+      const dims = (!p.panel && p.ancho && p.alto)
+        ? ' width="' + p.ancho + '" height="' + p.alto + '"' : ' width="720" height="405"';
+      return '<li><a class="otra otra-' + esc(p.familia) + '" href="' + esc(href) + '">' +
+        '<img src="' + esc(img) + '" alt=""' + dims + ' loading="lazy" decoding="async">' +
+        '<span><span class="rot">' + esc(p.n) + (p.fecha ? ' · ' + esc(p.fecha) : '') + '</span>' +
+        '<b>' + esc(p.tit) + '</b></span></a></li>';
+    }).join('');
+    /* la miniatura de Drive que no carga también cae al respaldo */
+    lista.querySelectorAll('a.otra').forEach(a => {
+      const mini = a.querySelector('img');
+      const respaldo = respaldoDe((a.className.split('otra-')[1] || '').trim());
+      if (mini) mini.addEventListener('error', () => { if (mini.getAttribute('src') !== respaldo) mini.src = respaldo; });
+    });
   }
 
   async function mostrar() {
@@ -585,18 +855,34 @@ button.btn{font-family:inherit;cursor:pointer}
       mostrarEstado('No se encontró esta publicación. Puede que el enlace esté incompleto o que la publicación ya no esté disponible.', false);
       return;
     }
+    const p = O.desdePanel(it);
+    /* El equipo subió por el panel un boletín que además tiene página
+       compilada: esa es la buena (trae el texto revisado y el PDF del
+       sitio). Se reemplaza la dirección, no se agrega al historial: el
+       botón de volver lleva a donde estaba la persona. */
+    const suya = COMPILADAS.find(f => O.repetida(p, [f]));
+    if (suya) { location.replace(suya.href); return; }
+
     /* Si el contenido llega deforme (una tabla con una fila que no es fila,
        una lista que no es lista), el dibujante se cae a mitad de camino y la
        página quedaba con «Cargando la publicación…» para siempre. Se dice qué
        pasó y se deja el botón de intentar de nuevo. */
+    const c = it.contenido || {};
     try {
-      pintar(it);
-      pintarOtrosDelPanel(id);
+      pintar(Object.assign({}, p, { bloques: c.bloques }), String(c.paginas || '').trim());
     } catch (e) {
       mostrarEstado('No se pudo mostrar esta publicación: su contenido llegó incompleto. ' +
         'Puede intentar de nuevo o ver las demás en el repositorio.', true);
       return;
     }
+    /* «Lo demás» va en su propio intento: la publicación ya está dibujada y
+       a la vista, y un tropiezo pintando la cinta del final no puede
+       taparla con el aviso de que no se pudo mostrar. Si falla, queda la
+       lista que trae la página compilada. */
+    try {
+      pintarOtras(items.filter(x => x && x.id).map(O.desdePanel)
+        .filter(x => !O.repetida(x, COMPILADAS)), id);
+    } catch (e) { /* la lista de abajo no vale una página en blanco */ }
     window.scrollTo(0, 0);
   }
 

@@ -73,14 +73,20 @@ h1.mayus{font-size:clamp(23px,3.7vw,33px);line-height:1.14;letter-spacing:.01em}
 .portada figcaption,.pb-fig figcaption{font-size:12.5px;line-height:1.45;color:var(--gris);margin-top:8px}
 .portada figcaption a{color:var(--gris)}
 .cuerpo{background:var(--papel);padding:32px 0 40px}
-.cuerpo p{margin-bottom:1.1em;max-width:68ch}
+.cuerpo p,.pb-lista li,.pb-destacado{text-align:justify;-webkit-hyphens:auto;hyphens:auto;
+  overflow-wrap:break-word}
+.cuerpo p a,.pb-lista li a{word-break:break-all}
+.cuerpo p{margin-bottom:1.1em}
+.portada figcaption,.pb-fig figcaption,.cuerpo .pb-tabla-pie,.cuerpo .pb-nota,
+.cuerpo .bajada,.cuerpo .repo-txt p,.pb-detalle .pb-lista li{text-align:left;
+  -webkit-hyphens:manual;hyphens:manual}
 .pb-h2{font:800 17px/1.3 "RedTitular",sans-serif;letter-spacing:.06em;color:var(--tierra);
   margin:2.1em 0 .9em;padding-bottom:8px;border-bottom:1px solid var(--linea)}
 .pb-h3{font:800 20px/1.25 "RedTitular",sans-serif;color:var(--olivo-hondo);margin:1.7em 0 .6em}
 .pb-h2+.pb-h3{margin-top:.8em}
 .pb-destacado{font-size:18.5px;line-height:1.55;font-weight:600;color:var(--olivo-hondo);
   border-left:4px solid var(--ocre);padding:2px 0 2px 18px;margin:1.2em 0 1.3em}
-.pb-lista{margin:0 0 1.2em 1.25em;max-width:66ch}
+.pb-lista{margin:0 0 1.2em 1.25em}
 .pb-lista li{margin-bottom:.55em;padding-left:.2em}
 .pb-lista ul{margin:.5em 0 0 1.2em}
 .pb-marcas{list-style:none;margin-left:0}
@@ -225,13 +231,14 @@ button.btn{font-family:inherit;cursor:pointer}
     <h2 id="otras-tit">Lo demás que ha publicado la Red</h2>
     <ul class="otras-lista">
       <li><a class="otra otra-boletin" href="boletin-007-congreso-defensa-reforma-agraria"><img src="../activos/portadas/boletin-007-congreso-defensa-reforma-agraria.jpg?v=caea09bdcd" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 007 · 22 de septiembre de 2026</span><b>El Congreso activa la defensa de la Reforma Agraria</b></span></a></li>
-      <li><a class="otra otra-boletin" href="boletin-006-appa-suelos-alimentos"><img src="../activos/portadas/boletin-006-appa-suelos-alimentos.jpg?v=7d1dd5ac78" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 006 · 7 de septiembre de 2026</span><b>Dos iniciativas ponen en riesgo los suelos que producen alimentos</b></span></a></li>
       <li><a class="otra otra-analisis" href="../fenomeno-del-nino"><img src="../activos/nino/deficit-de-precipitacion-en-diciembre-de-2026.jpg?v=d2620ef5aa" width="773" height="900" alt="" loading="lazy" decoding="async"><span><span class="rot">Análisis · Alerta alimentaria · Septiembre de 2026</span><b>Lo que “El Niño” le va a costar a la comida de Colombia</b></span></a></li>
+      <li><a class="otra otra-boletin" href="boletin-006-appa-suelos-alimentos"><img src="../activos/portadas/boletin-006-appa-suelos-alimentos.jpg?v=7d1dd5ac78" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 006 · 7 de septiembre de 2026</span><b>Dos iniciativas ponen en riesgo los suelos que producen alimentos</b></span></a></li>
       <li><a class="otra otra-boletin" href="boletin-005-recorte-presupuesto-campo"><img src="../activos/portadas/boletin-005-recorte-presupuesto-campo.jpg?v=edd049b35a" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 005 · 28 de agosto de 2026</span><b>Le recortan 6,1% al presupuesto del campo</b></span></a></li>
       <li><a class="otra otra-boletin" href="boletin-004-libro-de-la-verdad"><img src="../activos/portadas/boletin-004-libro-de-la-verdad.jpg?v=6873c0e61c" width="720" height="540" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 004</span><b>La Red reacciona al «libro de la verdad»</b></span></a></li>
       <li><a class="otra otra-boletin" href="boletin-003-regreso-al-pasado"><img src="../activos/portadas/boletin-003-regreso-al-pasado.jpg?v=e16b6456ec" width="720" height="315" alt="" loading="lazy" decoding="async"><span><span class="rot">Boletín Agrario 003</span><b>Regreso al pasado: los de siempre se toman el sector agropecuario</b></span></a></li>
     </ul>
     <p class="otras-todas"><a class="btn" href="../publicaciones/">Ver todas las publicaciones</a></p>
+    <div id="pub-datos" hidden data-actual="columna-contrarreformas-agrarias-made-in-miami">[{&quot;slug&quot;:&quot;boletin-007-congreso-defensa-reforma-agraria&quot;,&quot;familia&quot;:&quot;boletin&quot;,&quot;n&quot;:&quot;Boletín Agrario 007&quot;,&quot;tit&quot;:&quot;El Congreso activa la defensa de la Reforma Agraria&quot;,&quot;titImpreso&quot;:&quot;El Congreso activa la defensa de la Reforma Agraria&quot;,&quot;fecha&quot;:&quot;22 de septiembre de 2026&quot;,&quot;publicada&quot;:&quot;&quot;,&quot;autor&quot;:&quot;&quot;,&quot;img&quot;:&quot;../activos/portadas/boletin-007-congreso-defensa-reforma-agraria.jpg?v=caea09bdcd&quot;,&quot;ancho&quot;:720,&quot;alto&quot;:540,&quot;href&quot;:&quot;boletin-007-congreso-defensa-reforma-agraria&quot;},{&quot;slug&quot;:&quot;fenomeno-del-nino&quot;,&quot;familia&quot;:&quot;analisis&quot;,&quot;n&quot;:&quot;Análisis · Alerta alimentaria&quot;,&quot;tit&quot;:&quot;Lo que “El Niño” le va a costar a la comida de Colombia&quot;,&quot;titImpreso&quot;:&quot;Lo que “El Niño” le va a costar a la comida de Colombia&quot;,&quot;fecha&quot;:&quot;Septiembre de 2026&quot;,&quot;publicada&quot;:&quot;2026-09-15&quot;,&quot;autor&quot;:&quot;&quot;,&quot;img&quot;:&quot;../activos/nino/deficit-de-precipitacion-en-diciembre-de-2026.jpg?v=d2620ef5aa&quot;,&quot;ancho&quot;:773,&quot;alto&quot;:900,&quot;href&quot;:&quot;../fenomeno-del-nino&quot;},{&quot;slug&quot;:&quot;boletin-006-appa-suelos-alimentos&quot;,&quot;familia&quot;:&quot;boletin&quot;,&quot;n&quot;:&quot;Boletín Agrario 006&quot;,&quot;tit&quot;:&quot;Dos iniciativas ponen en riesgo los suelos que producen alimentos&quot;,&quot;titImpreso&quot;:&quot;Dos iniciativas del Gobierno Nacional y de la bancada de gobierno en el Congreso ponen en riesgo la protección de los suelos estratégicos para la producción de alimentos.&quot;,&quot;fecha&quot;:&quot;7 de septiembre de 2026&quot;,&quot;publicada&quot;:&quot;&quot;,&quot;autor&quot;:&quot;&quot;,&quot;img&quot;:&quot;../activos/portadas/boletin-006-appa-suelos-alimentos.jpg?v=7d1dd5ac78&quot;,&quot;ancho&quot;:720,&quot;alto&quot;:540,&quot;href&quot;:&quot;boletin-006-appa-suelos-alimentos&quot;},{&quot;slug&quot;:&quot;boletin-005-recorte-presupuesto-campo&quot;,&quot;familia&quot;:&quot;boletin&quot;,&quot;n&quot;:&quot;Boletín Agrario 005&quot;,&quot;tit&quot;:&quot;Le recortan 6,1% al presupuesto del campo&quot;,&quot;titImpreso&quot;:&quot;ALERTA: le recortan 6,1% al presupuesto del campo. Cuatro emergencias reconocidas por el propio Gobierno y ni una respuesta presupuestal a la altura&quot;,&quot;fecha&quot;:&quot;28 de agosto de 2026&quot;,&quot;publicada&quot;:&quot;&quot;,&quot;autor&quot;:&quot;&quot;,&quot;img&quot;:&quot;../activos/portadas/boletin-005-recorte-presupuesto-campo.jpg?v=edd049b35a&quot;,&quot;ancho&quot;:720,&quot;alto&quot;:540,&quot;href&quot;:&quot;boletin-005-recorte-presupuesto-campo&quot;},{&quot;slug&quot;:&quot;columna-contrarreformas-agrarias-made-in-miami&quot;,&quot;familia&quot;:&quot;columna&quot;,&quot;n&quot;:&quot;Columna de opinión&quot;,&quot;tit&quot;:&quot;Contrarreformas agrarias made in Miami&quot;,&quot;titImpreso&quot;:&quot;Contrarreformas agrarias Made in Miami&quot;,&quot;fecha&quot;:&quot;&quot;,&quot;publicada&quot;:&quot;&quot;,&quot;autor&quot;:&quot;Héctor Mondragón&quot;,&quot;img&quot;:&quot;../activos/portadas/columna-contrarreformas-agrarias-made-in-miami.jpg?v=45d820934a&quot;,&quot;ancho&quot;:720,&quot;alto&quot;:405,&quot;href&quot;:&quot;columna-contrarreformas-agrarias-made-in-miami&quot;},{&quot;slug&quot;:&quot;boletin-004-libro-de-la-verdad&quot;,&quot;familia&quot;:&quot;boletin&quot;,&quot;n&quot;:&quot;Boletín Agrario 004&quot;,&quot;tit&quot;:&quot;La Red reacciona al «libro de la verdad»&quot;,&quot;titImpreso&quot;:&quot;La Red Nacional por la Defensa de la Reforma Agraria reacciona al \&quot;libro de la verdad\&quot;: una guía para que no los engañen con el engaño&quot;,&quot;fecha&quot;:&quot;&quot;,&quot;publicada&quot;:&quot;&quot;,&quot;autor&quot;:&quot;&quot;,&quot;img&quot;:&quot;../activos/portadas/boletin-004-libro-de-la-verdad.jpg?v=6873c0e61c&quot;,&quot;ancho&quot;:720,&quot;alto&quot;:540,&quot;href&quot;:&quot;boletin-004-libro-de-la-verdad&quot;},{&quot;slug&quot;:&quot;boletin-003-regreso-al-pasado&quot;,&quot;familia&quot;:&quot;boletin&quot;,&quot;n&quot;:&quot;Boletín Agrario 003&quot;,&quot;tit&quot;:&quot;Regreso al pasado: los de siempre se toman el sector agropecuario&quot;,&quot;titImpreso&quot;:&quot;Regreso al pasado: los de siempre se toman el sector agropecuario&quot;,&quot;fecha&quot;:&quot;&quot;,&quot;publicada&quot;:&quot;&quot;,&quot;autor&quot;:&quot;&quot;,&quot;img&quot;:&quot;../activos/portadas/boletin-003-regreso-al-pasado.jpg?v=e16b6456ec&quot;,&quot;ancho&quot;:720,&quot;alto&quot;:315,&quot;href&quot;:&quot;boletin-003-regreso-al-pasado&quot;},{&quot;slug&quot;:&quot;boletin-002-contrarreforma-desinformacion&quot;,&quot;familia&quot;:&quot;boletin&quot;,&quot;n&quot;:&quot;Boletín Agrario 002&quot;,&quot;tit&quot;:&quot;La contrarreforma agraria comienza con desinformación&quot;,&quot;titImpreso&quot;:&quot;La contrarreforma agraria comienza con desinformación&quot;,&quot;fecha&quot;:&quot;&quot;,&quot;publicada&quot;:&quot;&quot;,&quot;autor&quot;:&quot;&quot;,&quot;img&quot;:&quot;../activos/portadas/boletin-002-contrarreforma-desinformacion.jpg?v=bb69db895e&quot;,&quot;ancho&quot;:720,&quot;alto&quot;:480,&quot;href&quot;:&quot;boletin-002-contrarreforma-desinformacion&quot;},{&quot;slug&quot;:&quot;boletin-001-viene-una-contrarreforma&quot;,&quot;familia&quot;:&quot;boletin&quot;,&quot;n&quot;:&quot;Boletín Agrario 001&quot;,&quot;tit&quot;:&quot;Colombia debe prepararse: viene una contrarreforma agraria&quot;,&quot;titImpreso&quot;:&quot;Colombia debe prepararse: viene una contrarreforma agraria&quot;,&quot;fecha&quot;:&quot;&quot;,&quot;publicada&quot;:&quot;&quot;,&quot;autor&quot;:&quot;&quot;,&quot;img&quot;:&quot;../activos/portadas/boletin-001-viene-una-contrarreforma.jpg?v=23044f09f3&quot;,&quot;ancho&quot;:720,&quot;alto&quot;:424,&quot;href&quot;:&quot;boletin-001-viene-una-contrarreforma&quot;},{&quot;slug&quot;:&quot;comunicado-002-jurisdiccion-agraria&quot;,&quot;familia&quot;:&quot;comunicado&quot;,&quot;n&quot;:&quot;Comunicado 002&quot;,&quot;tit&quot;:&quot;La Red celebra la radicación del proyecto de ley de la Jurisdicción Agraria y Rural&quot;,&quot;titImpreso&quot;:&quot;LA RED NACIONAL POR LA DEFENSA DE LA REFORMA AGRARIA CELEBRA LA RADICACIÓN DEL PROYECTO DE LEY ORDINARIA DE LA JURISDICCIÓN AGRARIA Y RURAL&quot;,&quot;fecha&quot;:&quot;&quot;,&quot;publicada&quot;:&quot;&quot;,&quot;autor&quot;:&quot;&quot;,&quot;img&quot;:&quot;../activos/portadas/comunicado-002-jurisdiccion-agraria.jpg?v=0f3d8b6030&quot;,&quot;ancho&quot;:720,&quot;alto&quot;:480,&quot;href&quot;:&quot;comunicado-002-jurisdiccion-agraria&quot;},{&quot;slug&quot;:&quot;comunicado-001-crimen-organizado-tierras&quot;,&quot;familia&quot;:&quot;comunicado&quot;,&quot;n&quot;:&quot;Comunicado 001&quot;,&quot;tit&quot;:&quot;El crimen organizado vuelve por las tierras de la Reforma Agraria&quot;,&quot;titImpreso&quot;:&quot;EL CRIMEN ORGANIZADO VUELVE POR LAS TIERRAS DE LA REFORMA AGRARIA&quot;,&quot;fecha&quot;:&quot;&quot;,&quot;publicada&quot;:&quot;&quot;,&quot;autor&quot;:&quot;&quot;,&quot;img&quot;:&quot;../activos/portadas/comunicado-001-crimen-organizado-tierras.jpg?v=bdea089a3f&quot;,&quot;ancho&quot;:720,&quot;alto&quot;:540,&quot;href&quot;:&quot;comunicado-001-crimen-organizado-tierras&quot;}]</div>
   </div>
 </section>
 </main>
@@ -244,6 +251,455 @@ button.btn{font-family:inherit;cursor:pointer}
       <a href="mailto:rednal.reformaagraria@gmail.com">rednal.reformaagraria@gmail.com</a></p>
   </div>
 </footer>
+<script>
+/* ══════════════════════════════════════════════════════════════════════
+   El orden y el nombre de las publicaciones, iguales en todas partes.
 
+   Lo usan la portada (carrusel y «Boletines y comunicados»), el lector de
+   lo que sube el panel (leer.html), las páginas de publicaciones/ («Lo
+   demás que ha publicado la Red» y el repositorio), el panel (la vista
+   previa) y armar_publicaciones.js al compilar. Antes cada lugar tenía su
+   copia de «cuándo salió esto» y su forma de nombrar lo del panel: el
+   análisis de El Niño iba fijado a mano de primero, y un boletín subido por
+   el panel salía como «Informe» y repetido junto al compilado.
+
+   Funciona igual en Node (module.exports) y pegado dentro de un <script>
+   (window.OrdenRed), como bloques_html.js. No usa nada que no exista en los
+   dos lados.
+
+   Las reglas:
+     · Lo más reciente va primero, sin fijar nada a mano.
+     · La fecha que manda es la que trae día: «22 de septiembre de 2026»,
+       o la ISO del panel (2026-09-22). Si lo impreso solo dice el mes
+       («Septiembre de 2026»), manda `publicada`: el día en que salió en el
+       sitio (ISO), que es un hecho y no una fecha inventada para el
+       documento. Sin ninguna de las dos, cuenta el mes; sin nada, va al
+       final, en el orden en que venía.
+     · Lo que el equipo sube por el panel y ya tiene página compilada (el
+       mismo título, o el mismo número del mismo tipo) no se repite: se
+       queda la compilada.                                                  */
+(function (raiz) {
+  'use strict';
+
+  const MESES = { enero: 1, febrero: 2, marzo: 3, abril: 4, mayo: 5, junio: 6, julio: 7, agosto: 8,
+                  septiembre: 9, setiembre: 9, octubre: 10, noviembre: 11, diciembre: 12 };
+  const NOMBRE_MES = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 'julio',
+                      'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
+
+  const texto = t => String(t == null ? '' : t);
+  const sinTildes = t => texto(t).normalize('NFD').replace(/[̀-ͯ]/g, '');
+
+  /* aaaammdd como número (20260922); con solo el mes, aaaamm00; sin fecha, 0 */
+  function deISO(t) {
+    const m = texto(t).trim().match(/^(\d{4})-(\d{2})(?:-(\d{2}))?/);
+    if (!m || +m[2] < 1 || +m[2] > 12) return 0;
+    const d = m[3] ? +m[3] : 0;
+    return d > 31 ? 0 : +m[1] * 10000 + +m[2] * 100 + d;
+  }
+  function deTexto(t) {
+    const s = sinTildes(t).toLowerCase();
+    /* con día: «22 de septiembre de 2026», también con el día de la semana
+       adelante («Martes, 22 de septiembre de 2026.») */
+    let m = s.match(/(\d{1,2})\s+de\s+([a-z]+)\s+(?:de|del)\s+(\d{4})/);
+    if (m && MESES[m[2]] && +m[1] >= 1 && +m[1] <= 31) return +m[3] * 10000 + MESES[m[2]] * 100 + +m[1];
+    m = s.match(/([a-z]+)\s+(?:de|del)\s+(\d{4})/);
+    if (m && MESES[m[1]]) return +m[2] * 10000 + MESES[m[1]] * 100;
+    return 0;
+  }
+  /* la fecha para ordenar: primero la que trae día, después la de
+     publicación en el sitio, después el mes */
+  function clave(p) {
+    if (!p) return 0;
+    const f = deISO(p.fecha) || deTexto(p.fecha);
+    if (f % 100) return f;
+    const pub = deISO(p.publicada);
+    if (pub % 100) return pub;
+    return f || pub || 0;
+  }
+  /* de lo más reciente a lo más viejo; los empates y lo que no tiene fecha
+     conservan el orden en que venían */
+  function ordenar(lista) {
+    return (Array.isArray(lista) ? lista : []).map((p, i) => ({ p, i, k: clave(p) }))
+      .sort((a, b) => b.k - a.k || a.i - b.i)
+      .map(x => x.p);
+  }
+
+  /* «22 de septiembre de 2026» desde 2026-09-22; sin día, «septiembre de 2026» */
+  function fechaLegible(iso) {
+    const m = texto(iso).trim().match(/^(\d{4})-(\d{2})(?:-(\d{2}))?/);
+    if (!m || +m[2] < 1 || +m[2] > 12) return texto(iso).trim();
+    return (m[3] && +m[3] ? +m[3] + ' de ' : '') + NOMBRE_MES[+m[2] - 1] + ' de ' + m[1];
+  }
+
+  /* un título comparable: sin tildes, sin mayúsculas, sin signos */
+  const normalizar = t => sinTildes(t).toLowerCase().replace(/[^a-z0-9]+/g, ' ').trim();
+
+  /* ── lo que sube el panel ── */
+  /* los tipos que son familias de la Red; lo demás (noticia, informe,
+     evento) va como «publicación» */
+  const FAMILIA_DE_TIPO = { boletin: 'boletin', comunicado: 'comunicado', columna: 'columna' };
+  const TIPOS = {
+    boletin:    'Boletín Agrario',
+    comunicado: 'Comunicado',
+    columna:    'Columna de opinión',
+    noticia:    'Noticia',
+    informe:    'Informe',
+    evento:     'Evento',
+  };
+  /* Se pregunta por la llave propia: un tipo llamado «constructor» devolvía
+     una función del prototipo. */
+  const propio = (o, k) => Object.prototype.hasOwnProperty.call(o, k);
+  const familiaDe = tipo => propio(FAMILIA_DE_TIPO, tipo) ? FAMILIA_DE_TIPO[tipo] : 'publicacion';
+  /* «007» y no «7»: así numera la Red sus boletines y comunicados */
+  const numero = n => { const t = texto(n).trim(); return /^\d{1,3}$/.test(t) ? t.padStart(3, '0') : t; };
+  function nombre(tipo, n) {
+    const base = propio(TIPOS, tipo) ? TIPOS[tipo] : 'Publicación';
+    return (tipo === 'boletin' || tipo === 'comunicado') && numero(n) ? base + ' ' + numero(n) : base;
+  }
+
+  /* Las imágenes del panel viven en Drive (lh3.googleusercontent.com), el
+     único origen de imágenes que admite la política de contenido. */
+  const imagenDrive = u =>
+    typeof u === 'string' && /^https:\/\/lh3\.googleusercontent\.com\/[^\s"'<>\\]+$/.test(u) ? u : '';
+  /* el documento original, también en Drive */
+  const documentoDrive = u =>
+    typeof u === 'string' && /^https:\/\/(drive|docs)\.google\.com\/[^\s"'<>\\]+$/.test(u) ? u : '';
+  const enlaceSeguro = u => typeof u === 'string' && /^https:\/\/[^\s"'<>\\]+$/.test(u) ? u : '';
+
+  /* Una entrada del receptor (?contenido=1) con la forma de las compiladas:
+     familia, n, fecha legible, tit, resumen, etiqueta, autor… Nada se
+     escapa aquí: quien la pinte la escapa. */
+  function desdePanel(it) {
+    const c = (it && it.contenido) || {};
+    const tipo = texto(it && it.tipo);
+    const familia = familiaDe(tipo);
+    const pdf = c.pdf && typeof c.pdf === 'object' ? c.pdf : {};
+    const titulo = texto(it && it.titulo).trim();
+    return {
+      panel: true,
+      id: texto(it && it.id),
+      tipo, familia,
+      n: nombre(tipo, c.numero),
+      numero: numero(c.numero),
+      fecha: fechaLegible(c.fecha || (it && it.fecha)),
+      fechaISO: texto(c.fecha || (it && it.fecha)).trim(),
+      tit: texto(c.tituloCorto).trim() || titulo || nombre(tipo, c.numero),
+      titImpreso: titulo,
+      resumen: texto(c.bajada).trim(),
+      etiqueta: familia === 'boletin' ? texto(c.etiqueta).trim() : '',
+      urgente: !!c.urgente,
+      autor: familia === 'columna' ? texto(c.autor).trim() : '',
+      oficio: familia === 'columna' ? texto(c.oficio).trim() : '',
+      imgURL: imagenDrive(c.portada),
+      portadaAlt: texto(c.portadaAlt).trim(),
+      retratoURL: familia === 'columna' ? imagenDrive(c.retrato) : '',
+      pdfURL: documentoDrive(pdf.url) || documentoDrive(c.enlace),
+      pdfDescarga: documentoDrive(pdf.descarga),
+      enlace: enlaceSeguro(c.enlace),
+      href: 'leer#' + encodeURIComponent(texto(it && it.id)),
+    };
+  }
+
+  /* ¿Esta entrada del panel ya tiene página compilada? El mismo título (el
+     corto de las tarjetas o el impreso en el documento), o el mismo número
+     del mismo tipo. `fijas` son las de publicaciones.json. */
+  function repetida(p, fijas) {
+    if (!p) return false;
+    const titulos = [p.tit, p.titImpreso].map(normalizar).filter(t => t.length >= 12);
+    return (Array.isArray(fijas) ? fijas : []).some(f => {
+      if (!f || f.panel) return false;
+      const suyos = [f.tit, f.titImpreso].map(normalizar).filter(Boolean);
+      if (titulos.some(t => suyos.includes(t))) return true;
+      return (p.familia === 'boletin' || p.familia === 'comunicado') && p.familia === f.familia &&
+        !!p.numero && normalizar(p.n) === normalizar(f.n);
+    });
+  }
+
+  /* Todo junto: lo compilado más lo del panel que no esté repetido, en orden.
+     Lo del panel sin id no tiene a qué página llevar: se deja por fuera. */
+  function juntar(fijas, delPanel) {
+    const base = Array.isArray(fijas) ? fijas : [];
+    const nuevas = (Array.isArray(delPanel) ? delPanel : [])
+      .filter(it => it && it.id)
+      .map(it => (it.panel ? it : desdePanel(it)))
+      .filter(p => !repetida(p, base));
+    /* lo del panel entra delante: a igual fecha, lo que acaba de subir el
+       equipo va primero */
+    return ordenar(nuevas.concat(base));
+  }
+
+  const api = { clave, ordenar, fechaLegible, normalizar, nombre, numero, familiaDe,
+                desdePanel, repetida, juntar, imagenDrive, documentoDrive, enlaceSeguro, TIPOS };
+  if (typeof module !== 'undefined' && module.exports) module.exports = api;
+  else raiz.OrdenRed = api;
+})(typeof window !== 'undefined' ? window : this);
+
+/* ══════════════════════════════════════════════════════════════════════
+   Lo que el equipo publica desde el panel, metido en las páginas de
+   publicaciones/ (cada publicación y el repositorio).
+
+   Estas páginas se compilan: salen con lo que había el día que se armó el
+   sitio. Media publica un comunicado desde el panel un martes y el sitio no
+   se vuelve a compilar por eso, así que hasta ahora ese comunicado aparecía
+   en la portada y en leer.html, pero no en «Lo demás que ha publicado la
+   Red» ni en el repositorio. Este guion le pide al receptor lo publicado
+   (?contenido=1, lo mismo que lee la portada) y lo mete donde va, en orden
+   y sin repetir lo que ya tiene página compilada.
+
+   Reglas de este archivo:
+     · El MISMO texto en todas las páginas de publicaciones/. Todas comparten
+       una sola regla en _headers (/publicaciones/*) con UNA huella: una
+       letra distinta de página a página y el navegador no lo dejaría correr.
+       Por eso lo que cambia (qué publicación está abierta y qué hay
+       compilado) llega del islote de datos (#pub-datos), no de aquí.
+     · Nada se pega como HTML: los nodos se arman con createElement y el
+       texto con textContent. Lo que llega del receptor lo escribe una
+       persona en el panel.
+     · Imágenes solo de donde el panel las guarda (lh3.googleusercontent.com);
+       si no hay, o si no cargan, va el respaldo de la familia.
+     · Sin receptor, sin red o con una respuesta rara, la página se queda
+       exactamente como se compiló. Nunca se borra lo que ya está antes de
+       tener con qué reemplazarlo.
+
+   armar_publicaciones.js reemplaza las marcas de este archivo al compilar. */
+(function () {
+  'use strict';
+
+  var O = window.OrdenRed;
+  var isla = document.getElementById('pub-datos');
+  if (!O || !isla) return;
+
+  /* En producción habla con el Apps Script; abierto en localhost, con el
+     servidor de pruebas. Así ensayar nunca escribe en el sistema real. */
+  var API_RED = /^(localhost|127\.0\.0\.1|\[::1\])$/.test(location.hostname)
+    ? '/api'
+    : 'https://script.google.com/macros/s/AKfycbzhYzR5BNKpYP4lmwJouZDiS0-s1muUkdBdfm6FQ4r_QxCUcLIy1OXysAEgfCjYtOEZ/exec';
+
+  /* sin portada propia, el respaldo de la familia: nunca un marco vacío */
+  var RESPALDO = {
+    boletin: '../activos/portadas/respaldo-boletin.jpg?v=60843515ba',
+    comunicado: '../activos/portadas/respaldo-comunicado.jpg?v=1779f29905',
+    columna: '../activos/portadas/respaldo-columna.jpg?v=4757a1e12c',
+    publicacion: '../activos/portadas/respaldo-publicacion.jpg?v=4757a1e12c',
+  };
+  /* cuántas van en «Lo demás que ha publicado la Red» (las mismas que
+     escribe armar_publicaciones.js al compilar) */
+  var TOPE_OTRAS = 6;
+  /* el grupo del repositorio para lo que no es boletín, comunicado ni
+     columna: una noticia, un informe o un evento del panel */
+  var GRUPO_OTRAS = { familia: 'publicacion', ancla: 'otras-publicaciones', plural: 'Otras publicaciones' };
+  /* todas estas páginas viven en publicaciones/: la raíz del sitio está un
+     piso arriba, y lo del panel se lee en /leer#<id> */
+  var RAIZ = '../';
+
+  var COMPILADAS = [];
+  try { COMPILADAS = JSON.parse(isla.textContent) || []; } catch (e) { return; }
+  if (!Array.isArray(COMPILADAS)) return;
+  var ACTUAL = isla.getAttribute('data-actual') || '';
+
+  var texto = function (t) { return String(t == null ? '' : t); };
+  /* un nombre de familia sirve de clase CSS: solo letras y guiones */
+  var clase = function (t) { return texto(t).toLowerCase().replace(/[^a-z0-9-]+/g, '-'); };
+
+  /* ── piezas ───────────────────────────────────────────────────────── */
+  function imagen(p, ancho, alto) {
+    var img = document.createElement('img');
+    var respaldo = RESPALDO[p.familia] || RESPALDO.publicacion;
+    var src = p.panel ? O.imagenDrive(p.imgURL) : texto(p.img);
+    img.src = src || respaldo;
+    img.alt = '';
+    img.loading = 'lazy';
+    img.decoding = 'async';
+    img.width = p.ancho || ancho;
+    img.height = p.alto || alto;
+    /* una imagen de Drive borrada o sin permiso dejaría el marco roto */
+    img.addEventListener('error', function () {
+      if (img.getAttribute('src') !== respaldo) img.src = respaldo;
+    });
+    return img;
+  }
+
+  /* a dónde lleva: la página compilada, o el lector con su id */
+  function adonde(p) { return p.panel ? RAIZ + p.href : texto(p.href); }
+
+  function conTexto(etiqueta, clases, txt) {
+    var n = document.createElement(etiqueta);
+    if (clases) n.className = clases;
+    if (txt != null) n.textContent = txt;
+    return n;
+  }
+  function enlace(href, txt, clases) {
+    var a = conTexto('a', clases, txt);
+    a.href = href;
+    return a;
+  }
+  var rotuloDe = function (p) { return texto(p.n) + (p.fecha ? ' · ' + p.fecha : ''); };
+
+  /* una tarjeta de «Lo demás que ha publicado la Red», igual a la que
+     escribe armar_publicaciones.js (listaOtras) */
+  function nodoOtra(p) {
+    var li = document.createElement('li');
+    var a = enlace(adonde(p), null, 'otra otra-' + clase(p.familia));
+    var env = document.createElement('span');
+    env.appendChild(conTexto('span', 'rot', rotuloDe(p)));
+    env.appendChild(conTexto('b', '', texto(p.tit)));
+    a.appendChild(imagen(p, 720, 405));
+    a.appendChild(env);
+    li.appendChild(a);
+    return li;
+  }
+
+  /* una ficha del repositorio, igual a la de paginaIndice */
+  function nodoRepo(p) {
+    var li = document.createElement('li');
+    var art = conTexto('article', 'repo-item repo-' + clase(p.familia));
+    art.setAttribute('data-panel', '');
+    var img = enlace(adonde(p), null, 'repo-img');
+    img.tabIndex = -1;
+    img.setAttribute('aria-hidden', 'true');
+    img.appendChild(imagen(p, 720, 405));
+
+    var txt = conTexto('div', 'repo-txt');
+    txt.appendChild(conTexto('p', 'rot',
+      rotuloDe(p) + (p.familia === 'columna' && p.autor ? ' · ' + p.autor : '')));
+    var h3 = document.createElement('h3');
+    h3.appendChild(enlace(adonde(p), texto(p.tit)));
+    txt.appendChild(h3);
+    if (p.resumen) txt.appendChild(conTexto('p', '', p.resumen));
+
+    var acc = conTexto('p', 'repo-acc');
+    acc.appendChild(enlace(adonde(p), 'Leer la publicación'));
+    /* el documento original: el PDF que subió el panel a Drive, o el enlace
+       que pegó a mano quien publicó */
+    var doc = p.pdfURL || p.enlace;
+    if (doc) {
+      acc.appendChild(document.createTextNode(' · '));
+      var d = enlace(doc, p.pdfURL ? 'Documento original (PDF)' : 'Documento adjunto');
+      d.target = '_blank';
+      d.rel = 'noopener';
+      acc.appendChild(d);
+    }
+    txt.appendChild(acc);
+
+    art.appendChild(img);
+    art.appendChild(txt);
+    li.appendChild(art);
+    return li;
+  }
+
+  /* ── «Lo demás que ha publicado la Red» ───────────────────────────── */
+  function pintarOtras(delPanel) {
+    var lista = document.querySelector('.otras-lista');
+    if (!lista) return;
+    var todas = O.juntar(COMPILADAS, delPanel)
+      .filter(function (p) { return p.panel || p.slug !== ACTUAL; })
+      .slice(0, TOPE_OTRAS);
+    if (!todas.length) return;
+    var nuevas = document.createDocumentFragment();
+    todas.forEach(function (p) { nuevas.appendChild(nodoOtra(p)); });
+    lista.textContent = '';
+    lista.appendChild(nuevas);
+  }
+
+  /* ── el repositorio ───────────────────────────────────────────────── */
+  /* el contador que va al lado del nombre del grupo, arriba y en el salto */
+  function contar(seccion, cuantas) {
+    var ancla = seccion.id;
+    var marcas = [seccion.querySelector('h2 span')];
+    var salto = document.querySelector('.saltos a[href="#' + ancla + '"] span');
+    if (salto) marcas.push(salto);
+    marcas.forEach(function (m) { if (m) m.textContent = '· ' + cuantas; });
+  }
+
+  /* el grupo de las noticias, informes y eventos del panel no existe al
+     compilar (no hay ninguno con página propia): se arma aquí */
+  function grupoNuevo() {
+    var hechas = document.querySelectorAll('section.familia');
+    if (!hechas.length) return null;
+    var sec = conTexto('section', 'familia');
+    sec.id = GRUPO_OTRAS.ancla;
+    sec.setAttribute('data-familia', GRUPO_OTRAS.familia);
+    sec.setAttribute('aria-labelledby', 'fam-' + GRUPO_OTRAS.ancla);
+    var h2 = conTexto('h2', '', GRUPO_OTRAS.plural + ' ');
+    h2.id = 'fam-' + GRUPO_OTRAS.ancla;
+    h2.appendChild(conTexto('span', '', '· 0'));
+    var ul = conTexto('ul', 'repo-lista');
+    sec.appendChild(h2);
+    sec.appendChild(ul);
+    hechas[hechas.length - 1].insertAdjacentElement('afterend', sec);
+
+    var saltos = document.querySelector('.saltos');
+    if (saltos) {
+      var a = enlace('#' + GRUPO_OTRAS.ancla, GRUPO_OTRAS.plural + ' ');
+      a.setAttribute('data-familia', GRUPO_OTRAS.familia);
+      a.appendChild(conTexto('span', '', '· 0'));
+      saltos.appendChild(a);
+    }
+    return sec;
+  }
+
+  function pintarRepositorio(delPanel) {
+    var secciones = document.querySelectorAll('section.familia[data-familia]');
+    if (!secciones.length) return;
+    var porFamilia = {};
+    Array.prototype.forEach.call(secciones, function (s) { porFamilia[s.getAttribute('data-familia')] = s; });
+
+    /* de qué familias llegó algo del panel; el análisis no se sube por ahí */
+    var familias = [];
+    delPanel.forEach(function (p) {
+      if (familias.indexOf(p.familia) < 0) familias.push(p.familia);
+    });
+
+    familias.forEach(function (familia) {
+      var mios = delPanel.filter(function (p) { return p.familia === familia; });
+      var suyas = COMPILADAS.filter(function (p) { return p.familia === familia; });
+      var seccion = porFamilia[familia] || (familia === GRUPO_OTRAS.familia ? grupoNuevo() : null);
+      if (!seccion) return;
+      var lista = seccion.querySelector('.repo-lista');
+      if (!lista) return;
+
+      /* las fichas compiladas se mueven, no se vuelven a dibujar: traen el
+         resumen y el enlace al PDF que salieron del texto transcrito */
+      var hechas = {};
+      Array.prototype.forEach.call(lista.querySelectorAll('.repo-item[data-slug]'), function (art) {
+        hechas[art.getAttribute('data-slug')] = art.parentNode;
+      });
+      var orden = O.juntar(suyas, mios);
+      var frag = document.createDocumentFragment();
+      orden.forEach(function (p) {
+        var li = p.panel ? nodoRepo(p) : hechas[p.slug];
+        if (li) frag.appendChild(li);
+      });
+      lista.appendChild(frag);
+      contar(seccion, orden.length);
+    });
+  }
+
+  /* ── traer y repartir ─────────────────────────────────────────────── */
+  function traer() {
+    if (!API_RED || /PEGUE-AQUI/.test(API_RED)) return Promise.resolve([]);
+    return fetch(API_RED + '?contenido=1', { cache: 'no-store' })
+      .then(function (r) { return r.ok ? r.json() : null; })
+      .then(function (d) { return d && d.ok && Array.isArray(d.items) ? d.items : []; })
+      .catch(function () { return []; });
+  }
+
+  traer().then(function (items) {
+    /* lo del panel que no tiene ya su página compilada */
+    var delPanel = items.filter(function (it) { return it && it.id; })
+      .map(O.desdePanel)
+      .filter(function (p) { return !O.repetida(p, COMPILADAS); });
+    if (!delPanel.length) return;
+    try {
+      pintarOtras(delPanel);
+      pintarRepositorio(delPanel);
+    } catch (e) {
+      /* si algo llegó deforme, la página se queda como se compiló: es
+         preferible a dejarla a medio pintar */
+    }
+  });
+})();
+
+</script>
 </body>
 </html>
